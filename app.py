@@ -197,25 +197,61 @@ with right:
     except Exception:
         court = None
 
-    zone_counts = compute_zone_counts()
-    xs, ys, sizes, labels = [], [], [], []
-    for z, cnt in zone_counts.items():
-        if z in ZONE_COORDS:
-            x,y = ZONE_COORDS[z]
-            xs.append(x); ys.append(y)
-            sizes.append(8 + cnt*6)
-            labels.append(f"Z{z}: {cnt}")
+# ---- Mapa de calor mejorado: puntos por equipo ----
+zone_counts_A = {}
+zone_counts_B = {}
+# separar eventos por equipo y contar por zona
+for ev in match['events']:
+    try:
+        z = int(ev.get('zone', 0) or 0)
+    except:
+        z = 0
+    if ev.get('team') == 'A':
+        zone_counts_A[z] = zone_counts_A.get(z, 0) + 1
+    else:
+        zone_counts_B[z] = zone_counts_B.get(z, 0) + 1
 
-    fig = go.Figure()
-    if court:
-        fig.add_layout_image(dict(source=court, xref="x", yref="y", x=0, y=1, sizex=1, sizey=1, sizing="stretch", layer="below"))
-    if xs:
-        fig.add_trace(go.Scatter(x=xs, y=ys, text=labels, textposition="top center", mode="markers+text",
-                                 marker=dict(size=sizes, color='rgba(255,0,0,0.6)')))
-    fig.update_xaxes(showgrid=False, visible=False, range=[0,1])
-    fig.update_yaxes(showgrid=False, visible=False, range=[0,1], scaleanchor="x")
-    fig.update_layout(height=440, margin=dict(l=0,r=0,t=0,b=0))
-    st.plotly_chart(fig, use_container_width=True)
+xsA, ysA, sizesA, textsA = [], [], [], []
+xsB, ysB, sizesB, textsB = [], [], [], []
+
+for z, cnt in zone_counts_A.items():
+    if z in ZONE_COORDS:
+        x,y = ZONE_COORDS[z]
+        xsA.append(x); ysA.append(y)
+        sizesA.append(8 + cnt*6)
+        textsA.append(f"A Z{z}: {cnt}")
+
+for z, cnt in zone_counts_B.items():
+    if z in ZONE_COORDS:
+        x,y = ZONE_COORDS[z]
+        xsB.append(x); ysB.append(y)
+        sizesB.append(8 + cnt*6)
+        textsB.append(f"B Z{z}: {cnt}")
+
+fig = go.Figure()
+
+if court is not None:
+    fig.add_layout_image(dict(source=court, xref="x", yref="y", x=0, y=1, sizex=1, sizey=1, sizing="stretch", layer="below"))
+
+# Equipo A - azul
+if xsA:
+    fig.add_trace(go.Scatter(
+        x=xsA, y=ysA, mode='markers+text', name='Equipo A',
+        text=textsA, textposition='top center',
+        marker=dict(size=sizesA, color='rgba(0,102,204,0.7)', line=dict(width=1, color='rgba(0,0,0,0.4)'))
+    ))
+# Equipo B - rojo
+if xsB:
+    fig.add_trace(go.Scatter(
+        x=xsB, y=ysB, mode='markers+text', name='Equipo B',
+        text=textsB, textposition='top center',
+        marker=dict(size=sizesB, color='rgba(220,20,60,0.7)', line=dict(width=1, color='rgba(0,0,0,0.4)'))
+    ))
+
+fig.update_xaxes(showgrid=False, visible=False, range=[0,1])
+fig.update_yaxes(showgrid=False, visible=False, range=[0,1], scaleanchor="x")
+fig.update_layout(height=440, margin=dict(l=0,r=0,t=0,b=0), legend=dict(orientation="h"))
+st.plotly_chart(fig, use_container_width=True)
 
 # ---------------------------
 # PANEL INFERIOR: EVENTOS, IMPORT, EXPORT
