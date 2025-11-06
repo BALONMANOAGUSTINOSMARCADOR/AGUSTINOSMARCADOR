@@ -38,6 +38,10 @@ if 'match' not in st.session_state:
 
 match = st.session_state.match
 
+# auto-refresh para actualizar la UI cada segundo (1000 ms)
+# esto provoca que Streamlit vuelva a ejecutar el script periódicamente y así el reloj y exclusiones se actualicen visualmente
+st_autorefresh(interval=1000, limit=None, key="auto_refresh")
+
 # ---------------------------
 # UTILIDADES
 # ---------------------------
