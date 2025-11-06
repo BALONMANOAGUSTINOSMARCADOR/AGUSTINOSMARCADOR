@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import datetime, json
 from io import BytesIO
+from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(page_title="AGUSTINOS MARCADOR", layout="wide", page_icon="🏐")
 
