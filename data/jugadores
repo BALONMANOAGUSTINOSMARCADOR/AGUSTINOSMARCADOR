@@ -1,1 +1,18 @@
-
+[
+{"dorsal": 1, "nombre": "Portero 1", "posicion": "Portero"},
+  {"dorsal": 2, "nombre": "Jugador 2", "posicion": "Pívot"},
+  {"dorsal": 3, "nombre": "Jugador 3", "posicion": "Extremo"},
+  {"dorsal": 4, "nombre": "Jugador 4", "posicion": "Lateral"},
+  {"dorsal": 5, "nombre": "Jugador 5", "posicion": "Central"},
+  {"dorsal": 6, "nombre": "Jugador 6", "posicion": "Extremo"},
+  {"dorsal": 7, "nombre": "Jugador 7", "posicion": "Lateral"},
+  {"dorsal": 8, "nombre": "Jugador 8", "posicion": "Central"},
+  {"dorsal": 9, "nombre": "Jugador 9", "posicion": "Defensa"},
+  {"dorsal": 10, "nombre": "Jugador 10", "posicion": "Ala"},
+  {"dorsal": 11, "nombre": "Jugador 11", "posicion": "Pivot"},
+  {"dorsal": 12, "nombre": "Jugador 12", "posicion": "Portero suplente"},
+  {"dorsal": 13, "nombre": "Jugador 13", "posicion": "Extremo"},
+  {"dorsal": 14, "nombre": "Jugador 14", "posicion": "Lateral"},
+  {"dorsal": 15, "nombre": "Jugador 15", "posicion": "Central"},
+  {"dorsal": 16, "nombre": "Jugador 16", "posicion": "Ala"}
+]
