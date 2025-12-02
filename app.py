@@ -296,3 +296,86 @@ if lm is not None:
 
 st.markdown("***")
 st.caption("App creada para AGUSTINOS. Si quieres ajustar zonas, cronómetro o añadir sonido, dime y lo adapto.")
+# --- Histórico y guardado en GitHub ---
+from modules import recorder, loader, stats, pdf_export
+import streamlit as st
+import json, os
+from datetime import datetime
+
+# Datos del repo (rellena con tu usuario y repo)
+GITHUB_OWNER = "miguelangel@autocares-martinez.com"
+GITHUB_REPO = "AGUSTINOSMARCADOR"
+
+# Token lo leeremos desde secrets (no lo pegues en el código)
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", None)
+if not GITHUB_TOKEN:
+    st.warning("No hay GITHUB_TOKEN en Streamlit Secrets. Para guardar partidos necesitas configurar el token. (Ver instrucciones).")
+
+st.markdown("---")
+st.subheader("Guardar / Histórico")
+
+# info del partido
+rival = st.text_input("Rival", key="input_rival")
+competicion = st.text_input("Competición (opcional)", key="input_comp")
+guardar_btn = st.button("💾 Finalizar y Guardar partido")
+
+if guardar_btn:
+    # construir objeto partido
+    partido = {
+        "fecha": datetime.utcnow().isoformat(),
+        "rival": rival or "Desconocido",
+        "competicion": competicion or "",
+        "scoreA": match['scoreA'],
+        "scoreB": match['scoreB'],
+        "events": match['events'],
+        "exclusions": match['exclusions'],
+        "elapsed_seconds": now_elapsed_seconds()
+    }
+    # path: data/partidos/20251130_181200_Agustinos_vs_Rival.json
+    ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    safe_rival = "".join(c for c in (rival or "rival") if c.isalnum() or c in ("_", "-")).strip()
+    filename = f"data/partidos/{ts}_Agustinos_vs_{safe_rival}.json"
+    if not GITHUB_TOKEN:
+        st.error("No hay token. No se puede guardar en GitHub.")
+    else:
+        status, res = recorder.guardar_partido_github(GITHUB_OWNER, GITHUB_REPO, filename, partido, GITHUB_TOKEN)
+        if status in (200,201):
+            st.success("Partido guardado en GitHub correctamente.")
+        else:
+            st.error(f"Error guardando partido en GitHub: {status} - {res}")
+
+# Mostrar histórico por rival (opción de búsqueda)
+st.markdown("### Buscar en histórico por RIVAL")
+buscar_rival = st.text_input("Nombre del rival a buscar", key="search_rival")
+if st.button("Buscar partidos"):
+    partidos = loader.cargar_partidos_local()  # lee data/partidos.json local si existe
+    # Además, intentar listar archivos en data/partidos/ si usamos guardado por archivos individuales
+    # Filtrar por rival en filename o en contenido
+    matches = []
+    # primero contenido del partidos.json global
+    for p in partidos:
+        if buscar_rival.strip().lower() in p.get("rival","").lower():
+            matches.append(p)
+    # si guardamos por archivos individuales (data/partidos/*), intentamos leerlos
+    import glob, os
+    local_files = glob.glob("data/partidos/*.json")
+    for f in local_files:
+        try:
+            with open(f, "r", encoding="utf-8") as fh:
+                p = json.load(fh)
+                if buscar_rival.strip().lower() in p.get("rival","").lower():
+                    matches.append(p)
+        except Exception:
+            pass
+    if not matches:
+        st.info("No se han encontrado partidos con ese rival.")
+    else:
+        st.success(f"Encontrados {len(matches)} partidos.")
+        for p in matches:
+            st.write("---")
+            st.write(f"Fecha: {p.get('fecha')}")
+            st.write(f"Rival: {p.get('rival')}")
+            st.write(f"Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
+            if st.button(f"Generar PDF: {p.get('fecha')}", key=f"pdf_{p.get('fecha')}"):
+                pdf_bytes = pdf_export.generar_pdf_partido(p)
+                st.download_button("Descargar PDF", data=pdf_bytes, file_name=f"partido_{p.get('fecha')}.pdf", mime="application/pdf")
