@@ -329,7 +329,7 @@ import json, os
 from datetime import datetime
 
 # Datos del repo (rellena con tu usuario y repo)
-GITHUB_OWNER = "miguelangel@autocares-martinez.com"
+GITHUB_OWNER = "BALONMANOAGUSTINOSMARCADOR"
 GITHUB_REPO = "AGUSTINOSMARCADOR"
 
 # Token lo leeremos desde secrets (no lo pegues en el código)
