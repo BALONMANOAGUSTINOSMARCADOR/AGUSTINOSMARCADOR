@@ -67,21 +67,14 @@ def add_exclusion(player, team, duration=DEFAULT_EXCLUSION_SECONDS):
     match['exclusions'].append(ex)
 
 def now_elapsed_seconds():
-    match = st.session_state.get("match")
+    match = st.session_state.match
 
-    if not match:
-        return 0
+    if "started_at" not in match or match["started_at"] is None:
+        match["started_at"] = datetime.datetime.now().isoformat()
 
-    started_at = match.get("started_at")
+    start = datetime.datetime.fromisoformat(match["started_at"])
+    return int((datetime.datetime.now() - start).total_seconds())
 
-    if not started_at:
-        return 0
-
-    try:
-        start = datetime.datetime.fromisoformat(started_at)
-        return int((datetime.datetime.now() - start).total_seconds())
-    except Exception:
-        return 0
 
 
 def start_match():
