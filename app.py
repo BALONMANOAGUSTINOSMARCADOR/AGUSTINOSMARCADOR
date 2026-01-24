@@ -7,6 +7,10 @@ import datetime, json
 from io import BytesIO
 from streamlit_autorefresh import st_autorefresh
 
+# --- GitHub token desde Streamlit Secrets ---
+GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
+
+
 st.set_page_config(page_title="AGUSTINOS MARCADOR", layout="wide", page_icon="🏐")
 
 # ---------------------------
