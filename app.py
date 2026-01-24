@@ -379,4 +379,3 @@ if st.button("Buscar partidos"):
             if st.button(f"Generar PDF: {p.get('fecha')}", key=f"pdf_{p.get('fecha')}"):
                 pdf_bytes = pdf_export.generar_pdf_partido(p)
                 st.download_button("Descargar PDF", data=pdf_bytes, file_name=f"partido_{p.get('fecha')}.pdf", mime="application/pdf")
-Fix started_at initialization
