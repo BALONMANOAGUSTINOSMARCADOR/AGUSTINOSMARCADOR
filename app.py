@@ -331,6 +331,7 @@ from datetime import datetime
 # Datos del repo (rellena con tu usuario y repo)
 GITHUB_OWNER = "BALONMANOAGUSTINOSMARCADOR"
 GITHUB_REPO = "AGUSTINOSMARCADOR"
+GITHUB_PATH = "data/partidos.json"
 
 # Token lo leeremos desde secrets (no lo pegues en el código)
 GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", None)
