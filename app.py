@@ -124,6 +124,7 @@ def reset_match():
     match['paused_at'] = None
     match['elapsed_before_pause'] = 0.0
 
+
 def cleanup_expired_exclusions():
     now = datetime.datetime.utcnow()
     active = []
