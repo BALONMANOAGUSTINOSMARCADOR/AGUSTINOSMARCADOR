@@ -31,7 +31,7 @@ if 'match' not in st.session_state:
         'scoreB': 0,
         'events': [],         # lista de dicts {time, team, zone, player}
         'exclusions': [],     # lista de dicts {player, team, started_at, ends_at}
-        'started_at': None,   # iso str
+        'started_at': datetime.datetime.now().isoformat(),
         'paused_at': None,    # iso str
         'elapsed_before_pause': 0.0
     }
