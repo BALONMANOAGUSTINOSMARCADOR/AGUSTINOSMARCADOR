@@ -69,21 +69,28 @@ def add_exclusion(player, team, duration=DEFAULT_EXCLUSION_SECONDS):
 def now_elapsed_seconds():
     match = st.session_state.match
 
-    # Si nunca se ha iniciado el partido
-    if match.get("started_at") is None:
+    started_at = match.get("started_at")
+
+    # Si no hay inicio válido
+    if not started_at or not isinstance(started_at, str):
         return int(match.get("elapsed_before_pause", 0))
 
-    start = datetime.datetime.fromisoformat(match["started_at"])
+    try:
+        start = datetime.datetime.fromisoformat(started_at)
+    except Exception:
+        # started_at corrupto → lo ignoramos
+        return int(match.get("elapsed_before_pause", 0))
 
     # Si está pausado
-    if match.get("paused_at") is not None:
-        paused = datetime.datetime.fromisoformat(match["paused_at"])
-        return int(match.get("elapsed_before_pause", 0) + (paused - start).total_seconds())
+    if match.get("paused_at"):
+        try:
+            paused = datetime.datetime.fromisoformat(match["paused_at"])
+            return int(match.get("elapsed_before_pause", 0) + (paused - start).total_seconds())
+        except Exception:
+            return int(match.get("elapsed_before_pause", 0))
 
     # En marcha
     return int(match.get("elapsed_before_pause", 0) + (datetime.datetime.utcnow() - start).total_seconds())
-
-
 
 
 def start_match():
