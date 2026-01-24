@@ -87,16 +87,21 @@ def now_elapsed_seconds():
 
 
 def start_match():
+    # iniciar desde cero
     if match['started_at'] is None:
         match['started_at'] = datetime.datetime.utcnow().isoformat()
         match['paused_at'] = None
         match['elapsed_before_pause'] = 0.0
-    elif match['paused_at'] is not None:
-        # resume
+        return
+
+    # reanudar tras pausa
+    if match['paused_at'] is not None:
         paused = datetime.datetime.fromisoformat(match['paused_at'])
-        diff = (datetime.datetime.utcnow() - paused).total_seconds()
-        match['elapsed_before_pause'] += diff
+        start = datetime.datetime.fromisoformat(match['started_at'])
+        match['elapsed_before_pause'] += (paused - start).total_seconds()
+        match['started_at'] = datetime.datetime.utcnow().isoformat()
         match['paused_at'] = None
+
 
 def pause_match():
     if match['started_at'] is None:
