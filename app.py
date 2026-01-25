@@ -390,8 +390,8 @@ if st.button("Buscar partidos"):
     st.session_state.view = "buscar_partidos"
 
 # ===== MOSTRAR RESULTADOS DE BUSCAR PARTIDOS =====
-if st.session_state.get("view") == "buscar_partidos":
-    results = st.session_state.search_results
+if st.session_state.view == "buscar_partidos":
+    results = st.session_state.search_results or []
 
     if results:
         st.success(f"Encontrados {len(results)} partidos.")
@@ -402,6 +402,7 @@ if st.session_state.get("view") == "buscar_partidos":
             st.write(f"Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
     else:
         st.warning("No se encontraron partidos.")
+
 
             
     # si guardamos por archivos individuales (data/partidos/*), intentamos leerlos
