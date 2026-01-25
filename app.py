@@ -379,18 +379,15 @@ if guardar_btn:
 st.markdown("### Buscar en histórico por RIVAL")
 buscar_rival = st.text_input("Nombre del rival a buscar", key="search_rival")
 if st.button("Buscar partidos"):
-    partidos = loader.cargar_partidos_local()  # lee data/partidos.json local si existe
-    # Además, intentar listar archivos en data/partidos/ si usamos guardado por archivos individuales
-    # Filtrar por rival en filename o en contenido
+    partidos = loader.cargar_partidos_local()
     matches = []
-    # primero contenido del partidos.json global
-    for p in partidos:
-        if buscar_rival.strip().lower() in p.get("rival","").lower():
-            matches.append(p)
-            
-            st.session_state.search_results = matches
 
-    results = st.session_state.search_results
+    for p in partidos:
+        if buscar_rival.strip().lower() in p.get("rival", "").lower():
+            matches.append(p)
+
+    st.session_state.search_results = matches
+    st.session_state.view = "buscar_partidos"
 
 # ===== MOSTRAR RESULTADOS DE BUSCAR PARTIDOS =====
 if st.session_state.get("view") == "buscar_partidos":
