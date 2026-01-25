@@ -1,0 +1,71 @@
+{
+  "fecha": "2026-01-25T00:06:51.693508",
+  "rival": "JOAN",
+  "competicion": "Ghgh",
+  "scoreA": 3,
+  "scoreB": 7,
+  "events": [
+    {
+      "time": "2026-01-25T00:06:03.078571",
+      "team": "A",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:03.229832",
+      "team": "A",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:03.574547",
+      "team": "A",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:05.302828",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:05.515281",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:05.736212",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:05.863242",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:06.190065",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:06.364847",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T00:06:06.531366",
+      "team": "B",
+      "zone": 5,
+      "player": null
+    }
+  ],
+  "exclusions": [],
+  "elapsed_seconds": 0
+}
