@@ -404,14 +404,6 @@ if st.session_state.get("view") == "buscar_partidos":
     else:
         st.warning("No se encontraron partidos.")
 
-if results:
-    st.success(f"Encontrados {len(results)} partidos.")
-    for p in results:
-        st.write("---")
-        st.write(f"Fecha: {p.get('fecha')}")
-        st.write(f"Rival: {p.get('rival')}")
-        st.write(f"Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
-
             
     # si guardamos por archivos individuales (data/partidos/*), intentamos leerlos
     import glob, os
