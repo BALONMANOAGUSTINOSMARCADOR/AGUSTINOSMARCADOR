@@ -1,0 +1,79 @@
+{
+  "fecha": "2026-01-25T23:22:39.561013",
+  "rival": "Ahora si",
+  "competicion": "Vamos a ver",
+  "scoreA": 5,
+  "scoreB": 5,
+  "events": [
+    {
+      "time": "2026-01-25T23:21:29.154443",
+      "team": "A",
+      "zone": 2,
+      "player": ""
+    },
+    {
+      "time": "2026-01-25T23:21:30.222078",
+      "team": "A",
+      "zone": 2,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T23:21:30.408655",
+      "team": "A",
+      "zone": 2,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T23:21:30.773641",
+      "team": "A",
+      "zone": 2,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T23:21:30.950220",
+      "team": "A",
+      "zone": 2,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T23:21:52.392946",
+      "team": "B",
+      "zone": 1,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T23:21:53.154936",
+      "team": "B",
+      "zone": 1,
+      "player": "6"
+    },
+    {
+      "time": "2026-01-25T23:21:53.320650",
+      "team": "B",
+      "zone": 1,
+      "player": "6"
+    },
+    {
+      "time": "2026-01-25T23:21:53.874331",
+      "team": "B",
+      "zone": 1,
+      "player": "6"
+    },
+    {
+      "time": "2026-01-25T23:21:54.071075",
+      "team": "B",
+      "zone": 1,
+      "player": "6"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "12",
+      "team": "A",
+      "started_at_seconds": 9,
+      "duration": 120,
+      "remaining": 115
+    }
+  ],
+  "elapsed_seconds": 14
+}
