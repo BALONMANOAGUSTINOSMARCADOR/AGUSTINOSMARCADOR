@@ -389,6 +389,20 @@ if st.button("Buscar partidos"):
 
     results = st.session_state.search_results
 
+# ===== MOSTRAR RESULTADOS DE BUSCAR PARTIDOS =====
+if st.session_state.get("view") == "buscar_partidos":
+    results = st.session_state.search_results
+
+    if results:
+        st.success(f"Encontrados {len(results)} partidos.")
+        for p in results:
+            st.write("---")
+            st.write(f"Fecha: {p.get('fecha')}")
+            st.write(f"Rival: {p.get('rival')}")
+            st.write(f"Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
+    else:
+        st.warning("No se encontraron partidos.")
+
 if results:
     st.success(f"Encontrados {len(results)} partidos.")
     for p in results:
