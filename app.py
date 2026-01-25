@@ -255,6 +255,10 @@ st.markdown("### Buscar en histórico por RIVAL")
 buscar_rival = st.text_input("Nombre del rival a buscar", key="search_rival")
 
 if st.button("Buscar partidos"):
+    # --- Configuración del repositorio GitHub ---
+GITHUB_OWNER = "BALONMANOAGUSTINOSMARCADOR"
+GITHUB_REPO = "AGUSTINOSMARCADOR"
+
     partidos = loader.cargar_partidos_github(
         GITHUB_OWNER,
         GITHUB_REPO,
