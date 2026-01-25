@@ -7,6 +7,13 @@ import datetime, json
 from io import BytesIO
 from streamlit_autorefresh import st_autorefresh
 
+if "partido_activo" not in st.session_state:
+    st.session_state.partido_activo = False
+
+if "match" not in st.session_state:
+    st.session_state.match = None
+
+
 # --- GitHub token desde Streamlit Secrets ---
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 
