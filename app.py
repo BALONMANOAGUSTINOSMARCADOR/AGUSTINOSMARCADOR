@@ -386,6 +386,17 @@ if st.button("Buscar partidos"):
             matches.append(p)
             
             st.session_state.search_results = matches
+
+    results = st.session_state.search_results
+
+if results:
+    st.success(f"Encontrados {len(results)} partidos.")
+    for p in results:
+        st.write("---")
+        st.write(f"Fecha: {p.get('fecha')}")
+        st.write(f"Rival: {p.get('rival')}")
+        st.write(f"Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
+
             
     # si guardamos por archivos individuales (data/partidos/*), intentamos leerlos
     import glob, os
