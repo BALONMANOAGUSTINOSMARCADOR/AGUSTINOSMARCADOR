@@ -1,0 +1,73 @@
+{
+  "fecha": "2026-01-25T18:25:22.317665",
+  "rival": "Yryr",
+  "competicion": "Hguhgyf",
+  "scoreA": 3,
+  "scoreB": 6,
+  "events": [
+    {
+      "time": "2026-01-25T18:23:49.796322",
+      "team": "A",
+      "zone": 2,
+      "player": ""
+    },
+    {
+      "time": "2026-01-25T18:23:51.199060",
+      "team": "A",
+      "zone": 2,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T18:23:51.411035",
+      "team": "A",
+      "zone": 2,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T18:24:05.535697",
+      "team": "B",
+      "zone": 3,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T18:24:06.960442",
+      "team": "B",
+      "zone": 3,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T18:24:07.114066",
+      "team": "B",
+      "zone": 3,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T18:24:11.602849",
+      "team": "B",
+      "zone": 1,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T18:24:12.628784",
+      "team": "B",
+      "zone": 1,
+      "player": "14"
+    },
+    {
+      "time": "2026-01-25T18:24:12.807306",
+      "team": "B",
+      "zone": 1,
+      "player": "14"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "4",
+      "team": "A",
+      "started_at_seconds": 43,
+      "duration": 120,
+      "remaining": 85
+    }
+  ],
+  "elapsed_seconds": 78
+}
