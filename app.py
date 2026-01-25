@@ -255,7 +255,12 @@ st.subheader("🔎 Buscar histórico")
 
 buscar = st.text_input("Rival a buscar")
 if st.button("Buscar"):
-    partidos = loader.cargar_partidos_local()
+    partidos = loader.cargar_partidos_github(
+    GITHUB_OWNER,
+    GITHUB_REPO,
+    "data/partidos",
+    GITHUB_TOKEN
+)
     encontrados = [p for p in partidos if buscar.lower() in p.get("rival","").lower()]
     if encontrados:
         for p in encontrados:
