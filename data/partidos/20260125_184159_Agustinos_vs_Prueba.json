@@ -1,0 +1,41 @@
+{
+  "fecha": "2026-01-25T18:41:59.791533",
+  "rival": "Prueba",
+  "competicion": "Mía",
+  "scoreA": 2,
+  "scoreB": 3,
+  "events": [
+    {
+      "time": "2026-01-25T18:41:50.186406",
+      "team": "A",
+      "zone": 2,
+      "player": "7"
+    },
+    {
+      "time": "2026-01-25T18:41:50.341543",
+      "team": "A",
+      "zone": 2,
+      "player": "7"
+    },
+    {
+      "time": "2026-01-25T18:41:51.121708",
+      "team": "B",
+      "zone": 2,
+      "player": "7"
+    },
+    {
+      "time": "2026-01-25T18:41:51.288799",
+      "team": "B",
+      "zone": 2,
+      "player": "7"
+    },
+    {
+      "time": "2026-01-25T18:41:51.471367",
+      "team": "B",
+      "zone": 2,
+      "player": "7"
+    }
+  ],
+  "exclusions": [],
+  "elapsed_seconds": 7
+}
