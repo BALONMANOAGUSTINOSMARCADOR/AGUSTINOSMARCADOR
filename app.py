@@ -250,20 +250,38 @@ if st.button("Guardar partido en GitHub"):
 # =========================================================
 # HISTÓRICO
 # =========================================================
-st.markdown("---")
-st.subheader("🔎 Buscar histórico")
+st.markdown("### Buscar en histórico por RIVAL")
 
-buscar = st.text_input("Rival a buscar")
-if st.button("Buscar"):
+buscar_rival = st.text_input("Nombre del rival a buscar", key="search_rival")
+
+if st.button("Buscar partidos"):
     partidos = loader.cargar_partidos_github(
-    GITHUB_OWNER,
-    GITHUB_REPO,
-    "data/partidos",
-    GITHUB_TOKEN
-)
-    encontrados = [p for p in partidos if buscar.lower() in p.get("rival","").lower()]
-    if encontrados:
-        for p in encontrados:
-            st.write(f"{p['fecha']} — {p['rival']} ({p['scoreA']}-{p['scoreB']})")
+        GITHUB_OWNER,
+        GITHUB_REPO,
+        "data/partidos",
+        GITHUB_TOKEN
+    )
+
+    matches = []
+    for p in partidos:
+        if buscar_rival.strip().lower() in p.get("rival", "").lower():
+            matches.append(p)
+
+    st.session_state.search_results = matches
+    st.session_state.view = "buscar_partidos"
+
+
+# ---- MOSTRAR RESULTADOS ----
+if st.session_state.view == "buscar_partidos":
+    results = st.session_state.search_results or []
+
+    if results:
+        st.success(f"Encontrados {len(results)} partidos.")
+        for p in results:
+            st.write("---")
+            st.write(f"📅 Fecha: {p.get('fecha')}")
+            st.write(f"🤝 Rival: {p.get('rival')}")
+            st.write(f"📊 Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
     else:
-        st.warning("No se encontraron partidos")
+        st.warning("No se encontraron partidos.")
+
