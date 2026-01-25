@@ -20,6 +20,28 @@ GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 
 st.set_page_config(page_title="AGUSTINOS MARCADOR", layout="wide", page_icon="🏐")
 
+
+st.subheader("Control de partido")
+
+col_start, col_end = st.columns(2)
+
+with col_start:
+    if st.button("▶️ INICIAR PARTIDO", disabled=st.session_state.partido_activo):
+        st.session_state.match = {
+            'scoreA': 0,
+            'scoreB': 0,
+            'events': [],
+            'exclusions': [],
+            'started_at': datetime.datetime.utcnow().isoformat(),
+            'paused_at': None,
+            'elapsed_before_pause': 0.0
+        }
+        st.session_state.partido_activo = True
+
+with col_end:
+    if st.button("⏹️ FINALIZAR PARTIDO", disabled=not st.session_state.partido_activo):
+        st.session_state.partido_activo = False
+
 # ---------------------------
 # CONFIGURACIÓN
 # ---------------------------
