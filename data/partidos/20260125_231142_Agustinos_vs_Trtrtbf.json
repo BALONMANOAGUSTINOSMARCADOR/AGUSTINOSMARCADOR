@@ -1,0 +1,79 @@
+{
+  "fecha": "2026-01-25T23:11:42.222473",
+  "rival": "Trtrtbf",
+  "competicion": "Tt4vbv",
+  "scoreA": 4,
+  "scoreB": 6,
+  "events": [
+    {
+      "time": "2026-01-25T23:10:33.311869",
+      "team": "A",
+      "zone": 5,
+      "player": ""
+    },
+    {
+      "time": "2026-01-25T23:10:34.556362",
+      "team": "A",
+      "zone": 5,
+      "player": "34"
+    },
+    {
+      "time": "2026-01-25T23:10:34.707066",
+      "team": "A",
+      "zone": 5,
+      "player": "34"
+    },
+    {
+      "time": "2026-01-25T23:10:34.963477",
+      "team": "A",
+      "zone": 5,
+      "player": "34"
+    },
+    {
+      "time": "2026-01-25T23:10:53.359757",
+      "team": "B",
+      "zone": 3,
+      "player": "34"
+    },
+    {
+      "time": "2026-01-25T23:10:54.342309",
+      "team": "B",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T23:10:54.475512",
+      "team": "B",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T23:10:54.702000",
+      "team": "B",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T23:10:54.845085",
+      "team": "B",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T23:10:54.864206",
+      "team": "B",
+      "zone": 3,
+      "player": "17"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "12",
+      "team": "A",
+      "started_at_seconds": 43,
+      "duration": 120,
+      "remaining": 116
+    }
+  ],
+  "elapsed_seconds": 47
+}
