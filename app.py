@@ -384,7 +384,9 @@ if st.button("Buscar partidos"):
     for p in partidos:
         if buscar_rival.strip().lower() in p.get("rival","").lower():
             matches.append(p)
-      st.session_state.search_results = matches
+            
+            st.session_state.search_results = matches
+            
     # si guardamos por archivos individuales (data/partidos/*), intentamos leerlos
     import glob, os
     local_files = glob.glob("data/partidos/*.json")
