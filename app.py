@@ -168,18 +168,21 @@ with mid:
             add_exclusion(p, team, dur)
 
     exs = active_exclusions()
-    if exs:
-        rows = []
-        for ex in exs:
-            rem = int((datetime.datetime.fromisoformat(ex["ends_at"]) - datetime.datetime.utcnow()).total_seconds())
-            rows.append({
-                "Jugador": ex["player"],
-                "Equipo": ex["team"],
-                "Restante": f"{rem//60:02d}:{rem%60:02d}"
-            })
-        st.table(pd.DataFrame(rows))
-    else:
-        st.write("Sin exclusiones activas")
+
+if exs:
+    rows = []
+    for ex in exs:
+        mm = ex["remaining"] // 60
+        ss = ex["remaining"] % 60
+        rows.append({
+            "Jugador": ex["player"],
+            "Equipo": ex["team"],
+            "Tiempo restante": f"{mm:02d}:{ss:02d}"
+        })
+    st.table(pd.DataFrame(rows))
+else:
+    st.write("No hay exclusiones activas.")
+
 
 # -------- HEATMAP --------
 with right:
