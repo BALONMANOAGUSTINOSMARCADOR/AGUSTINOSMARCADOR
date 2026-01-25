@@ -100,12 +100,16 @@ def add_exclusion(player, team, duration):
     })
 
 def active_exclusions():
-    now = datetime.datetime.utcnow()
     active = []
+    now_sec = elapsed_seconds()
+
     for ex in match["exclusions"]:
-        if datetime.datetime.fromisoformat(ex["ends_at"]) > now:
+        end_sec = ex["started_at_seconds"] + ex["duration"]
+        if now_sec < end_sec:
+            remaining = int(end_sec - now_sec)
+            ex["remaining"] = remaining
             active.append(ex)
-    match["exclusions"] = active
+
     return active
 
 # =========================================================
