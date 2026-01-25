@@ -46,10 +46,12 @@ if "match" not in st.session_state:
         "elapsed_before_pause": 0
     }
 
-if "view" not in st.session_state:
-    st.session_state.view = None
 
 match = st.session_state.match
+
+if "view" not in st.session_state:
+    st.session_state.view = ""
+
 
 # =========================================================
 # FUNCIONES
