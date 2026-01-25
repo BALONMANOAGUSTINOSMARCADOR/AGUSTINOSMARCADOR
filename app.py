@@ -416,15 +416,3 @@ if st.session_state.view == "buscar_partidos":
                     matches.append(p)
         except Exception:
             pass
-    if not matches:
-        st.info("No se han encontrado partidos con ese rival.")
-    else:
-        st.success(f"Encontrados {len(matches)} partidos.")
-        for p in matches:
-            st.write("---")
-            st.write(f"Fecha: {p.get('fecha')}")
-            st.write(f"Rival: {p.get('rival')}")
-            st.write(f"Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
-            if st.button(f"Generar PDF: {p.get('fecha')}", key=f"pdf_{p.get('fecha')}"):
-                pdf_bytes = pdf_export.generar_pdf_partido(p)
-                st.download_button("Descargar PDF", data=pdf_bytes, file_name=f"partido_{p.get('fecha')}.pdf", mime="application/pdf")
