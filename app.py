@@ -29,16 +29,6 @@ ZONE_COORDS = {
 # ---------------------------
 # ESTADO (persistente en sesión)
 # ---------------------------
-if 'match' not in st.session_state:
-    st.session_state.match = {
-        'scoreA': 0,
-        'scoreB': 0,
-        'events': [],         # lista de dicts {time, team, zone, player}
-        'exclusions': [],     # lista de dicts {player, team, started_at, ends_at}
-        'started_at': datetime.datetime.now().isoformat(),
-        'paused_at': None,    # iso str
-        'elapsed_before_pause': 0.0
-    }
 
 match = st.session_state.match
 
