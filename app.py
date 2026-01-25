@@ -42,6 +42,10 @@ with col_end:
     if st.button("⏹️ FINALIZAR PARTIDO", disabled=not st.session_state.partido_activo):
         st.session_state.partido_activo = False
 
+if not st.session_state.partido_activo:
+    st.info("No hay partido activo. Pulsa ▶️ INICIAR PARTIDO para comenzar.")
+    st.stop()
+
 # ---------------------------
 # CONFIGURACIÓN
 # ---------------------------
