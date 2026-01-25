@@ -254,9 +254,16 @@ st.markdown("### Buscar en histórico por RIVAL")
 
 buscar_rival = st.text_input("Nombre del rival a buscar", key="search_rival")
 
-# --- Configuración del repositorio GitHub ---
+# --- GitHub config (OBLIGATORIO) ---
 GITHUB_OWNER = "BALONMANOAGUSTINOSMARCADOR"
 GITHUB_REPO = "AGUSTINOSMARCADOR"
+
+# Token desde Streamlit Secrets
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN")
+
+if not GITHUB_TOKEN:
+    st.warning("⚠️ No hay GITHUB_TOKEN configurado en Streamlit Secrets")
+
 
 
 if st.button("Buscar partidos"):
