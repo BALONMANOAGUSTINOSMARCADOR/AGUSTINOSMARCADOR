@@ -1,0 +1,85 @@
+{
+  "fecha": "2026-01-25T23:00:13.401793",
+  "rival": "Yttyt",
+  "competicion": "Hghggu",
+  "scoreA": 5,
+  "scoreB": 6,
+  "events": [
+    {
+      "time": "2026-01-25T22:59:20.650774",
+      "team": "A",
+      "zone": 3,
+      "player": ""
+    },
+    {
+      "time": "2026-01-25T22:59:21.861048",
+      "team": "B",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T22:59:22.325620",
+      "team": "A",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T22:59:22.502404",
+      "team": "A",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T22:59:22.671329",
+      "team": "A",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T22:59:22.837324",
+      "team": "A",
+      "zone": 3,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T22:59:31.567820",
+      "team": "B",
+      "zone": 5,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-25T22:59:32.483063",
+      "team": "B",
+      "zone": 5,
+      "player": "19"
+    },
+    {
+      "time": "2026-01-25T22:59:32.635090",
+      "team": "B",
+      "zone": 5,
+      "player": "19"
+    },
+    {
+      "time": "2026-01-25T22:59:32.966058",
+      "team": "B",
+      "zone": 5,
+      "player": "19"
+    },
+    {
+      "time": "2026-01-25T22:59:33.119744",
+      "team": "B",
+      "zone": 5,
+      "player": "19"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "12",
+      "team": "A",
+      "started_at_seconds": 12,
+      "duration": 120,
+      "remaining": 110
+    }
+  ],
+  "elapsed_seconds": 22
+}
