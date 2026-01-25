@@ -287,6 +287,9 @@ if st.button("Buscar partidos"):
 
 
 # ---- MOSTRAR RESULTADOS ----
+if "search_results" not in st.session_state:
+    st.session_state.search_results = []
+
 if st.session_state.view == "buscar_partidos":
     results = st.session_state.search_results or []
 
