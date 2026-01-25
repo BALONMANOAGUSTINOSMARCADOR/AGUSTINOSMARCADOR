@@ -92,12 +92,11 @@ def add_goal(team, zone, player=None):
     match[f"score{team}"] += 1
 
 def add_exclusion(player, team, duration):
-    start = datetime.datetime.utcnow()
     match["exclusions"].append({
         "player": player,
         "team": team,
-        "started_at": start.isoformat(),
-        "ends_at": (start + datetime.timedelta(seconds=duration)).isoformat()
+        "started_at_seconds": elapsed_seconds(),
+        "duration": duration
     })
 
 def active_exclusions():
