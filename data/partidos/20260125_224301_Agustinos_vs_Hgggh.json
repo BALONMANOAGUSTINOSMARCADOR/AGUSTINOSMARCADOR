@@ -1,0 +1,73 @@
+{
+  "fecha": "2026-01-25T22:43:01.514583",
+  "rival": "Hgggh",
+  "competicion": "Yt6tv",
+  "scoreA": 4,
+  "scoreB": 5,
+  "events": [
+    {
+      "time": "2026-01-25T22:41:47.545729",
+      "team": "A",
+      "zone": 5,
+      "player": ""
+    },
+    {
+      "time": "2026-01-25T22:41:48.541588",
+      "team": "A",
+      "zone": 5,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T22:41:48.722867",
+      "team": "A",
+      "zone": 5,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T22:41:49.051419",
+      "team": "A",
+      "zone": 5,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T22:42:00.037827",
+      "team": "B",
+      "zone": 2,
+      "player": "12"
+    },
+    {
+      "time": "2026-01-25T22:42:00.967062",
+      "team": "B",
+      "zone": 2,
+      "player": "16"
+    },
+    {
+      "time": "2026-01-25T22:42:01.153555",
+      "team": "B",
+      "zone": 2,
+      "player": "16"
+    },
+    {
+      "time": "2026-01-25T22:42:01.471511",
+      "team": "B",
+      "zone": 2,
+      "player": "16"
+    },
+    {
+      "time": "2026-01-25T22:42:01.663612",
+      "team": "B",
+      "zone": 2,
+      "player": "16"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "3",
+      "team": "A",
+      "started_at_seconds": 18,
+      "duration": 120,
+      "remaining": 102
+    }
+  ],
+  "elapsed_seconds": 36
+}
