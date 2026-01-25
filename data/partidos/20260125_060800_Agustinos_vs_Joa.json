@@ -1,0 +1,89 @@
+{
+  "fecha": "2026-01-25T06:08:00.713071",
+  "rival": "Joa",
+  "competicion": "Imaiuiu",
+  "scoreA": 3,
+  "scoreB": 10,
+  "events": [
+    {
+      "time": "2026-01-25T06:07:29.818072",
+      "team": "A",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:29.974912",
+      "team": "A",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:30.322983",
+      "team": "A",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:34.254899",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:34.441311",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:34.618457",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:34.970648",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:35.167107",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:35.338271",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:35.526668",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:35.688785",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:36.018246",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    },
+    {
+      "time": "2026-01-25T06:07:36.171868",
+      "team": "B",
+      "zone": 2,
+      "player": null
+    }
+  ],
+  "exclusions": [],
+  "elapsed_seconds": 0
+}
