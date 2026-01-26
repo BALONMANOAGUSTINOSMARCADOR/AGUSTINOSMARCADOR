@@ -121,6 +121,10 @@ def set_match_time(minutes, seconds):
     match["elapsed_before_pause"] = total_seconds
     match["started_at"] = None
 
+def set_score(scoreA, scoreB):
+    match["scoreA"] = scoreA
+    match["scoreB"] = scoreB
+
 
     return active
 
