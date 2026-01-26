@@ -116,6 +116,12 @@ def active_exclusions():
             ex["remaining"] = remaining
             active.append(ex)
 
+def set_match_time(minutes, seconds):
+    total_seconds = minutes * 60 + seconds
+    match["elapsed_before_pause"] = total_seconds
+    match["started_at"] = None
+
+
     return active
 
 # =========================================================
