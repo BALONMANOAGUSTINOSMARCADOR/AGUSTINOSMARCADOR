@@ -179,6 +179,8 @@ with mid:
     st.button("▶ Reanudar", on_click=start_match)
 
     st.markdown("---")
+if st.button("⚙️ MODIFICACIONES"):
+    st.session_state.show_mods = not st.session_state.get("show_mods", False)
     st.subheader("Exclusiones")
 
     with st.form("form_ex"):
