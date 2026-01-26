@@ -277,8 +277,6 @@ if st.button("Buscar partidos"):
         GITHUB_TOKEN
     )
 
-st.write("DEBUG → partidos encontrados:", len(partidos))
-st.write(partidos)
 
 matches = []
 
