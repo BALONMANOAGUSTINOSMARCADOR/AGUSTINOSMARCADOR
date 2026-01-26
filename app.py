@@ -52,6 +52,8 @@ match = st.session_state.match
 if "view" not in st.session_state:
     st.session_state.view = ""
 
+if "partidos" not in st.session_state:
+    st.session_state.partidos = []
 
 # =========================================================
 # FUNCIONES
