@@ -125,6 +125,11 @@ def set_score(scoreA, scoreB):
     match["scoreA"] = scoreA
     match["scoreB"] = scoreB
 
+def start_second_half():
+    match["part"] = 2
+    match["elapsed_before_pause"] = 0
+    match["started_at"] = None
+
 
     return active
 
