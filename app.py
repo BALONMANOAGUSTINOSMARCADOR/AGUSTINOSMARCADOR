@@ -275,6 +275,10 @@ if "partidos" not in st.session_state:
 if "search_results" not in st.session_state:
     st.session_state.search_results = []
 
+if "view" not in st.session_state:
+    st.session_state.view = ""
+
+
 # ---- BOTÓN BUSCAR ----
 if st.button("Buscar partidos"):
     data = loader.cargar_partidos_github(
