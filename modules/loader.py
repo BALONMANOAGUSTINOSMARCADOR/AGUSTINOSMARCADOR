@@ -47,7 +47,10 @@ def cargar_partidos_github(owner, repo, folder_path, token):
     partidos = []
 
     for f in files:
-        if f["name"].endswith(".json"):
+    if f.get("type") != "file":
+        continue
+
+    if f["name"].endswith(".json"):
             file_url = f["url"]
             r = requests.get(file_url, headers=headers)
 
