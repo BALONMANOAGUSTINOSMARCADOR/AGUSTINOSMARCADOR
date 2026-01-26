@@ -281,13 +281,20 @@ if "view" not in st.session_state:
 
 # ---- BOTÓN BUSCAR ----
 if st.button("Buscar partidos"):
-    st.session_state.partidos = loader.cargar_partidos_github(
-        GITHUB_OWNER,
-        GITHUB_REPO,
-        "data/partidos",
-        GITHUB_TOKEN
-    )
-    st.session_state.view = "buscar_partidos"
+
+    if st.session_state.partido_activo:
+        st.warning("⚠️ Para buscar partidos antes hay que FINALIZAR el partido")
+    else:
+        with st.spinner("🔍 Buscando partidos en el histórico..."):
+            st.session_state.partidos = loader.cargar_partidos_github(
+                GITHUB_OWNER,
+                GITHUB_REPO,
+                "data/partidos",
+                GITHUB_TOKEN
+            )
+
+        st.session_state.view = "buscar_partidos"
+        st.success("✅ Búsqueda completada")
 
 # ---- FILTRADO ----
 matches = []
