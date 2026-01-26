@@ -268,16 +268,18 @@ GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN")
 if not GITHUB_TOKEN:
     st.warning("⚠️ No hay GITHUB_TOKEN configurado en Streamlit Secrets")
 
-
-
 if st.button("Buscar partidos"):
 
-    partidos = loader.cargar_partidos_github(
+    st.session_state.partidos = loader.cargar_partidos_github(
         GITHUB_OWNER,
         GITHUB_REPO,
         "data/partidos",
         GITHUB_TOKEN
     )
+
+    st.session_state.view = "buscar_partidos"
+
+if st.button("Buscar partidos"):
 
 
 matches = []
