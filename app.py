@@ -279,8 +279,6 @@ if st.button("Buscar partidos"):
 
     st.session_state.view = "buscar_partidos"
 
-if st.button("Buscar partidos"):
-
 matches = []
 
 for p in st.session_state.partidos:
