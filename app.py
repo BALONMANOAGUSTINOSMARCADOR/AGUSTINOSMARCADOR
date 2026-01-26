@@ -1,4 +1,4 @@
-# =========================================================
+no# =========================================================
 # AGUSTINOS MARCADOR — VERSIÓN COMPLETA Y ESTABLE
 # =========================================================
 
@@ -279,11 +279,16 @@ if st.button("Buscar partidos"):
 
 st.write("DEBUG → partidos encontrados:", len(partidos))
 st.write(partidos)
-   
+
 matches = []
-    for p in partidos:
-        if buscar_rival.strip().lower() in p.get("rival", "").lower():
-            matches.append(p)
+
+for p in partidos:
+    rival_p = p.get("rival", "").lower()
+
+    if not buscar_rival.strip():
+        matches.append(p)
+    elif buscar_rival.strip().lower() in rival_p:
+        matches.append(p)
 
     st.session_state.search_results = matches
     st.session_state.view = "buscar_partidos"
