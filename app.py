@@ -28,7 +28,8 @@ ZONE_COORDS = {
     7: (0.12, 0.32), 8: (0.5, 0.32), 9: (0.88, 0.32),
 }
 
-st_autorefresh(interval=1000)
+if st.session_state.get("partido_activo", False):
+    st_autorefresh(interval=1000)
 
 # =========================================================
 # ESTADO PERSISTENTE (NO SE BORRA AL RECARGAR)
