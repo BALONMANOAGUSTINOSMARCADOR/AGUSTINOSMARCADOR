@@ -277,7 +277,10 @@ if st.button("Buscar partidos"):
         GITHUB_TOKEN
     )
 
-    matches = []
+st.write("DEBUG → partidos encontrados:", len(partidos))
+st.write(partidos)
+   
+matches = []
     for p in partidos:
         if buscar_rival.strip().lower() in p.get("rival", "").lower():
             matches.append(p)
