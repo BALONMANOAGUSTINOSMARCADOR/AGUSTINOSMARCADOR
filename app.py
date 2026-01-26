@@ -258,27 +258,33 @@ st.markdown("### Buscar en histórico por RIVAL")
 
 buscar_rival = st.text_input("Nombre del rival a buscar", key="search_rival")
 
-# --- GitHub config (OBLIGATORIO) ---
+# --- GitHub config ---
 GITHUB_OWNER = "BALONMANOAGUSTINOSMARCADOR"
 GITHUB_REPO = "AGUSTINOSMARCADOR"
 
-# Token desde Streamlit Secrets
 GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN")
 
 if not GITHUB_TOKEN:
     st.warning("⚠️ No hay GITHUB_TOKEN configurado en Streamlit Secrets")
 
-if st.button("Buscar partidos"):
+# Inicializar estado
+if "partidos" not in st.session_state:
+    st.session_state.partidos = []
 
+if "search_results" not in st.session_state:
+    st.session_state.search_results = []
+
+# ---- BOTÓN BUSCAR ----
+if st.button("Buscar partidos"):
     st.session_state.partidos = loader.cargar_partidos_github(
         GITHUB_OWNER,
         GITHUB_REPO,
         "data/partidos",
         GITHUB_TOKEN
     )
-
     st.session_state.view = "buscar_partidos"
 
+# ---- FILTRADO ----
 matches = []
 
 for p in st.session_state.partidos:
@@ -289,16 +295,11 @@ for p in st.session_state.partidos:
     elif buscar_rival.strip().lower() in rival_p:
         matches.append(p)
 
-    st.session_state.search_results = matches
-    st.session_state.view = "buscar_partidos"
-
+st.session_state.search_results = matches
 
 # ---- MOSTRAR RESULTADOS ----
-if "search_results" not in st.session_state:
-    st.session_state.search_results = []
-
 if st.session_state.view == "buscar_partidos":
-    results = st.session_state.search_results or []
+    results = st.session_state.search_results
 
     if results:
         st.success(f"Encontrados {len(results)} partidos.")
@@ -309,4 +310,3 @@ if st.session_state.view == "buscar_partidos":
             st.write(f"📊 Resultado: {p.get('scoreA')} - {p.get('scoreB')}")
     else:
         st.warning("No se encontraron partidos.")
-
