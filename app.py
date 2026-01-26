@@ -44,7 +44,8 @@ if "match" not in st.session_state:
         "events": [],
         "exclusions": [],
         "started_at": None,
-        "elapsed_before_pause": 0
+        "elapsed_before_pause": 0,
+        "part": 1  # 1ª o 2ª parte
     }
 
 
