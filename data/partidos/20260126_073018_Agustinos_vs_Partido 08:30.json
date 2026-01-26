@@ -1,0 +1,85 @@
+{
+  "fecha": "2026-01-26T07:30:18.974950",
+  "rival": "Partido 08:30",
+  "competicion": "Mutxamel",
+  "scoreA": 6,
+  "scoreB": 5,
+  "events": [
+    {
+      "time": "2026-01-26T07:28:58.083591",
+      "team": "A",
+      "zone": 2,
+      "player": ""
+    },
+    {
+      "time": "2026-01-26T07:29:00.894661",
+      "team": "A",
+      "zone": 2,
+      "player": "15"
+    },
+    {
+      "time": "2026-01-26T07:29:00.996999",
+      "team": "A",
+      "zone": 2,
+      "player": "15"
+    },
+    {
+      "time": "2026-01-26T07:29:01.339273",
+      "team": "A",
+      "zone": 2,
+      "player": "15"
+    },
+    {
+      "time": "2026-01-26T07:29:01.507928",
+      "team": "A",
+      "zone": 2,
+      "player": "15"
+    },
+    {
+      "time": "2026-01-26T07:29:02.054213",
+      "team": "A",
+      "zone": 2,
+      "player": "15"
+    },
+    {
+      "time": "2026-01-26T07:29:14.154561",
+      "team": "B",
+      "zone": 5,
+      "player": "15"
+    },
+    {
+      "time": "2026-01-26T07:29:15.391576",
+      "team": "B",
+      "zone": 5,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-26T07:29:15.515113",
+      "team": "B",
+      "zone": 5,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-26T07:29:15.656838",
+      "team": "B",
+      "zone": 5,
+      "player": "17"
+    },
+    {
+      "time": "2026-01-26T07:29:16.221759",
+      "team": "B",
+      "zone": 5,
+      "player": "17"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "3",
+      "team": "A",
+      "started_at_seconds": 0,
+      "duration": 120,
+      "remaining": 109
+    }
+  ],
+  "elapsed_seconds": 11
+}
