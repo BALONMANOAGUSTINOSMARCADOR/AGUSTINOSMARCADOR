@@ -281,10 +281,9 @@ if st.button("Buscar partidos"):
 
 if st.button("Buscar partidos"):
 
-
 matches = []
 
-for p in partidos:
+for p in st.session_state.partidos:
     rival_p = p.get("rival", "").lower()
 
     if not buscar_rival.strip():
