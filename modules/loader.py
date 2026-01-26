@@ -31,7 +31,7 @@ def cargar_partidos_github(owner, repo, folder_path, token):
     Lee todos los archivos JSON de una carpeta del repo GitHub
     y devuelve una lista de partidos (dict).
     """
-    url = f"https://api.github.com/repos/{owner}/{repo}/contents/{folder_path}"
+    url = f"https://api.github.com/repos/{owner}/{repo}/contents/{folder_path}?ref=main"
 
     headers = {
         "Authorization": f"token {token}",
