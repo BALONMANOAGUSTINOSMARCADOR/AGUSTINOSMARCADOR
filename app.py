@@ -276,12 +276,19 @@ if "search_results" not in st.session_state:
 
 # ---- BOTÓN BUSCAR ----
 if st.button("Buscar partidos"):
-    st.session_state.partidos = loader.cargar_partidos_github(
+    data = loader.cargar_partidos_github(
         GITHUB_OWNER,
         GITHUB_REPO,
         "data/partidos",
         GITHUB_TOKEN
     )
+
+    # 🔑 CLAVE: convertir dict → lista
+    if isinstance(data, dict):
+        st.session_state.partidos = list(data.values())
+    else:
+        st.session_state.partidos = data or []
+
     st.session_state.view = "buscar_partidos"
 
 # ---- FILTRADO ----
