@@ -335,7 +335,15 @@ with right:
 # =========================================================
 st.markdown("---")
 st.subheader("Eventos registrados")
-st.dataframe(pd.DataFrame(match["events"]))
+if match["events"]:
+    df = pd.DataFrame(match["events"])
+    df["team"] = df["team"].map({
+        "A": match["teamA"],
+        "B": match["teamB"]
+    })
+    st.dataframe(df)
+else:
+    st.write("No hay eventos registrados.")
 
 # =========================================================
 # GUARDAR PARTIDO
