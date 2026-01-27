@@ -86,6 +86,7 @@ def reset_match():
         "exclusions": [],
         "started_at": None,
         "elapsed_before_pause": 0
+        "part": 1
     }
 
 def add_goal(team, zone, player=None):
@@ -115,6 +116,8 @@ def active_exclusions():
             remaining = int(end_sec - now_sec)
             ex["remaining"] = remaining
             active.append(ex)
+   
+    return active
 
 def set_match_time(minutes, seconds):
     total_seconds = minutes * 60 + seconds
@@ -213,7 +216,7 @@ if st.session_state.get("show_mods", False):
 
     st.markdown("---")
     st.subheader("🏁 Parte del partido")
-    st.info(f"Parte actual: {match['part']}ª")
+    st.info(f"Parte actual: {match.get('part', 1)}ª")
 
     if match["part"] == 1:
         if st.button("▶️ Iniciar 2ª parte"):
