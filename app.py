@@ -356,15 +356,17 @@ competicion = st.text_input("Competición")
 
 if st.button("Guardar partido en GitHub"):
     partido = {
-        "fecha": iso_now(),
-        "rival": rival,
-        "competicion": competicion,
-        "scoreA": match["scoreA"],
-        "scoreB": match["scoreB"],
-        "events": match["events"],
-        "exclusions": match["exclusions"],
-        "elapsed_seconds": elapsed_seconds()
-    }
+    "fecha": iso_now(),
+    "rival": rival,
+    "competicion": competicion,
+    "teamA": match["teamA"],
+    "teamB": match["teamB"],
+    "scoreA": match["scoreA"],
+    "scoreB": match["scoreB"],
+    "events": match["events"],
+    "exclusions": match["exclusions"],
+    "elapsed_seconds": elapsed_seconds()
+}
 
     ts = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
     filename = f"data/partidos/{ts}_Agustinos_vs_{rival}.json"
