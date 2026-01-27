@@ -28,6 +28,18 @@ ZONE_COORDS = {
     7: (0.12, 0.32), 8: (0.5, 0.32), 9: (0.88, 0.32),
 }
 
+ZONAS = {
+    1: "EI",
+    2: "LI",
+    3: "C",
+    4: "LD",
+    5: "ED",
+    6: "P",
+    7: "EXI",
+    8: "EXC",
+    9: "EXD"
+}
+
 if st.session_state.get("partido_activo", False):
     st_autorefresh(interval=1000)
 
