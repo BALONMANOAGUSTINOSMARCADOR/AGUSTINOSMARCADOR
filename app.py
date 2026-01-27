@@ -40,6 +40,8 @@ ZONAS = {
     9: "EXD"
 }
 
+ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
+
 if st.session_state.get("partido_activo", False):
     st_autorefresh(interval=1000)
 
