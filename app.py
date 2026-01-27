@@ -53,15 +53,16 @@ if "partido_activo" not in st.session_state:
 
 if "match" not in st.session_state:
     st.session_state.match = {
-        "scoreA": 0,
-        "scoreB": 0,
-        "events": [],
-        "exclusions": [],
-        "started_at": None,
-        "elapsed_before_pause": 0,
-        "part": 1  # 1ª o 2ª parte
-    }
-
+    "teamA": "Equipo A",
+    "teamB": "Equipo B",
+    "scoreA": 0,
+    "scoreB": 0,
+    "events": [],
+    "exclusions": [],
+    "started_at": None,
+    "elapsed_before_pause": 0,
+    "part": 1
+}
 
 match = st.session_state.match
 
