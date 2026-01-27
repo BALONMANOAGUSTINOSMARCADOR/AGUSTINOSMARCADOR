@@ -239,7 +239,11 @@ with mid:
 
 with st.form("form_ex"):
     p = st.text_input("Jugador (nº)")
-    team = st.selectbox("Equipo", ["A", "B"])
+    team = st.selectbox(
+    "Equipo",
+    ["A", "B"],
+    format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+)
     dur = st.number_input(
         "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
     )
