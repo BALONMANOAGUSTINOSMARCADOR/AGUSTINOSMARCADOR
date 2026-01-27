@@ -179,9 +179,11 @@ with mid:
     st.button("▶ Reanudar", on_click=start_match)
 
     st.markdown("---")
+    
 if st.button("⚙️ MODIFICACIONES"):
     st.session_state.show_mods = not st.session_state.get("show_mods", False)
-    if st.session_state.get("show_mods", False):
+
+if st.session_state.get("show_mods", False):
     st.warning("⚠️ Modo modificaciones activado")
 
     st.subheader("⏱️ Ajustar reloj")
