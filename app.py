@@ -229,8 +229,6 @@ if st.session_state.get("show_mods", False):
         if st.form_submit_button("Añadir exclusión"):
             add_exclusion(p, team, dur)
 
-    exs = active_exclusions()
-
 if exs:
     rows = []
     for ex in exs:
