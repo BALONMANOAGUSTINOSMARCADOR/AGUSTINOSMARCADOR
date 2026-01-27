@@ -300,9 +300,11 @@ with right:
 
     xsA, ysA, xsB, ysB = [], [], [], []
     for ev in match["events"]:
-        x, y = ZONE_COORDS[ev["zone"]]
-        (xsA if ev["team"] == "A" else xsB).append(x)
-        (ysA if ev["team"] == "A" else ysB).append(y)
+        zone_id = ZONA_NOMBRE_A_ID.get(ev["zone"])
+        if zone_id:
+            x, y = ZONE_COORDS[zone_id]
+            (xsA if ev["team"] == "A" else xsB).append(x)
+            (ysA if ev["team"] == "A" else ysB).append(y)
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=xsA, y=ysA, mode="markers", name="Equipo A"))
