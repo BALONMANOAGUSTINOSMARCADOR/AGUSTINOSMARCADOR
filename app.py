@@ -85,7 +85,7 @@ def reset_match():
         "events": [],
         "exclusions": [],
         "started_at": None,
-        "elapsed_before_pause": 0
+        "elapsed_before_pause": 0,
         "part": 1
     }
 
@@ -132,9 +132,6 @@ def start_second_half():
     match["part"] = 2
     match["elapsed_before_pause"] = 0
     match["started_at"] = None
-
-
-    return active
 
 # =========================================================
 # HEADER
