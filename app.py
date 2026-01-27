@@ -80,6 +80,8 @@ def pause_match():
 
 def reset_match():
     st.session_state.match = {
+        "teamA": "",
+        "teamB": "",
         "scoreA": 0,
         "scoreB": 0,
         "events": [],
