@@ -107,7 +107,7 @@ def add_goal(team, zone, player=None):
     match["events"].append({
         "time": iso_now(),
         "team": team,
-        "zone": int(zone),
+        "zone": ZONAS[int(zone)],
         "player": player
     })
     match[f"score{team}"] += 1
