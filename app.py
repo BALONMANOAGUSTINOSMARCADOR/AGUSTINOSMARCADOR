@@ -193,7 +193,12 @@ with left:
     f"**{match['teamB']}:** {match['scoreB']}"
 )
 
-    zone = st.selectbox("Zona", list(ZONE_COORDS.keys()), index=4)
+    zone = st.selectbox(
+    "Zona",
+    list(ZONAS.keys()),
+    format_func=lambda x: ZONAS[x],
+    index=4
+)
     player = st.text_input("Jugador")
 
     st.button(f"Gol {match['teamA']}", on_click=add_goal, args=("A", zone, player))
