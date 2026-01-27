@@ -181,7 +181,34 @@ with mid:
     st.button("▶ Reanudar", on_click=start_match)
 
     st.markdown("---")
-    
+
+    st.subheader("Exclusiones")
+
+with st.form("form_ex"):
+    p = st.text_input("Jugador (nº)")
+    team = st.selectbox("Equipo", ["A", "B"])
+    dur = st.number_input(
+        "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+    )
+    if st.form_submit_button("Añadir exclusión"):
+        add_exclusion(p, team, dur)
+
+exs = active_exclusions()
+
+if exs:
+    rows = []
+    for ex in exs:
+        mm = ex["remaining"] // 60
+        ss = ex["remaining"] % 60
+        rows.append({
+            "Jugador": ex["player"],
+            "Equipo": ex["team"],
+            "Tiempo restante": f"{mm:02d}:{ss:02d}"
+        })
+    st.table(pd.DataFrame(rows))
+else:
+    st.write("No hay exclusiones activas.")
+
 if st.button("⚙️ MODIFICACIONES"):
     st.session_state.show_mods = not st.session_state.get("show_mods", False)
 
@@ -213,36 +240,12 @@ if st.session_state.get("show_mods", False):
 
     st.markdown("---")
     st.subheader("🏁 Parte del partido")
-    st.info(f"Parte actual: {match.get('part', 1)}ª")
+    st.info(f"Parte actual: {match['part']}ª")
 
     if match["part"] == 1:
         if st.button("▶️ Iniciar 2ª parte"):
             start_second_half()
             st.success("Segunda parte iniciada (00:00)")
-
-    st.subheader("Exclusiones")
-
-    with st.form("form_ex"):
-        p = st.text_input("Jugador (nº)")
-        team = st.selectbox("Equipo", ["A", "B"])
-        dur = st.number_input("Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS)
-        if st.form_submit_button("Añadir exclusión"):
-            add_exclusion(p, team, dur)
-
-if exs:
-    rows = []
-    for ex in exs:
-        mm = ex["remaining"] // 60
-        ss = ex["remaining"] % 60
-        rows.append({
-            "Jugador": ex["player"],
-            "Equipo": ex["team"],
-            "Tiempo restante": f"{mm:02d}:{ss:02d}"
-        })
-    st.table(pd.DataFrame(rows))
-else:
-    st.write("No hay exclusiones activas.")
-
 
 # -------- HEATMAP --------
 with right:
