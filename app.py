@@ -173,12 +173,34 @@ with left:
 exs = active_exclusions()
 
 with mid:
-    st.subheader("Tiempo de partido")
-    t = elapsed_seconds()
-    st.markdown(f"**{t//60:02d}:{t%60:02d}**")
+    col_time, col_ex = st.columns([2, 3])
 
-    st.button("⏸ Pausar", on_click=pause_match)
-    st.button("▶ Reanudar", on_click=start_match)
+    # ⏱️ TIEMPO
+    with col_time:
+        st.subheader("Tiempo de partido")
+        t = elapsed_seconds()
+        st.markdown(f"## {t//60:02d}:{t%60:02d}")
+
+        st.button("⏸ Pausar", on_click=pause_match)
+        st.button("▶ Reanudar", on_click=start_match)
+
+    # 🚫 EXCLUSIONES ACTIVAS
+    with col_ex:
+        exs = active_exclusions()
+
+        if exs:
+            st.subheader("🚫 Exclusiones")
+            for ex in exs:
+                mm = ex["remaining"] // 60
+                ss = ex["remaining"] % 60
+                st.markdown(
+                    f"**{ex['player']}** | "
+                    f"Equipo {ex['team']} | "
+                    f"⏱ {mm:02d}:{ss:02d}"
+                )
+        else:
+            st.subheader("🚫 Exclusiones")
+            st.write("—")
 
     st.markdown("---")
 
