@@ -170,6 +170,8 @@ with left:
     st.button("Gol Equipo B", on_click=add_goal, args=("B", zone, player))
 
 # -------- TIEMPO + EXCLUSIONES --------
+exs = active_exclusions()
+
 with mid:
     st.subheader("Tiempo de partido")
     t = elapsed_seconds()
