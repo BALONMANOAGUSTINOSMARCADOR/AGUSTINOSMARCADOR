@@ -142,10 +142,19 @@ st.title("🏐 AGUSTINOS – Marcador Oficial")
 
 col1, col2 = st.columns(2)
 with col1:
-    if st.button("▶️ INICIAR PARTIDO", disabled=st.session_state.partido_activo):
-        reset_match()
-        st.session_state.partido_activo = True
-        start_match()
+    if st.button("▶️ INICIAR PARTIDO"):
+    st.session_state.show_team_form = True
+
+    if st.session_state.get("show_team_form", False):
+    with st.form("form_teams"):
+        teamA = st.text_input("Equipo A")
+        teamB = st.text_input("Equipo B")
+
+        if st.form_submit_button("Confirmar y empezar"):
+            match["teamA"] = teamA or "Equipo A"
+            match["teamB"] = teamB or "Equipo B"
+            start_match()
+            st.session_state.show_team_form = False
 
 with col2:
     if st.button("⏹️ FINALIZAR PARTIDO", disabled=not st.session_state.partido_activo):
@@ -197,7 +206,7 @@ with mid:
                 ss = ex["remaining"] % 60
                 st.markdown(
                     f"**{ex['player']}** | "
-                    f"Equipo {ex['team']} | "
+                    f"{match['teamA'] if ex['team']=='A' else match['teamB']} | "
                     f"⏱ {mm:02d}:{ss:02d}"
                 )
         else:
