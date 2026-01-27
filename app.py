@@ -187,13 +187,17 @@ left, mid, right = st.columns(3)
 # -------- MARCADOR --------
 with left:
     st.subheader("Marcador")
-    st.markdown(f"**Equipo A:** {match['scoreA']}  —  **Equipo B:** {match['scoreB']}")
+    st.markdown(
+    f"**{match['teamA']}:** {match['scoreA']}  —  "
+    f"**{match['teamB']}:** {match['scoreB']}"
+)
 
     zone = st.selectbox("Zona", list(ZONE_COORDS.keys()), index=4)
     player = st.text_input("Jugador")
 
-    st.button("Gol Equipo A", on_click=add_goal, args=("A", zone, player))
-    st.button("Gol Equipo B", on_click=add_goal, args=("B", zone, player))
+    st.button(f"Gol {match['teamA']}", on_click=add_goal, args=("A", zone, player))
+    st.button(f"Gol {match['teamB']}", on_click=add_goal, args=("B", zone, player))
+
 
 # -------- TIEMPO + EXCLUSIONES --------
 exs = active_exclusions()
