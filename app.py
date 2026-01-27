@@ -322,11 +322,45 @@ with right:
             (ysA if ev["team"] == "A" else ysB).append(y)
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=xsA, y=ysA, mode="markers", name="Equipo A"))
-    fig.add_trace(go.Scatter(x=xsB, y=ysB, mode="markers", name="Equipo B"))
+
+    # 🔥 AÑADIR IMAGEN DE FONDO (CAMPO BALONMANO)
+    fig.add_layout_image(
+        dict(
+            source=Image.open("court.png"),
+            xref="x",
+            yref="y",
+            x=0,
+            y=1,
+            sizex=1,
+            sizey=1,
+            sizing="stretch",
+            opacity=1,
+            layer="below"
+        )
+    )
+
+    # 🔴 PUNTOS EQUIPO A
+    fig.add_trace(go.Scatter(
+        x=xsA,
+        y=ysA,
+        mode="markers",
+        name=match["teamA"]
+    ))
+
+    # 🔵 PUNTOS EQUIPO B
+    fig.add_trace(go.Scatter(
+        x=xsB,
+        y=ysB,
+        mode="markers",
+        name=match["teamB"]
+    ))
+
     fig.update_xaxes(visible=False, range=[0,1])
     fig.update_yaxes(visible=False, range=[0,1])
-    fig.update_layout(height=400)
+    fig.update_layout(
+        height=400,
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
