@@ -377,7 +377,7 @@ with right:
     autorange=False
 )
 
-fig.update_yaxes(
+    fig.update_yaxes(
     visible=False,
     range=[0, 1],
     fixedrange=True,
