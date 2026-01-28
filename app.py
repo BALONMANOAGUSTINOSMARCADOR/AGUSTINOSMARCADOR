@@ -252,75 +252,6 @@ with mid:
 
     st.markdown("---")
 
-    st.subheader("Exclusiones")
-
-with st.form("form_ex"):
-    p = st.text_input("Jugador (nº)")
-    team = st.selectbox(
-    "Equipo",
-    ["A", "B"],
-    format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
-)
-    dur = st.number_input(
-        "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
-    )
-    if st.form_submit_button("Añadir exclusión"):
-        add_exclusion(p, team, dur)
-
-exs = active_exclusions()
-
-if exs:
-    rows = []
-    for ex in exs:
-        mm = ex["remaining"] // 60
-        ss = ex["remaining"] % 60
-        rows.append({
-            "Jugador": ex["player"],
-            "Equipo": ex["team"],
-            "Tiempo restante": f"{mm:02d}:{ss:02d}"
-        })
-    st.table(pd.DataFrame(rows))
-else:
-    st.write("No hay exclusiones activas.")
-
-if st.button("⚙️ MODIFICACIONES"):
-    st.session_state.show_mods = not st.session_state.get("show_mods", False)
-
-if st.session_state.get("show_mods", False):
-    st.warning("⚠️ Modo modificaciones activado")
-
-    st.subheader("⏱️ Ajustar reloj")
-    colm1, colm2 = st.columns(2)
-    with colm1:
-        new_min = st.number_input("Minutos", 0, 60, t // 60)
-    with colm2:
-        new_sec = st.number_input("Segundos", 0, 59, t % 60)
-
-    if st.button("Aplicar tiempo"):
-        set_match_time(new_min, new_sec)
-        st.success("Reloj actualizado")
-
-    st.markdown("---")
-    st.subheader("📊 Ajustar marcador")
-    colm3, colm4 = st.columns(2)
-    with colm3:
-        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"])
-    with colm4:
-        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"])
-
-    if st.button("Aplicar marcador"):
-        set_score(new_a, new_b)
-        st.success("Marcador actualizado")
-
-    st.markdown("---")
-    st.subheader("🏁 Parte del partido")
-    st.info(f"Parte actual: {match['part']}ª")
-
-    if match["part"] == 1:
-        if st.button("▶️ Iniciar 2ª parte"):
-            start_second_half()
-            st.success("Segunda parte iniciada (00:00)")
-
 # -------- HEATMAP --------
 with right:
     st.subheader("Mapa de calor")
@@ -396,6 +327,76 @@ with right:
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
+ st.subheader("Exclusiones")
+
+with st.form("form_ex"):
+    p = st.text_input("Jugador (nº)")
+    team = st.selectbox(
+    "Equipo",
+    ["A", "B"],
+    format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+)
+    dur = st.number_input(
+        "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+    )
+    if st.form_submit_button("Añadir exclusión"):
+        add_exclusion(p, team, dur)
+
+exs = active_exclusions()
+
+if exs:
+    rows = []
+    for ex in exs:
+        mm = ex["remaining"] // 60
+        ss = ex["remaining"] % 60
+        rows.append({
+            "Jugador": ex["player"],
+            "Equipo": ex["team"],
+            "Tiempo restante": f"{mm:02d}:{ss:02d}"
+        })
+    st.table(pd.DataFrame(rows))
+else:
+    st.write("No hay exclusiones activas.")
+
+if st.button("⚙️ MODIFICACIONES"):
+    st.session_state.show_mods = not st.session_state.get("show_mods", False)
+
+if st.session_state.get("show_mods", False):
+    st.warning("⚠️ Modo modificaciones activado")
+
+    st.subheader("⏱️ Ajustar reloj")
+    colm1, colm2 = st.columns(2)
+    with colm1:
+        new_min = st.number_input("Minutos", 0, 60, t // 60)
+    with colm2:
+        new_sec = st.number_input("Segundos", 0, 59, t % 60)
+
+    if st.button("Aplicar tiempo"):
+        set_match_time(new_min, new_sec)
+        st.success("Reloj actualizado")
+
+    st.markdown("---")
+    st.subheader("📊 Ajustar marcador")
+    colm3, colm4 = st.columns(2)
+    with colm3:
+        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"])
+    with colm4:
+        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"])
+
+    if st.button("Aplicar marcador"):
+        set_score(new_a, new_b)
+        st.success("Marcador actualizado")
+
+    st.markdown("---")
+    st.subheader("🏁 Parte del partido")
+    st.info(f"Parte actual: {match['part']}ª")
+
+    if match["part"] == 1:
+        if st.button("▶️ Iniciar 2ª parte"):
+            start_second_half()
+            st.success("Segunda parte iniciada (00:00)")
+
 
 # =========================================================
 # EVENTOS
