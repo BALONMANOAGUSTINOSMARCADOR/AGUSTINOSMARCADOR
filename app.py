@@ -50,7 +50,7 @@ ZONAS = {
     9: "EXD"
 }
 
-COURT_IMG=Image.open("court.png"),
+COURT_IMG=Image.open("court.png")
 
 ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 
