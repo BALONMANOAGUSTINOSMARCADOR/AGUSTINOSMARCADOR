@@ -50,6 +50,8 @@ ZONAS = {
     9: "EXD"
 }
 
+source=Image.open("court.png"),
+
 ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 
 if st.session_state.get("partido_activo", False):
@@ -341,7 +343,7 @@ with right:
     # 🏟️ Imagen de fondo: campo de balonmano
     fig.add_layout_image(
         dict(
-            source=Image.open("court.png"),
+            SOURCE=COURT_IMG,
             xref="x",
             yref="y",
             x=0,
@@ -388,6 +390,7 @@ with right:
 
     fig.update_layout(
         height=400,
+        autosize=False,
         margin=dict(l=0, r=0, t=0, b=0)
     )
 
