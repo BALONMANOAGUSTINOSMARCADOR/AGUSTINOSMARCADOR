@@ -333,7 +333,6 @@ with right:
 
     fig = go.Figure()
 
-    # 🔥 AÑADIR IMAGEN DE FONDO (CAMPO BALONMANO)
     fig.add_layout_image(
         dict(
             source="court.png",
@@ -349,7 +348,6 @@ with right:
         )
     )
 
-    # 🔴 PUNTOS EQUIPO A
     fig.add_trace(go.Scatter(
         x=xsA,
         y=ysA,
@@ -357,7 +355,6 @@ with right:
         name=match["teamA"]
     ))
 
-    # 🔵 PUNTOS EQUIPO B
     fig.add_trace(go.Scatter(
         x=xsB,
         y=ysB,
@@ -366,9 +363,9 @@ with right:
     ))
 
     fig.update_xaxes(
-    visible=False,
-    range=[0, 1],
-    fixedrange=True
+        visible=False,
+        range=[0, 1],
+        fixedrange=True
     )
     fig.update_yaxes(
         visible=False,
@@ -377,6 +374,7 @@ with right:
         scaleanchor="x",
         scaleratio=1
     )
+
     fig.update_layout(
         height=400,
         margin=dict(l=0, r=0, t=0, b=0)
