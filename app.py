@@ -326,8 +326,10 @@ with right:
     xsA, ysA, xsB, ysB = [], [], [], []
     for ev in match["events"]:
         zone_id = ZONA_NOMBRE_A_ID.get(ev["zone"])
-        if zone_id:
-            x, y = ZONE_COORDS[zone_id]
+if zone_id in ZONE_COORDS:
+    x, y = ZONE_COORDS[zone_id]
+else:
+    continue
             (xsA if ev["team"] == "A" else xsB).append(x)
             (ysA if ev["team"] == "A" else ysB).append(y)
 
