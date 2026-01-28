@@ -328,9 +328,10 @@ with right:
     xsA, ysA, xsB, ysB = [], [], [], []
 
     for ev in match["events"]:
-        zone_id = ZONA_NOMBRE_A_ID.get(ev["zone"])
-        if zone_id in ZONE_COORDS:
-            x, y = ZONE_COORDS[zone_id]
+        zone_name = ev["zone"]   # ya es "EI", "C", etc
+
+        if zone_name in ZONE_COORDS:
+            x, y = ZONE_COORDS[zone_name]
             if ev["team"] == "A":
                 xsA.append(x)
                 ysA.append(y)
@@ -343,7 +344,7 @@ with right:
     # 🏟️ Imagen de fondo: campo de balonmano
     fig.add_layout_image(
         dict(
-            SOURCE=COURT_IMG,
+            source=COURT_IMG,
             xref="x",
             yref="y",
             x=0,
@@ -373,19 +374,19 @@ with right:
     ))
 
     fig.update_xaxes(
-    visible=False,
-    range=[0, 1],
-    fixedrange=True,
-    autorange=False
+        visible=False,
+        range=[0, 1],
+        fixedrange=True,
+        autorange=False
 )
 
     fig.update_yaxes(
-    visible=False,
-    range=[0, 1],
-    fixedrange=True,
-    autorange=False,
-    scaleanchor="x",
-    scaleratio=1
+        visible=False,
+        range=[0, 1],
+        fixedrange=True,
+        autorange=False,
+        scaleanchor="x",
+        scaleratio=1
 )
 
     fig.update_layout(
