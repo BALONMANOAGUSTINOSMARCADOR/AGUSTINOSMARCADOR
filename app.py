@@ -335,7 +335,7 @@ with right:
 
     fig.add_layout_image(
         dict(
-            source="court.png",
+            source=Image.open("court.png"),
             xref="x",
             yref="y",
             x=0,
