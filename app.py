@@ -336,7 +336,7 @@ with right:
     # 🔥 AÑADIR IMAGEN DE FONDO (CAMPO BALONMANO)
     fig.add_layout_image(
         dict(
-            source=Image.open("court.png"),
+            source="court.png",
             xref="x",
             yref="y",
             x=0,
