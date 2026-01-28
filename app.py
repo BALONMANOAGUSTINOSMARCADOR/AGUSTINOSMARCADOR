@@ -329,7 +329,7 @@ with right:
     if zone_id in ZONE_COORDS:
         x, y = ZONE_COORDS[zone_id]
     else:
-        continue:
+        continue
             (xsA if ev["team"] == "A" else xsB).append(x)
             (ysA if ev["team"] == "A" else ysB).append(y)
 
