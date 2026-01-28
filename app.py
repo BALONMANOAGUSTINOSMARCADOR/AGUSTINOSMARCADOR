@@ -365,8 +365,18 @@ with right:
         name=match["teamB"]
     ))
 
-    fig.update_xaxes(visible=False, range=[0,1])
-    fig.update_yaxes(visible=False, range=[0,1])
+    fig.update_xaxes(
+    visible=False,
+    range=[0, 1],
+    fixedrange=True
+)
+fig.update_yaxes(
+    visible=False,
+    range=[0, 1],
+    fixedrange=True,
+    scaleanchor="x",
+    scaleratio=1
+)
     fig.update_layout(
         height=400,
         margin=dict(l=0, r=0, t=0, b=0)
