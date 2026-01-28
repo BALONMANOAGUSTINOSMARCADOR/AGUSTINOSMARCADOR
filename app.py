@@ -335,6 +335,8 @@ else:
 
     fig = go.Figure()
 
+court_img = Image.open("court.png")
+
     fig.add_layout_image(
         dict(
             source=Image.open("court.png"),
