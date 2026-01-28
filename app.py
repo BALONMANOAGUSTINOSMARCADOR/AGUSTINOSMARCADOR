@@ -324,17 +324,21 @@ with right:
     st.subheader("Mapa de calor")
 
     xsA, ysA, xsB, ysB = [], [], [], []
+
     for ev in match["events"]:
         zone_id = ZONA_NOMBRE_A_ID.get(ev["zone"])
-    if zone_id in ZONE_COORDS:
-        x, y = ZONE_COORDS[zone_id]
-            (xsA if ev["team"] == "A" else xsB).append(x)
-            (ysA if ev["team"] == "A" else ysB).append(y)
+        if zone_id in ZONE_COORDS:
+            x, y = ZONE_COORDS[zone_id]
+            if ev["team"] == "A":
+                xsA.append(x)
+                ysA.append(y)
+            else:
+                xsB.append(x)
+                ysB.append(y)
 
     fig = go.Figure()
 
-court_img = Image.open("court.png")
-
+    # 🏟️ Imagen de fondo: campo de balonmano
     fig.add_layout_image(
         dict(
             source=Image.open("court.png"),
@@ -350,6 +354,7 @@ court_img = Image.open("court.png")
         )
     )
 
+    # 🔴 Equipo A
     fig.add_trace(go.Scatter(
         x=xsA,
         y=ysA,
@@ -357,6 +362,7 @@ court_img = Image.open("court.png")
         name=match["teamA"]
     ))
 
+    # 🔵 Equipo B
     fig.add_trace(go.Scatter(
         x=xsB,
         y=ysB,
