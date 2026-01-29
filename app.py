@@ -286,6 +286,14 @@ st.markdown("---")
 # HEATMAP (ANCHO COMPLETO)
 # =========================================================
 
+st.markdown("""
+<style>
+    .stContainer {
+        padding-top: 0rem;  /* elimina espacio por defecto */
+    }
+</style>
+""", unsafe_allow_html=True)
+
 with st.container():
     st.subheader("Mapa de calor")
 
