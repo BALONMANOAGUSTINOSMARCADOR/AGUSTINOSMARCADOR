@@ -287,7 +287,7 @@ st.markdown("---")
 # =========================================================
 
 with st.container():
-    # st.subheader("Mapa de calor")
+    st.subheader("Mapa de calor")
 
 # 1️⃣ contar goles por zona y equipo
 goals = {
@@ -320,29 +320,21 @@ def build_team_points(team):
 xsA, ysA, sizesA, textsA = build_team_points("A")
 xsB, ysB, sizesB, textsB = build_team_points("B")
 
-    fig = go.Figure()
+fig = go.Figure()
 
-    fig.add_layout_image(
-        dict(
-            source=COURT_IMG,
-            xref="x",
-            yref="y",
-            x=0,
-            y=1,
-            sizex=1,
-            sizey=1,
-            sizing="stretch",
-            layer="below"
-        )
+fig.add_layout_image(
+    dict(
+        source=COURT_IMG,
+        xref="x",
+        yref="y",
+        x=0,
+        y=1,
+        sizex=1,
+        sizey=1,
+        sizing="stretch",
+        layer="below"
     )
-
-    fig.add_trace(go.Scatter(
-        x=xsA,
-        y=ysA,
-        mode="markers",
-        name=match["teamA"],
-        marker=dict(size=14)
-    ))
+)
 
 fig.add_trace(go.Scatter(
     x=xsA,
@@ -366,21 +358,21 @@ fig.add_trace(go.Scatter(
     textposition="middle center"
 ))
 
-    fig.update_xaxes(visible=False, range=[0, 1])
-    fig.update_yaxes(
-        visible=False,
-        range=[0, 1],
-        scaleanchor="x",
-        scaleratio=1
-    )
+fig.update_xaxes(visible=False, range=[0, 1])
+fig.update_yaxes(
+    visible=False,
+    range=[0, 1],
+    scaleanchor="x",
+    scaleratio=1
+)
 
-    fig.update_layout(
-        height=520,        # 👈 aquí controlas el tamaño REAL
-        autosize=True,
-        margin=dict(l=0, r=0, t=10, b=0)
-    )
+fig.update_layout(
+    height=520,        # 👈 aquí controlas el tamaño REAL
+    autosize=True,
+    margin=dict(l=0, r=0, t=10, b=0)
+)
 
-    st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
 if st.button("⚙️ MODIFICACIONES"):
     st.session_state.show_mods = not st.session_state.get("show_mods", False)
