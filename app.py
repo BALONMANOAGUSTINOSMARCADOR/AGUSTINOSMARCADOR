@@ -286,7 +286,7 @@ with right:
 # -------- HEATMAP --------
 
     st.markdown("---")
-    st.subheader("Mapa de calor")
+    #    st.subheader("Mapa de calor")
 
     xsA, ysA, xsB, ysB = [], [], [], []
 
