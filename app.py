@@ -286,102 +286,96 @@ st.markdown("---")
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
 
-# ⚠️ Eliminar padding superior extra de Streamlit
-st.markdown("""
-<style>
-    .stContainer {
-        padding-top: 0rem !important;
+# contenedor Streamlit para controlar separación
+with st.container():
+    st_empty = st.empty()  # "pegamento" para quitar espacio vertical
+    st_empty.markdown("<div style='margin-top:-1rem'></div>", unsafe_allow_html=True)
+
+    # 1️⃣ contar goles por zona y equipo
+    goals = {
+        "A": defaultdict(int),
+        "B": defaultdict(int)
     }
-</style>
-""", unsafe_allow_html=True)
 
-# 1️⃣ contar goles por zona y equipo
-goals = {
-    "A": defaultdict(int),
-    "B": defaultdict(int)
-}
+    for ev in match["events"]:
+        goals[ev["team"]][ev["zone"]] += 1
 
-for ev in match["events"]:
-    goals[ev["team"]][ev["zone"]] += 1
+    # 2️⃣ función para construir coordenadas, tamaño y texto
+    def build_team_points(team):
+        xs, ys, sizes, texts = [], [], [], []
 
-# 2️⃣ función para construir coordenadas, tamaño y texto
-def build_team_points(team):
-    xs, ys, sizes, texts = [], [], [], []
+        for zone, n in goals[team].items():
+            if zone in ZONE_COORDS:
+                x, y = ZONE_COORDS[zone]
 
-    for zone, n in goals[team].items():
-        if zone in ZONE_COORDS:
-            x, y = ZONE_COORDS[zone]
+                # equipo B reflejado horizontalmente
+                if team == "B":
+                    x = 1 - x
 
-            # equipo B reflejado horizontalmente
-            if team == "B":
-                x = 1 - x
+                xs.append(x)
+                ys.append(y)
+                sizes.append(18 + n*6)
+                texts.append(str(n))
 
-            xs.append(x)
-            ys.append(y)
-            sizes.append(18 + n*6)  # tamaño progresivo
-            texts.append(str(n))    # número de goles dentro del punto
+        return xs, ys, sizes, texts
 
-    return xs, ys, sizes, texts
+    xsA, ysA, sizesA, textsA = build_team_points("A")
+    xsB, ysB, sizesB, textsB = build_team_points("B")
 
-xsA, ysA, sizesA, textsA = build_team_points("A")
-xsB, ysB, sizesB, textsB = build_team_points("B")
+    fig = go.Figure()
 
-fig = go.Figure()
-
-fig.add_layout_image(
-    dict(
-        source=COURT_IMG,
-        xref="x",
-        yref="y",
-        x=0,
-        y=1,
-        sizex=1,
-        sizey=1,
-        sizing="stretch",
-        layer="below"
+    fig.add_layout_image(
+        dict(
+            source=COURT_IMG,
+            xref="x",
+            yref="y",
+            x=0,
+            y=1,
+            sizex=1,
+            sizey=1,
+            sizing="stretch",
+            layer="below"
+        )
     )
-)
 
-# puntos Equipo A
-fig.add_trace(go.Scatter(
-    x=xsA,
-    y=ysA,
-    mode="markers+text",
-    name=match["teamA"],
-    marker=dict(size=sizesA, color="blue"),
-    text=textsA,
-    textfont=dict(color="white", size=14),
-    textposition="middle center"
-))
+    fig.add_trace(go.Scatter(
+        x=xsA,
+        y=ysA,
+        mode="markers+text",
+        name=match["teamA"],
+        marker=dict(size=sizesA, color="blue"),
+        text=textsA,
+        textfont=dict(color="white", size=14),
+        textposition="middle center"
+    ))
 
-# puntos Equipo B
-fig.add_trace(go.Scatter(
-    x=xsB,
-    y=ysB,
-    mode="markers+text",
-    name=match["teamB"],
-    marker=dict(size=sizesB, color="red"),
-    text=textsB,
-    textfont=dict(color="white", size=14),
-    textposition="middle center"
-))
+    fig.add_trace(go.Scatter(
+        x=xsB,
+        y=ysB,
+        mode="markers+text",
+        name=match["teamB"],
+        marker=dict(size=sizesB, color="red"),
+        text=textsB,
+        textfont=dict(color="white", size=14),
+        textposition="middle center"
+    ))
 
-fig.update_xaxes(visible=False, range=[0, 1])
-fig.update_yaxes(
-    visible=False,
-    range=[0, 1],
-    scaleanchor="x",
-    scaleratio=1
-)
+    fig.update_xaxes(visible=False, range=[0, 1])
+    fig.update_yaxes(
+        visible=False,
+        range=[0, 1],
+        scaleanchor="x",
+        scaleratio=1
+    )
 
-# 👈 margen mínimo para pegarlo arriba
-fig.update_layout(
-    height=520,
-    autosize=True,
-    margin=dict(l=0, r=0, t=0, b=0)  # sin márgenes superiores
-)
+    # margen mínimo para pegarlo arriba pero sin bloquear botones
+    fig.update_layout(
+        height=520,
+        autosize=True,
+        margin=dict(l=0, r=0, t=0, b=5)
+    )
 
-st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
     
 if st.button("⚙️ MODIFICACIONES"):
     st.session_state.show_mods = not st.session_state.get("show_mods", False)
