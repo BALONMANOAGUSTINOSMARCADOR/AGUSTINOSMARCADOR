@@ -294,18 +294,38 @@ st.markdown("---")
 with st.container():
     # st.subheader("Mapa de calor")
 
-    xsA, ysA, xsB, ysB = [], [], [], []
+from collections import defaultdict
 
-    for ev in match["events"]:
-        zone_name = ev["zone"]
-        if zone_name in ZONE_COORDS:
-            x, y = ZONE_COORDS[zone_name]
-            if ev["team"] == "A":
-                xsA.append(x)
-                ysA.append(y)
-            else:
-                xsB.append(x)
-                ysB.append(y)
+# 1️⃣ contar goles por zona y equipo
+goals = {
+    "A": defaultdict(int),
+    "B": defaultdict(int)
+}
+
+for ev in match["events"]:
+    goals[ev["team"]][ev["zone"]] += 1
+
+# 2️⃣ función para construir coordenadas, tamaño y texto
+def build_team_points(team):
+    xs, ys, sizes, texts = [], [], [], []
+
+    for zone, n in goals[team].items():
+        if zone in ZONE_COORDS:
+            x, y = ZONE_COORDS[zone]
+
+            # equipo B reflejado horizontalmente
+            if team == "B":
+                x = 1 - x
+
+            xs.append(x)
+            ys.append(y)
+            sizes.append(18 + n*6)  # tamaño progresivo
+            texts.append(str(n))    # número de goles dentro del punto
+
+    return xs, ys, sizes, texts
+
+xsA, ysA, sizesA, textsA = build_team_points("A")
+xsB, ysB, sizesB, textsB = build_team_points("B")
 
     fig = go.Figure()
 
