@@ -369,7 +369,7 @@ fig.update_yaxes(
 fig.update_layout(
     height=520,        # 👈 aquí controlas el tamaño REAL
     autosize=True,
-    margin=dict(l=0, r=0, t=10, b=0)
+    margin=dict(l=0, r=0, t=0, b=0)
 )
 
 st.plotly_chart(fig, use_container_width=True)
