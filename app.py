@@ -283,7 +283,7 @@ with right:
     else:
         st.write("No hay exclusiones activas.")
 
-    
+st.markdown("---")
     
 # -------- HEATMAP --------
     
