@@ -252,7 +252,7 @@ with mid:
 
  
 with right:
-     st.subheader("Exclusiones")
+    st.subheader("Exclusiones")
 
     with st.form("form_ex"):
         p = st.text_input("Jugador (nº)")
