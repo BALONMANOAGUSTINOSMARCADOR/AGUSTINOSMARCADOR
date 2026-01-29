@@ -351,13 +351,27 @@ xsB, ysB, sizesB, textsB = build_team_points("B")
         marker=dict(size=14)
     ))
 
-    fig.add_trace(go.Scatter(
-        x=xsB,
-        y=ysB,
-        mode="markers",
-        name=match["teamB"],
-        marker=dict(size=14)
-    ))
+fig.add_trace(go.Scatter(
+    x=xsA,
+    y=ysA,
+    mode="markers+text",
+    name=match["teamA"],
+    marker=dict(size=sizesA, color="blue"),
+    text=textsA,
+    textfont=dict(color="white", size=14),
+    textposition="middle center"
+))
+
+fig.add_trace(go.Scatter(
+    x=xsB,
+    y=ysB,
+    mode="markers+text",
+    name=match["teamB"],
+    marker=dict(size=sizesB, color="red"),
+    text=textsB,
+    textfont=dict(color="white", size=14),
+    textposition="middle center"
+))
 
     fig.update_xaxes(visible=False, range=[0, 1])
     fig.update_yaxes(
