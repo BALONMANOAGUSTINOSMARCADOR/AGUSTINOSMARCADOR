@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 import datetime, json, glob
 from PIL import Image
 from streamlit_autorefresh import st_autorefresh
+from collections import defaultdict
 
 from modules import recorder, loader
 
@@ -287,8 +288,6 @@ st.markdown("---")
 
 with st.container():
     # st.subheader("Mapa de calor")
-
-from collections import defaultdict
 
 # 1️⃣ contar goles por zona y equipo
 goals = {
