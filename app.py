@@ -34,12 +34,6 @@ ZONE_COORDS = {
     "EXD": (0.65, 0.75),
 }
 
-    "ED":  (0.15, 0.80),   # Extremo derecho (arriba)
-    "LD":  (0.30, 0.65),   # Lateral derecho
-    "C":   (0.45, 0.50),   # Central
-    "LI":  (0.30, 0.35),   # Lateral izquierdo
-    "EI":  (0.15, 0.20),   # Extremo izquierdo (abajo)
-
 ZONAS = {
     1: "EI",
     2: "LI",
