@@ -23,20 +23,22 @@ st.set_page_config(
 DEFAULT_EXCLUSION_SECONDS = 120
 
 ZONE_COORDS = {
+    "EI": (0.12, 0.15),
+    "LI": (0.26, 0.32),
+    "C":  (0.40, 0.50),
+    "LD": (0.26, 0.68),
+    "ED": (0.12, 0.85),
+    "P":  (0.22, 0.50),
+    "EXI": (0.65, 0.25),
+    "EXC": (0.75, 0.50),
+    "EXD": (0.65, 0.75),
+}
+
     "ED":  (0.15, 0.80),   # Extremo derecho (arriba)
     "LD":  (0.30, 0.65),   # Lateral derecho
     "C":   (0.45, 0.50),   # Central
     "LI":  (0.30, 0.35),   # Lateral izquierdo
     "EI":  (0.15, 0.20),   # Extremo izquierdo (abajo)
-
-    # Pivote
-    "P":   (0.20, 0.50),
-
-    # Exterior / contraataque
-    "EXD": (0.65, 0.75),
-    "EXC": (0.75, 0.50),
-    "EXI": (0.65, 0.25),
-}
 
 ZONAS = {
     1: "EI",
