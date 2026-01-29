@@ -287,12 +287,14 @@ with right:
     
 # -------- HEATMAP --------
     
+     
+    
+    xsA, ysA, xsB, ysB = [], [], [], []
+
     st.markdown(
         "<div style='margin-top:-30px'>>/div>",
         unsafe_allow_html=True
-    ) 
-    
-    xsA, ysA, xsB, ysB = [], [], [], []
+    )    
     
     #    st.subheader("Mapa de calor") 
     
