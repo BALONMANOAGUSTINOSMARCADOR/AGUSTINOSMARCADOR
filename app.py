@@ -283,11 +283,16 @@ with right:
     else:
         st.write("No hay exclusiones activas.")
 
+    st.markdown(
+        "<div style='margin-top:-30px'>>/div>",
+        unsafe_allow_html=True
+    ) 
+    
 # -------- HEATMAP --------
     
     xsA, ysA, xsB, ysB = [], [], [], []
 
-    st.markdown("---")
+    
     #    st.subheader("Mapa de calor") 
     
     for ev in match["events"]:
