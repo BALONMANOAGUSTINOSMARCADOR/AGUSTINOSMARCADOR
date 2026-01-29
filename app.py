@@ -284,12 +284,12 @@ with right:
         st.write("No hay exclusiones activas.")
 
 # -------- HEATMAP --------
-
-    st.markdown("---")
-    #    st.subheader("Mapa de calor")
-
+    
     xsA, ysA, xsB, ysB = [], [], [], []
 
+    st.markdown("---")
+    #    st.subheader("Mapa de calor") 
+    
     for ev in match["events"]:
         zone_name = ev["zone"]   # ya es "EI", "C", etc
 
