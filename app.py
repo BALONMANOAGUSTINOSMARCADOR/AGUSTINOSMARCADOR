@@ -287,7 +287,7 @@ st.markdown("---")
 # =========================================================
 
 with st.container():
-    st.subheader("Mapa de calor")
+    # st.subheader("Mapa de calor")
 
 # 1️⃣ contar goles por zona y equipo
 goals = {
