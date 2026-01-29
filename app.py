@@ -284,23 +284,18 @@ with right:
         st.write("No hay exclusiones activas.")
 
 st.markdown("---")
-    
-# -------- HEATMAP --------
-    
-     
-    
+
+# =========================================================
+# HEATMAP (ANCHO COMPLETO)
+# =========================================================
+
+with st.container():
+    # st.subheader("Mapa de calor")
+
     xsA, ysA, xsB, ysB = [], [], [], []
 
-    st.markdown(
-        "<div style='margin-top:-30px'>>/div>",
-        unsafe_allow_html=True
-    )    
-    
-    #    st.subheader("Mapa de calor") 
-    
     for ev in match["events"]:
-        zone_name = ev["zone"]   # ya es "EI", "C", etc
-
+        zone_name = ev["zone"]
         if zone_name in ZONE_COORDS:
             x, y = ZONE_COORDS[zone_name]
             if ev["team"] == "A":
@@ -312,7 +307,6 @@ st.markdown("---")
 
     fig = go.Figure()
 
-    # 🏟️ Imagen de fondo: campo de balonmano
     fig.add_layout_image(
         dict(
             source=COURT_IMG,
@@ -323,47 +317,38 @@ st.markdown("---")
             sizex=1,
             sizey=1,
             sizing="stretch",
-            opacity=1,
             layer="below"
         )
     )
 
-    # 🔴 Equipo A
     fig.add_trace(go.Scatter(
         x=xsA,
         y=ysA,
         mode="markers",
-        name=match["teamA"]
+        name=match["teamA"],
+        marker=dict(size=14)
     ))
 
-    # 🔵 Equipo B
     fig.add_trace(go.Scatter(
         x=xsB,
         y=ysB,
         mode="markers",
-        name=match["teamB"]
+        name=match["teamB"],
+        marker=dict(size=14)
     ))
 
-    fig.update_xaxes(
-        visible=False,
-        range=[0, 1],
-        fixedrange=True,
-        autorange=False
-)
-
+    fig.update_xaxes(visible=False, range=[0, 1])
     fig.update_yaxes(
         visible=False,
         range=[0, 1],
-        fixedrange=True,
-        autorange=False,
         scaleanchor="x",
         scaleratio=1
-)
+    )
 
     fig.update_layout(
-        height=400,
-        autosize=False,
-        margin=dict(l=0, r=0, t=0, b=0)
+        height=520,        # 👈 aquí controlas el tamaño REAL
+        autosize=True,
+        margin=dict(l=0, r=0, t=10, b=0)
     )
 
     st.plotly_chart(fig, use_container_width=True)
