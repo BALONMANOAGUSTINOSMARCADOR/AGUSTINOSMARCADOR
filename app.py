@@ -283,19 +283,17 @@ with right:
 st.markdown("---")
 
 # =========================================================
-# HEATMAP (ANCHO COMPLETO)
+# HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
 
+# ⚠️ Eliminar padding superior extra de Streamlit
 st.markdown("""
 <style>
     .stContainer {
-        padding-top: 0rem;  /* elimina espacio por defecto */
+        padding-top: 0rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
-
-with st.container():
-    st.subheader("Mapa de calor")
 
 # 1️⃣ contar goles por zona y equipo
 goals = {
@@ -344,6 +342,7 @@ fig.add_layout_image(
     )
 )
 
+# puntos Equipo A
 fig.add_trace(go.Scatter(
     x=xsA,
     y=ysA,
@@ -355,6 +354,7 @@ fig.add_trace(go.Scatter(
     textposition="middle center"
 ))
 
+# puntos Equipo B
 fig.add_trace(go.Scatter(
     x=xsB,
     y=ysB,
@@ -374,14 +374,15 @@ fig.update_yaxes(
     scaleratio=1
 )
 
+# 👈 margen mínimo para pegarlo arriba
 fig.update_layout(
-    height=520,        # 👈 aquí controlas el tamaño REAL
+    height=520,
     autosize=True,
-    margin=dict(l=0, r=0, t=0, b=0)
+    margin=dict(l=0, r=0, t=0, b=0)  # sin márgenes superiores
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
+    
 if st.button("⚙️ MODIFICACIONES"):
     st.session_state.show_mods = not st.session_state.get("show_mods", False)
 
