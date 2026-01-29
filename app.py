@@ -265,7 +265,7 @@ with right:
             "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
         )
         if st.form_submit_button("Añadir exclusión"):
-        add_exclusion(p, team, dur)
+            add_exclusion(p, team, dur)
 
     exs = active_exclusions()
 
