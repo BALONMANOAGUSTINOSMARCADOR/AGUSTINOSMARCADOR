@@ -228,10 +228,16 @@ with left:
 )
     player = st.text_input("Jugador")
 
-    st.button(f"Gol {match['teamA']}", on_click=add_goal, args=("A", zone, player))
-    st.button(f"Gol {match['teamB']}", on_click=add_goal, args=("B", zone, player))
+ col_gol_a, col_gol_b = st.columns(2)
 
+with col_gol_a:
+    if st.button("➕ GOL A", use_container_width=True):
+        sumar_gol("A")
 
+with col_gol_b:
+    if st.button("➕ GOL B", use_container_width=True):
+        sumar_gol("B")
+   
 # -------- TIEMPO + EXCLUSIONES --------
 exs = active_exclusions()
 
