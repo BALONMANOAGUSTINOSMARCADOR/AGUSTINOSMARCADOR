@@ -253,26 +253,26 @@ with mid:
 
     # ⏱️ TIEMPO
     with col_time:
-    st.subheader("Tiempo de partido")
+         st.subheader("Tiempo de partido")
 
-    # recalcular el tiempo siempre que se renderiza
-    t = elapsed_seconds()
-    st.markdown(f"## {t//60:02d}:{t%60:02d}")
+         # recalcular el tiempo siempre que se renderiza
+         t = elapsed_seconds()
+         st.markdown(f"## {t//60:02d}:{t%60:02d}")
 
-    # botones de control
-    if st.button("⏸ Pausar"):
-        pause_match()
-    if st.button("▶ Reanudar"):
-        start_match()
+         # botones de control
+         if st.button("⏸ Pausar"):
+             pause_match()
+         if st.button("▶ Reanudar"):
+             start_match()
 
-    # BOTÓN SEGUNDA PARTE
-    if match["part"] == 1:
-        if st.button("▶️ Iniciar 2ª parte"):
-            start_second_half()
-            # recalcular el tiempo inmediatamente
-            t = elapsed_seconds()
-            st.success("Segunda parte iniciada (00:00)")
-            st.experimental_rerun()  # fuerza que se vea actualizado
+         # BOTÓN SEGUNDA PARTE
+         if match["part"] == 1:
+             if st.button("▶️ Iniciar 2ª parte"):
+                 start_second_half()
+                 # recalcular el tiempo inmediatamente
+                 t = elapsed_seconds()
+                 st.success("Segunda parte iniciada (00:00)")
+                 st.experimental_rerun()  # fuerza que se vea actualizado
 
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
