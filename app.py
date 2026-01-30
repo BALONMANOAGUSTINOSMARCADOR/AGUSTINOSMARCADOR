@@ -218,9 +218,9 @@ with left:
     st.markdown(
         f"""
         <div style="font-size:24px; font-weight:bold;">
-            <span style="font-size:28px;">{match['teamA']}</span>: 
+            <span style="font-size:20px;">{match['teamA']}</span>: 
             <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  —  \
-            <span style="font-size:28px;">{match['teamB']}</span>: 
+            <span style="font-size:20px;">{match['teamB']}</span>: 
             <span style="font-size:48px; color:red;">{match['scoreB']}</span>
         </div>
         """,
