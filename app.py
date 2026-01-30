@@ -434,7 +434,7 @@ if st.session_state.get("show_mods", False):
     with colm2:
         new_sec = st.number_input("Segundos", 0, 59, t % 60)
 
-    if st.button("Aplicar tiempo"):
+    if st.button("Aplicar tiempo", key="aplicar_tiempo"):
         set_match_time(new_min, new_sec)
         st.success("Reloj actualizado")
 
@@ -446,7 +446,7 @@ if st.session_state.get("show_mods", False):
     with colm4:
         new_b = st.number_input("Equipo B", 0, 99, match["scoreB"])
 
-    if st.button("Aplicar marcador"):
+    if st.button("Aplicar marcador", key="aplicar_marcador"):
         set_score(new_a, new_b)
         st.success("Marcador actualizado")
 
@@ -455,10 +455,10 @@ if st.session_state.get("show_mods", False):
     st.info(f"Parte actual: {match['part']}ª")
 
     if match["part"] == 1:
-        if st.button("▶️ Iniciar 2ª parte"):
+        if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
             start_second_half()
+            st.success("Segunda parte iniciada (00:00)")
             st.experimental_rerun()
-
 
 # =========================================================
 # EVENTOS
