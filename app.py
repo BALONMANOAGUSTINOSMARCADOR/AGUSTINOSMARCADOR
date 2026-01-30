@@ -264,6 +264,7 @@ with right:
             add_exclusion(p, team, dur)
 
     exs = active_exclusions()
+    st.markdown("<div style='margin-top:-0.8rem'></div>", unsafe_allow_html=True)
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
