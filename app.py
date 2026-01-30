@@ -443,7 +443,7 @@ if st.session_state.get("show_mods", False):
     if match["part"] == 1:
         if st.button("▶️ Iniciar 2ª parte"):
             start_second_half()
-            st.success("Segunda parte iniciada (00:00)")
+            st.experimental_rerun()
 
 
 # =========================================================
