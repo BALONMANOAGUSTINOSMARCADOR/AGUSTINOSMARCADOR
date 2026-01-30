@@ -215,36 +215,36 @@ left, mid, right = st.columns(3)
 # -------- MARCADOR --------
 with left:
     st.subheader("Marcador")
+
+    # Mostrar nombres y goles grandes
     st.markdown(
         f"""
-        <div style="font-size:24px; font-weight:bold;">
-            <span style="font-size:20px;">{match['teamA']}</span>: 
-            <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  —  \
-            <span style="font-size:20px;">{match['teamB']}</span>: 
+        <div style="display:flex; align-items:center; font-weight:bold; gap:20px;">
+            <span style="font-size:28px;">{match['teamA']}</span>
+            <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  
+            <span style="font-size:28px;">{match['teamB']}</span>
             <span style="font-size:48px; color:red;">{match['scoreB']}</span>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-
+    # Zona y jugador
     zone = st.selectbox(
-    "Zona",
-    list(ZONAS.keys()),
-    format_func=lambda x: ZONAS[x],
-    index=4
-)
+        "Zona",
+        list(ZONAS.keys()),
+        format_func=lambda x: ZONAS[x],
+        index=4
+    )
     player = st.text_input("Jugador")
 
+    # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2)
+    with col_gol_a:
+        st.button(f"Gol {match['teamA']}", on_click=add_goal, args=("A", zone, player))
+    with col_gol_b:
+        st.button(f"Gol {match['teamB']}", on_click=add_goal, args=("B", zone, player))
 
-with col_gol_a:
-    if st.button("➕ GOL A", use_container_width=True):
-        sumar_gol("A")
-
-with col_gol_b:
-    if st.button("➕ GOL B", use_container_width=True):
-        sumar_gol("B")
 # -------- TIEMPO + EXCLUSIONES --------
 exs = active_exclusions()
 
