@@ -265,20 +265,6 @@ with right:
 
     exs = active_exclusions()
 
-    if exs:
-        rows = []
-        for ex in exs:
-            mm = ex["remaining"] // 60
-            ss = ex["remaining"] % 60
-            rows.append({
-                "Jugador": ex["player"],
-                "Equipo": ex["team"],
-                "Tiempo restante": f"{mm:02d}:{ss:02d}"
-            })
-        st.table(pd.DataFrame(rows))
-    else:
-        st.write("No hay exclusiones activas.")
-
 st.markdown("---")
 
 # =========================================================
