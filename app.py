@@ -216,9 +216,17 @@ left, mid, right = st.columns(3)
 with left:
     st.subheader("Marcador")
     st.markdown(
-    f"**{match['teamA']}:** {match['scoreA']}  —  "
-    f"**{match['teamB']}:** {match['scoreB']}"
-)
+        f"""
+        <div style="font-size:24px; font-weight:bold;">
+            <span style="font-size:28px;">{match['teamA']}</span>: 
+            <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  —  \
+            <span style="font-size:28px;">{match['teamB']}</span>: 
+            <span style="font-size:48px; color:red;">{match['scoreB']}</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
     zone = st.selectbox(
     "Zona",
