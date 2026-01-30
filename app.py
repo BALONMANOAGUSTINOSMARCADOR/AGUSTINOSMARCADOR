@@ -228,7 +228,7 @@ with left:
 )
     player = st.text_input("Jugador")
 
- col_gol_a, col_gol_b = st.columns(2)
+    col_gol_a, col_gol_b = st.columns(2)
 
 with col_gol_a:
     if st.button("➕ GOL A", use_container_width=True):
