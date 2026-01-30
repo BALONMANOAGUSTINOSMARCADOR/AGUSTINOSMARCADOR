@@ -237,7 +237,6 @@ with col_gol_a:
 with col_gol_b:
     if st.button("➕ GOL B", use_container_width=True):
         sumar_gol("B")
-   
 # -------- TIEMPO + EXCLUSIONES --------
 exs = active_exclusions()
 
@@ -270,8 +269,6 @@ with mid:
         else:
             st.subheader("🚫 Exclusiones")
             st.write("—")
-
- 
 with right:
     
     with st.form("form_ex"):
