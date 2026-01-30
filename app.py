@@ -265,15 +265,6 @@ with mid:
          if st.button("▶ Reanudar"):
              start_match()
 
-         # BOTÓN SEGUNDA PARTE
-         if match["part"] == 1:
-             if st.button("▶️ Iniciar 2ª parte"):
-                 start_second_half()
-                 # recalcular el tiempo inmediatamente
-                 t = elapsed_seconds()
-                 st.success("Segunda parte iniciada (00:00)")
-                 st.experimental_rerun()  # fuerza que se vea actualizado
-
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
         exs = active_exclusions()
