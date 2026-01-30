@@ -316,6 +316,42 @@ with st.container():
     def build_team_points(team):
         xs, ys, sizes, texts = [], [], [], []
 
+        for zone_name, n in goals[team].items():
+             if zone_name not in ZONE_COORDS:
+                 continue
+
+             x, y = ZONE_COORDS[zone_name]
+
+             if team == "B":
+                 # Reflejar horizontalmente el eje X
+                 x = 1 - x
+
+                 # Ajustar las zonas laterales para que coincidan con el lado correcto
+                 if zone_name == "EI":  # Equipo B "izquierda" pasa a derecha
+                     x = 1 - ZONE_COORDS["ED"][0]
+                     y = ZONE_COORDS["ED"][1]
+                 elif zone_name == "ED":  # Equipo B "derecha" pasa a izquierda
+                     x = 1 - ZONE_COORDS["EI"][0]
+                     y = ZONE_COORDS["EI"][1]
+                 elif zone_name == "LI":  # izquierda interna
+                     x = 1 - ZONE_COORDS["LD"][0]
+                     y = ZONE_COORDS["LD"][1]
+                 elif zone_name == "LD":  # derecha interna
+                     x = 1 - ZONE_COORDS["LI"][0]
+                     y = ZONE_COORDS["LI"][1]
+                 # Centro, P, EXI, EXC, EXD se mantienen igual
+
+             xs.append(x)
+             ys.append(y)
+             sizes.append(18 + n*6)
+             texts.append(str(n))
+
+         return xs, ys, sizes, texts
+
+    
+    def build_team_points(team):
+        xs, ys, sizes, texts = [], [], [], []
+
         for zone, n in goals[team].items():
             if zone in ZONE_COORDS:
                 x, y = ZONE_COORDS[zone]
