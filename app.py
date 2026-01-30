@@ -314,39 +314,39 @@ with st.container():
 
     # 2️⃣ función para construir coordenadas, tamaño y texto
     def build_team_points(team):
-        xs, ys, sizes, texts = [], [], [], []
+    xs, ys, sizes, texts = [], [], [], []
 
-        for zone_name, n in goals[team].items():
-             if zone_name not in ZONE_COORDS:
-                 continue
+    for zone_name, n in goals[team].items():
+        if zone_name not in ZONE_COORDS:
+            continue
 
-             x, y = ZONE_COORDS[zone_name]
+        x, y = ZONE_COORDS[zone_name]
 
-             if team == "B":
-                 # Reflejar horizontalmente el eje X
-                 x = 1 - x
+        if team == "B":
+            # Reflejar horizontalmente el eje X
+            x = 1 - x
 
-                 # Ajustar las zonas laterales para que coincidan con el lado correcto
-                 if zone_name == "EI":  # Equipo B "izquierda" pasa a derecha
-                     x = 1 - ZONE_COORDS["ED"][0]
-                     y = ZONE_COORDS["ED"][1]
-                 elif zone_name == "ED":  # Equipo B "derecha" pasa a izquierda
-                     x = 1 - ZONE_COORDS["EI"][0]
-                     y = ZONE_COORDS["EI"][1]
-                 elif zone_name == "LI":  # izquierda interna
-                     x = 1 - ZONE_COORDS["LD"][0]
-                     y = ZONE_COORDS["LD"][1]
-                 elif zone_name == "LD":  # derecha interna
-                     x = 1 - ZONE_COORDS["LI"][0]
-                     y = ZONE_COORDS["LI"][1]
-                 # Centro, P, EXI, EXC, EXD se mantienen igual
+            # Ajustar las zonas laterales
+            if zone_name == "EI":  # izquierda → derecha
+                x = 1 - ZONE_COORDS["ED"][0]
+                y = ZONE_COORDS["ED"][1]
+            elif zone_name == "ED":  # derecha → izquierda
+                x = 1 - ZONE_COORDS["EI"][0]
+                y = ZONE_COORDS["EI"][1]
+            elif zone_name == "LI":  # izquierda interna → derecha interna
+                x = 1 - ZONE_COORDS["LD"][0]
+                y = ZONE_COORDS["LD"][1]
+            elif zone_name == "LD":  # derecha interna → izquierda interna
+                x = 1 - ZONE_COORDS["LI"][0]
+                y = ZONE_COORDS["LI"][1]
+            # Centro, P, EXI, EXC, EXD se mantienen igual
 
-             xs.append(x)
-             ys.append(y)
-             sizes.append(18 + n*6)
-             texts.append(str(n))
+        xs.append(x)
+        ys.append(y)
+        sizes.append(18 + n*6)
+        texts.append(str(n))
 
-         return xs, ys, sizes, texts
+    return xs, ys, sizes, texts
 
     xsA, ysA, sizesA, textsA = build_team_points("A")
     xsB, ysB, sizesB, textsB = build_team_points("B")
