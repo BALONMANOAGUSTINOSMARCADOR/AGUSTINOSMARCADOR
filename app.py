@@ -11,6 +11,24 @@ from streamlit_autorefresh import st_autorefresh
 from collections import defaultdict
 
 from modules import recorder, loader
+st.markdown("""
+<style>
+div[data-testid="stVerticalBlock"] > div {
+    gap: 0.25rem;
+}
+
+button {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+p {
+    margin-bottom: 0.2rem !important;
+    margin-top: 0.2rem !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 # =========================================================
 # CONFIG
