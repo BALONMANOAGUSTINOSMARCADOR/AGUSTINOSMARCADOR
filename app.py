@@ -314,22 +314,34 @@ with st.container():
 
     # 2️⃣ función para construir coordenadas, tamaño y texto
     def build_team_points(team):
-        xs, ys, sizes, texts = [], [], [], []
+    xs, ys, sizes, texts = [], [], [], []
 
-        for zone, n in goals[team].items():
-            if zone in ZONE_COORDS:
-                x, y = ZONE_COORDS[zone]
+    for zone, n in goals[team].items():
+        if zone in ZONE_COORDS:
+            x, y = ZONE_COORDS[zone]
 
-                # equipo B reflejado horizontalmente
-                if team == "B":
-                    x = 1 - x
+            if team == "B":
+                # Reflejar horizontalmente
+                x = 1 - x
 
-                xs.append(x)
-                ys.append(y)
-                sizes.append(18 + n*6)
-                texts.append(str(n))
+                # Invertir las zonas de derecha/izquierda
+                if zone == "EI":
+                    zone = "ED"
+                elif zone == "ED":
+                    zone = "EI"
+                elif zone == "LI":
+                    zone = "LD"
+                elif zone == "LD":
+                    zone = "LI"
+                # centro, P, EXI, EXC, EXD se mantienen igual
 
-        return xs, ys, sizes, texts
+            xs.append(x)
+            ys.append(y)
+            sizes.append(18 + n*6)  # tamaño progresivo
+            texts.append(str(n))    # número de goles dentro del punto
+
+    return xs, ys, sizes, texts
+
 
     xsA, ysA, sizesA, textsA = build_team_points("A")
     xsB, ysB, sizesB, textsB = build_team_points("B")
