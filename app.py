@@ -377,7 +377,7 @@ with st.container():
     height=380,           # más estrecho verticalmente
     width=800,            # un poco más ancho
     autosize=False,       # desactivamos autosize para respetar width/height
-    margin=dict(l=0, r=0, t=-10, b=0)  # sin márgenes
+    margin=dict(l=0, r=0, t=0, b=0)  # sin márgenes
 )
 
     st.plotly_chart(fig, use_container_width=True)
