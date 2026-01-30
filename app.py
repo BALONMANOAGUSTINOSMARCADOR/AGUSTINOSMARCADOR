@@ -415,9 +415,12 @@ with st.container():
 if st.button("⚙️ MODIFICACIONES"):
     st.session_state.show_mods = not st.session_state.get("show_mods", False)
 
+
+
 if st.session_state.get("show_mods", False):
     st.warning("⚠️ Modo modificaciones activado")
 
+    # --- Ajuste de reloj ---
     st.subheader("⏱️ Ajustar reloj")
     colm1, colm2 = st.columns(2)
     with colm1:
@@ -430,6 +433,7 @@ if st.session_state.get("show_mods", False):
         st.success("Reloj actualizado")
 
     st.markdown("---")
+    # --- Ajuste marcador ---
     st.subheader("📊 Ajustar marcador")
     colm3, colm4 = st.columns(2)
     with colm3:
@@ -442,14 +446,16 @@ if st.session_state.get("show_mods", False):
         st.success("Marcador actualizado")
 
     st.markdown("---")
+    # --- Parte del partido ---
     st.subheader("🏁 Parte del partido")
     st.info(f"Parte actual: {match['part']}ª")
 
+    # ⚡ Botón de segunda parte aquí
     if match["part"] == 1:
         if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-            start_second_half()
+            start_second_half()  # pone tiempo a cero y parte = 2
             st.success("Segunda parte iniciada (00:00)")
-            st.experimental_rerun()
+            st.experimental_rerun()  # fuerza que se actualice inmediatamente
 
 # =========================================================
 # EVENTOS
