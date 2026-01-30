@@ -264,9 +264,6 @@ with right:
             add_exclusion(p, team, dur)
 
     exs = active_exclusions()
-
-st.markdown("---")
-
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
