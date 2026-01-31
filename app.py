@@ -452,10 +452,11 @@ if st.session_state.get("show_mods", False):
 
     # ⚡ Botón de segunda parte aquí
     if match["part"] == 1:
-        if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-            start_second_half()  # pone tiempo a cero y parte = 2
-            st.success("Segunda parte iniciada (00:00)")
-            st.experimental_rerun()  # fuerza que se actualice inmediatamente
+    if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
+        start_second_half()             # pone tiempo a cero y parte = 2
+        t = elapsed_seconds()           # recalcula tiempo
+        st.success("Segunda parte iniciada (00:00)")
+        st.experimental_rerun()         # fuerza actualización
 
 # =========================================================
 # EVENTOS
