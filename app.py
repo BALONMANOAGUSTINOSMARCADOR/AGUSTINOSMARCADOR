@@ -412,21 +412,30 @@ with st.container():
 
     st.plotly_chart(fig, use_container_width=True)
     
-if st.button("⚙️ MODIFICACIONES"):
-    st.session_state.show_mods = not st.session_state.get("show_mods", False)
+# =========================================================
+# BOTÓN MODIFICACIONES Y AJUSTES
+# =========================================================
 
+# Inicializar estado si no existe
+if "show_mods" not in st.session_state:
+    st.session_state.show_mods = False
 
+# Botón MODIFICACIONES
+if st.button("⚙️ MODIFICACIONES", key="boton_mods"):
+    st.session_state.show_mods = not st.session_state.show_mods
 
-if st.session_state.get("show_mods", False):
+# Bloque de ajustes que solo se muestra si show_mods es True
+if st.session_state.show_mods:
     st.warning("⚠️ Modo modificaciones activado")
 
     # --- Ajuste de reloj ---
     st.subheader("⏱️ Ajustar reloj")
     colm1, colm2 = st.columns(2)
+    t = elapsed_seconds()  # recalcular tiempo actual
     with colm1:
-        new_min = st.number_input("Minutos", 0, 60, t // 60)
+        new_min = st.number_input("Minutos", 0, 60, t // 60, key="mod_min")
     with colm2:
-        new_sec = st.number_input("Segundos", 0, 59, t % 60)
+        new_sec = st.number_input("Segundos", 0, 59, t % 60, key="mod_sec")
 
     if st.button("Aplicar tiempo", key="aplicar_tiempo"):
         set_match_time(new_min, new_sec)
@@ -437,9 +446,9 @@ if st.session_state.get("show_mods", False):
     st.subheader("📊 Ajustar marcador")
     colm3, colm4 = st.columns(2)
     with colm3:
-        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"])
+        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"], key="mod_scoreA")
     with colm4:
-        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"])
+        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"], key="mod_scoreB")
 
     if st.button("Aplicar marcador", key="aplicar_marcador"):
         set_score(new_a, new_b)
@@ -450,13 +459,12 @@ if st.session_state.get("show_mods", False):
     st.subheader("🏁 Parte del partido")
     st.info(f"Parte actual: {match['part']}ª")
 
-    # ⚡ Botón de segunda parte aquí
+    # ⚡ Botón de segunda parte dentro del bloque de modificaciones
     if match["part"] == 1:
-         if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-             start_second_half()             # pone tiempo a cero y parte = 2
-             t = elapsed_seconds()           # recalcula tiempo
-             st.success("Segunda parte iniciada (00:00)")
-             st.experimental_rerun()         # fuerza actualización
+        if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
+            start_second_half()  # pone tiempo a cero y parte = 2
+            st.success("Segunda parte iniciada (00:00)")
+            st.experimental_rerun()  # fuerza que se actualice inmediatamente
 
 # =========================================================
 # EVENTOS
