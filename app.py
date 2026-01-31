@@ -69,12 +69,9 @@ COURT_IMG=Image.open("court.png")
 
 ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 
-if (
-    st.session_state.get("partido_activo", False)
-    and not st.session_state.get("show_mods", False)
-):
+if st.session_state.get("partido_activo", False):
     st_autorefresh(interval=1000)
-    
+
 # =========================================================
 # ESTADO PERSISTENTE (NO SE BORRA AL RECARGAR)
 # =========================================================
