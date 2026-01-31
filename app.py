@@ -419,18 +419,6 @@ with st.container():
 # BOTÓN MODIFICACIONES Y AJUSTES
 # =========================================================
 
-# Inicializar estado si no existe
-if "show_mods" not in st.session_state:
-    st.session_state.show_mods = False
-
-# Botón MODIFICACIONES
-if st.button("⚙️ MODIFICACIONES", key="boton_mods"):
-    st.session_state.show_mods = not st.session_state.show_mods
-
-# Bloque de ajustes que solo se muestra si show_mods es True
-if st.session_state.show_mods:
-    st.warning("⚠️ Modo modificaciones activado")
-
     # --- Ajuste de reloj ---
     st.subheader("⏱️ Ajustar reloj")
     colm1, colm2 = st.columns(2)
