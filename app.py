@@ -411,11 +411,15 @@ with st.container():
 )
 
     st.plotly_chart(fig, use_container_width=True)
-    
+
 # =========================================================
-# BOTÓN MODIFICACIONES Y AJUSTES
+# MODIFICACIONES (SIEMPRE VISIBLES)
 # =========================================================
 
+st.markdown("---")
+st.subheader("🛠️ Modificaciones")
+with st.container():
+ 
     # --- Ajuste de reloj ---
     st.subheader("⏱️ Ajustar reloj")
     colm1, colm2 = st.columns(2)
