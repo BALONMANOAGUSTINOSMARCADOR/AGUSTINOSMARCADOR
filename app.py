@@ -456,9 +456,11 @@ with st.container():
     # ⚡ Botón de segunda parte dentro del bloque de modificaciones
     if match["part"] == 1:
         if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-            start_second_half()  # pone tiempo a cero y parte = 2
+            pause_match()          # ⬅️ parar reloj actual
+            start_second_half()    # pone parte=2 y tiempo=0
+            start_match()          # ⬅️ arranca la 2ª parte
             st.success("Segunda parte iniciada (00:00)")
-            st.experimental_rerun()  # fuerza que se actualice inmediatamente
+            st.experimental_rerun()
 
 # =========================================================
 # EVENTOS
