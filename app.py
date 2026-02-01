@@ -464,6 +464,8 @@ with st.container():
          pause_match()
          set_score(new_a, new_b)
          st.success("Marcador actualizado")
+         st.session_state.modo_modificaciones = False
+         st.rerun()
 
     st.markdown("---")
     # --- Parte del partido ---
