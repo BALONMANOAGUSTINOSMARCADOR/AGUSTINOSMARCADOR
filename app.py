@@ -458,12 +458,17 @@ with st.container():
 
     # ⚡ Botón de segunda parte dentro del bloque de modificaciones
     if match["part"] == 1:
-        if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-            pause_match()          # ⬅️ parar reloj actual
-            start_second_half()    # pone parte=2 y tiempo=0
-            start_match()          # ⬅️ arranca la 2ª parte
-            st.success("Segunda parte iniciada (00:00)")
-            st.experimental_rerun()
+    if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
+        # ⬅️ Pausar el reloj actual por seguridad
+        pause_match()
+        # ⬅️ Reiniciar tiempo y poner parte 2
+        start_second_half()
+        # ⬅️ Arrancar la 2ª parte
+        start_match()
+        # ⬅️ Mostrar mensaje antes de rerun
+        st.success("Segunda parte iniciada (00:00)")
+        # ⬅️ Fuerza que toda la app se actualice
+        st.experimental_rerun()
 
 # =========================================================
 # EVENTOS
