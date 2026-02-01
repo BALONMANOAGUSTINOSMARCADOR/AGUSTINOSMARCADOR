@@ -82,6 +82,9 @@ if st.session_state.get("partido_activo", False):
 if "partido_activo" not in st.session_state:
     st.session_state.partido_activo = False
 
+if "modo_modificaciones" not in st.session_state:
+    st.session_state.modo_modificaciones = False
+
 if "match" not in st.session_state:
     st.session_state.match = {
     "teamA": "Equipo A",
