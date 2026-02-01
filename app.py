@@ -430,10 +430,13 @@ with st.container():
         new_sec = st.number_input("Segundos", 0, 59, t % 60, key="mod_sec")
 
     if st.button("Aplicar tiempo", key="aplicar_tiempo"):
-        pause_match()                      # ⬅️ CLAVE
-        set_match_time(new_min, new_sec)
-        st.success("Reloj actualizado")
-        st.experimental_rerun()
+         # 1️⃣ Pausar antes
+         pause_match()
+         # 2️⃣ Actualizar tiempo
+         set_match_time(new_min, new_sec)
+         st.success("Reloj actualizado")
+         # 3️⃣ Forzar actualización de toda la app
+         st.experimental_rerun()
 
     st.markdown("---")
     # --- Ajuste marcador ---
