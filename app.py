@@ -440,7 +440,7 @@ with st.container():
          set_match_time(new_min, new_sec)
          st.success("Reloj actualizado")
          # 3️⃣ Forzar actualización de toda la app
-         st.experimental_rerun()
+         st.rerun()
 
     st.markdown("---")
     # --- Ajuste marcador ---
@@ -475,7 +475,7 @@ if match["part"] == 1:
         start_match()
 
         st.success("Segunda parte iniciada (00:00)")
-        st.experimental_rerun()
+        st.rerun()
 
 # =========================================================
 # EVENTOS
