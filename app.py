@@ -428,6 +428,7 @@ with st.container():
 
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
+st.session_state.modo_modificaciones = True
 with st.container():
  
     # --- Ajuste de reloj ---
