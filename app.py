@@ -69,7 +69,11 @@ COURT_IMG=Image.open("court.png")
 
 ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 
-if st.session_state.get("partido_activo", False):
+# Bloque para modificaciones
+modificaciones_activo = True
+
+# Solo refresca si no estamos tocando modificaciones
+if st.session_state.get("partido_activo", False) and not modificaciones_activo:
     st_autorefresh(interval=1000)
 
 # =========================================================
