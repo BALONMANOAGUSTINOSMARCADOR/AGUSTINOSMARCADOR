@@ -452,8 +452,10 @@ with st.container():
         new_b = st.number_input("Equipo B", 0, 99, match["scoreB"], key="mod_scoreB")
 
     if st.button("Aplicar marcador", key="aplicar_marcador"):
-        set_score(new_a, new_b)
-        st.success("Marcador actualizado")
+         # 1️⃣ Pausar antes
+         pause_match()
+         set_score(new_a, new_b)
+         st.success("Marcador actualizado")
 
     st.markdown("---")
     # --- Parte del partido ---
