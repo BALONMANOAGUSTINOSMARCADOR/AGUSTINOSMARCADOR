@@ -1,0 +1,351 @@
+{
+  "fecha": "2026-02-01T17:18:26.716139",
+  "rival": "SANTA POLA 31-01-26",
+  "competicion": "PROVINCIAL 25/26",
+  "teamA": "AGTOS",
+  "teamB": "STA POLA",
+  "scoreA": 27,
+  "scoreB": 21,
+  "events": [
+    {
+      "time": "2026-02-01T16:15:52.481239",
+      "team": "A",
+      "zone": "C",
+      "player": ""
+    },
+    {
+      "time": "2026-02-01T16:15:52.726041",
+      "team": "A",
+      "zone": "C",
+      "player": ""
+    },
+    {
+      "time": "2026-02-01T16:16:01.391882",
+      "team": "B",
+      "zone": "C",
+      "player": ""
+    },
+    {
+      "time": "2026-02-01T16:18:11.694807",
+      "team": "B",
+      "zone": "LD",
+      "player": ""
+    },
+    {
+      "time": "2026-02-01T16:18:31.558931",
+      "team": "A",
+      "zone": "C",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T16:19:52.822541",
+      "team": "A",
+      "zone": "LI",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:20:53.428914",
+      "team": "B",
+      "zone": "P",
+      "player": "24"
+    },
+    {
+      "time": "2026-02-01T16:22:31.634769",
+      "team": "A",
+      "zone": "C",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T16:23:40.655021",
+      "team": "B",
+      "zone": "LD",
+      "player": "24"
+    },
+    {
+      "time": "2026-02-01T16:24:58.020548",
+      "team": "B",
+      "zone": "LD",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:25:41.866404",
+      "team": "A",
+      "zone": "LD",
+      "player": "45"
+    },
+    {
+      "time": "2026-02-01T16:26:15.757074",
+      "team": "B",
+      "zone": "LI",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:27:04.932714",
+      "team": "A",
+      "zone": "C",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:28:27.606712",
+      "team": "A",
+      "zone": "EXD",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:28:50.627163",
+      "team": "B",
+      "zone": "LD",
+      "player": "2"
+    },
+    {
+      "time": "2026-02-01T16:29:24.717733",
+      "team": "A",
+      "zone": "P",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T16:31:13.764991",
+      "team": "B",
+      "zone": "LI",
+      "player": "19"
+    },
+    {
+      "time": "2026-02-01T16:32:41.035435",
+      "team": "A",
+      "zone": "EXI",
+      "player": "24"
+    },
+    {
+      "time": "2026-02-01T16:34:27.637196",
+      "team": "B",
+      "zone": "LD",
+      "player": "7"
+    },
+    {
+      "time": "2026-02-01T16:35:57.652613",
+      "team": "A",
+      "zone": "ED",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T16:36:30.890260",
+      "team": "B",
+      "zone": "LI",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:36:42.439749",
+      "team": "A",
+      "zone": "C",
+      "player": "45"
+    },
+    {
+      "time": "2026-02-01T16:38:26.244753",
+      "team": "B",
+      "zone": "LI",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:38:41.733997",
+      "team": "A",
+      "zone": "LD",
+      "player": "94"
+    },
+    {
+      "time": "2026-02-01T16:40:28.137530",
+      "team": "A",
+      "zone": "LI",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:44:17.582131",
+      "team": "A",
+      "zone": "C",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T16:48:34.452025",
+      "team": "B",
+      "zone": "C",
+      "player": "24"
+    },
+    {
+      "time": "2026-02-01T16:48:56.504617",
+      "team": "A",
+      "zone": "LI",
+      "player": "45"
+    },
+    {
+      "time": "2026-02-01T16:49:50.426889",
+      "team": "B",
+      "zone": "C",
+      "player": "7"
+    },
+    {
+      "time": "2026-02-01T16:50:03.045078",
+      "team": "A",
+      "zone": "LI",
+      "player": "27"
+    },
+    {
+      "time": "2026-02-01T16:52:18.402157",
+      "team": "B",
+      "zone": "C",
+      "player": "88"
+    },
+    {
+      "time": "2026-02-01T16:52:44.049206",
+      "team": "A",
+      "zone": "C",
+      "player": "45"
+    },
+    {
+      "time": "2026-02-01T16:53:07.326070",
+      "team": "A",
+      "zone": "C",
+      "player": "23"
+    },
+    {
+      "time": "2026-02-01T16:54:45.593175",
+      "team": "A",
+      "zone": "C",
+      "player": "45"
+    },
+    {
+      "time": "2026-02-01T16:55:08.428865",
+      "team": "B",
+      "zone": "C",
+      "player": "9"
+    },
+    {
+      "time": "2026-02-01T16:55:09.344133",
+      "team": "B",
+      "zone": "C",
+      "player": "19"
+    },
+    {
+      "time": "2026-02-01T16:55:10.433378",
+      "team": "B",
+      "zone": "C",
+      "player": "19"
+    },
+    {
+      "time": "2026-02-01T16:57:07.080575",
+      "team": "B",
+      "zone": "C",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T16:57:20.402992",
+      "team": "A",
+      "zone": "C",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T17:00:10.250374",
+      "team": "A",
+      "zone": "C",
+      "player": "24"
+    },
+    {
+      "time": "2026-02-01T17:00:14.687699",
+      "team": "A",
+      "zone": "C",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T17:01:37.593048",
+      "team": "A",
+      "zone": "LD",
+      "player": "25"
+    },
+    {
+      "time": "2026-02-01T17:04:46.050948",
+      "team": "B",
+      "zone": "ED",
+      "player": "23"
+    },
+    {
+      "time": "2026-02-01T17:07:57.746272",
+      "team": "A",
+      "zone": "C",
+      "player": "27"
+    },
+    {
+      "time": "2026-02-01T17:08:31.961528",
+      "team": "A",
+      "zone": "C",
+      "player": "70"
+    },
+    {
+      "time": "2026-02-01T17:09:24.978185",
+      "team": "B",
+      "zone": "P",
+      "player": "24"
+    },
+    {
+      "time": "2026-02-01T17:10:54.699241",
+      "team": "A",
+      "zone": "C",
+      "player": "4"
+    },
+    {
+      "time": "2026-02-01T17:11:13.680078",
+      "team": "B",
+      "zone": "LI",
+      "player": "45"
+    }
+  ],
+  "exclusions": [
+    {
+      "player": "4",
+      "team": "B",
+      "started_at_seconds": 585,
+      "duration": 120,
+      "remaining": 1
+    },
+    {
+      "player": "45",
+      "team": "B",
+      "started_at_seconds": 722,
+      "duration": 120,
+      "remaining": 1
+    },
+    {
+      "player": "2",
+      "team": "B",
+      "started_at_seconds": 766,
+      "duration": 120,
+      "remaining": 1
+    },
+    {
+      "player": "2",
+      "team": "B",
+      "started_at_seconds": 1400,
+      "duration": 120,
+      "remaining": 1
+    },
+    {
+      "player": "88",
+      "team": "A",
+      "started_at_seconds": 2133,
+      "duration": 120,
+      "remaining": 1
+    },
+    {
+      "player": "2",
+      "team": "A",
+      "started_at_seconds": 2448,
+      "duration": 120,
+      "remaining": 1
+    },
+    {
+      "player": "64",
+      "team": "B",
+      "started_at_seconds": 2810,
+      "duration": 120,
+      "remaining": 1
+    }
+  ],
+  "elapsed_seconds": 3003
+}
