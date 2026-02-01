@@ -73,8 +73,8 @@ ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 modificaciones_activo = True
 
 # Solo refresca si no estamos tocando modificaciones
-if st.session_state.get("partido_activo", False) and not modificaciones_activo:
-    st_autorefresh(interval=1000)
+if st.session_state.get("partido_activo", False):
+    st_autorefresh(interval=1000, key="clock_refresh")
 
 # =========================================================
 # ESTADO PERSISTENTE (NO SE BORRA AL RECARGAR)
