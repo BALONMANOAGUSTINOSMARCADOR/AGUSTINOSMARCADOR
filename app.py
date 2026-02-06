@@ -425,41 +425,33 @@ with st.container():
 
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
-with st.container():
- 
-    # --- Ajuste de reloj ---
+
+# --- Formulario para ajustes ---
+with st.form("form_modificaciones"):
+    # Ajuste de reloj
     st.subheader("⏱️ Ajustar reloj")
+    t = elapsed_seconds()
     colm1, colm2 = st.columns(2)
-    t = elapsed_seconds()  # recalcular tiempo actual
     with colm1:
-        new_min = st.number_input("Minutos", 0, 60, t // 60, key="mod_min")
+        new_min = st.number_input("Minutos", 0, 60, t // 60)
     with colm2:
-        new_sec = st.number_input("Segundos", 0, 59, t % 60, key="mod_sec")
+        new_sec = st.number_input("Segundos", 0, 59, t % 60)
 
-    if st.button("Aplicar tiempo", key="aplicar_tiempo"):
-         # 1️⃣ Pausar antes
-         pause_match()
-         # 2️⃣ Actualizar tiempo
-         set_match_time(new_min, new_sec)
-         st.success("Reloj actualizado")
-         # 3️⃣ Forzar actualización
-         st.rerun()
-
-    st.markdown("---")
-    # --- Ajuste marcador ---
+    # Ajuste marcador
     st.subheader("📊 Ajustar marcador")
     colm3, colm4 = st.columns(2)
     with colm3:
-        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"], key="mod_scoreA")
+        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"])
     with colm4:
-        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"], key="mod_scoreB")
+        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"])
 
-    if st.button("Aplicar marcador", key="aplicar_marcador"):
-         # 1️⃣ Pausar antes
-         pause_match()
-         set_score(new_a, new_b)
-         st.success("Marcador actualizado")
-         st.rerun()
+    # Botón aplicar todo
+    if st.form_submit_button("Aplicar cambios"):
+        pause_match()
+        set_match_time(new_min, new_sec)
+        set_score(new_a, new_b)
+        st.success("Reloj y marcador actualizados")
+        st.experimental_rerun()
 
     st.markdown("---")
     # --- Parte del partido ---
