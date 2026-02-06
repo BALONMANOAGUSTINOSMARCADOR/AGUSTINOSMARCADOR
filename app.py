@@ -104,25 +104,26 @@ if "partidos" not in st.session_state:
     st.session_state.partidos = []
 
 # =========================================================
-# FUNCIONES
+# FUNCIONES QUE MODIFICAN EL PARTIDO — USANDO st.session_state.match DIRECTAMENTE
 # =========================================================
-def iso_now():
-    return datetime.datetime.utcnow().isoformat()
 
 def elapsed_seconds():
-    if not match["started_at"]:
-        return match["elapsed_before_pause"]
-    start = datetime.datetime.fromisoformat(match["started_at"])
-    return int(match["elapsed_before_pause"] + (datetime.datetime.utcnow() - start).total_seconds())
+    m = st.session_state.match
+    if not m["started_at"]:
+        return m["elapsed_before_pause"]
+    start = datetime.datetime.fromisoformat(m["started_at"])
+    return int(m["elapsed_before_pause"] + (datetime.datetime.utcnow() - start).total_seconds())
 
 def start_match():
-    if not match["started_at"]:
-        match["started_at"] = iso_now()
+    m = st.session_state.match
+    if not m["started_at"]:
+        m["started_at"] = iso_now()
 
 def pause_match():
-    if match["started_at"]:
-        match["elapsed_before_pause"] = elapsed_seconds()
-        match["started_at"] = None
+    m = st.session_state.match
+    if m["started_at"]:
+        m["elapsed_before_pause"] = elapsed_seconds()
+        m["started_at"] = None
 
 def reset_match():
     st.session_state.match = {
@@ -138,16 +139,18 @@ def reset_match():
     }
 
 def add_goal(team, zone, player=None):
-    match["events"].append({
+    m = st.session_state.match
+    m["events"].append({
         "time": iso_now(),
         "team": team,
         "zone": ZONAS[int(zone)],
         "player": player
     })
-    match[f"score{team}"] += 1
+    m[f"score{team}"] += 1
 
 def add_exclusion(player, team, duration):
-    match["exclusions"].append({
+    m = st.session_state.match
+    m["exclusions"].append({
         "player": player,
         "team": team,
         "started_at_seconds": elapsed_seconds(),
@@ -155,10 +158,11 @@ def add_exclusion(player, team, duration):
     })
 
 def active_exclusions():
+    m = st.session_state.match
     active = []
     now_sec = elapsed_seconds()
 
-    for ex in match["exclusions"]:
+    for ex in m["exclusions"]:
         end_sec = ex["started_at_seconds"] + ex["duration"]
         if now_sec < end_sec:
             remaining = int(end_sec - now_sec)
@@ -168,18 +172,21 @@ def active_exclusions():
     return active
 
 def set_match_time(minutes, seconds):
+    m = st.session_state.match
     total_seconds = minutes * 60 + seconds
-    match["elapsed_before_pause"] = total_seconds
-    match["started_at"] = None
+    m["elapsed_before_pause"] = total_seconds
+    m["started_at"] = None
 
 def set_score(scoreA, scoreB):
-    match["scoreA"] = scoreA
-    match["scoreB"] = scoreB
+    m = st.session_state.match
+    m["scoreA"] = scoreA
+    m["scoreB"] = scoreB
 
 def start_second_half():
-    match["part"] = 2
-    match["elapsed_before_pause"] = 0
-    match["started_at"] = None
+    m = st.session_state.match
+    m["part"] = 2
+    m["elapsed_before_pause"] = 0
+    m["started_at"] = None
 
 # =========================================================
 # HEADER
