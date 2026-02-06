@@ -427,30 +427,29 @@ with st.container():
     st.plotly_chart(fig, use_container_width=True)
 
 # =========================================================
-# MODIFICACIONES (SIEMPRE VISIBLES)
+# MODIFICACIONES (SIEMPRE VISIBLES) — CORREGIDO
 # =========================================================
 
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
 
-# --- Formulario para ajustes ---
 with st.form("form_modificaciones"):
-    # Ajuste de reloj
+    # ⏱️ Ajustar reloj
     st.subheader("⏱️ Ajustar reloj")
     t = elapsed_seconds()
     colm1, colm2 = st.columns(2)
     with colm1:
-        new_min = st.number_input("Minutos", 0, 60, t // 60)
+        new_min = st.number_input("Minutos", 0, 60, t // 60, key="mod_min")
     with colm2:
-        new_sec = st.number_input("Segundos", 0, 59, t % 60)
+        new_sec = st.number_input("Segundos", 0, 59, t % 60, key="mod_sec")
 
-    # Ajuste marcador
+    # 📊 Ajustar marcador
     st.subheader("📊 Ajustar marcador")
     colm3, colm4 = st.columns(2)
     with colm3:
-        new_a = st.number_input("Equipo A", 0, 99, match["scoreA"])
+        new_a = st.number_input("Equipo A", 0, 99, st.session_state.match["scoreA"], key="mod_scoreA")
     with colm4:
-        new_b = st.number_input("Equipo B", 0, 99, match["scoreB"])
+        new_b = st.number_input("Equipo B", 0, 99, st.session_state.match["scoreB"], key="mod_scoreB")
 
     # Botón aplicar todo
     if st.form_submit_button("Aplicar cambios"):
