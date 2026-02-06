@@ -82,9 +82,6 @@ if st.session_state.get("partido_activo", False):
 if "partido_activo" not in st.session_state:
     st.session_state.partido_activo = False
 
-if "modo_modificaciones" not in st.session_state:
-    st.session_state.modo_modificaciones = False
-
 if "match" not in st.session_state:
     st.session_state.match = {
     "teamA": "Equipo A",
@@ -432,7 +429,6 @@ with st.container():
 
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
-st.session_state.modo_modificaciones = True
 with st.container():
  
     # --- Ajuste de reloj ---
@@ -451,7 +447,6 @@ with st.container():
          set_match_time(new_min, new_sec)
          st.success("Reloj actualizado")
          # 3️⃣ Forzar actualización
-         st.session_state.modo_modificaciones = False
          st.rerun()
 
     st.markdown("---")
@@ -468,7 +463,6 @@ with st.container():
          pause_match()
          set_score(new_a, new_b)
          st.success("Marcador actualizado")
-         st.session_state.modo_modificaciones = False
          st.rerun()
 
     st.markdown("---")
