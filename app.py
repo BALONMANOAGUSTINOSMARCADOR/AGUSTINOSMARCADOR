@@ -266,10 +266,6 @@ with mid:
              reloj_display = st.empty()
              reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
 
-         # refresco automático solo si el partido está activo y no en modo modificaciones
-         if st.session_state.get("partido_activo", False) and not st.session_state.get("modo_modificaciones", False):
-            st_autorefresh(interval=1000, key="auto_refresh_reloj")
-
          # botones de control
          if st.button("⏸ Pausar"):
              pause_match()
@@ -483,7 +479,6 @@ if match["part"] == 1:
         start_match()
 
         st.success("Segunda parte iniciada (00:00)")
-        st.session_state.modo_modificaciones = False
         st.rerun()
 
 # =========================================================
