@@ -114,6 +114,10 @@ def elapsed_seconds():
     start = datetime.datetime.fromisoformat(m["started_at"])
     return int(m["elapsed_before_pause"] + (datetime.datetime.utcnow() - start).total_seconds())
 
+def iso_now():
+    """Devuelve la fecha y hora actual en formato ISO (UTC)"""
+    return datetime.datetime.utcnow().isoformat()
+
 def start_match():
     m = st.session_state.match
     if not m["started_at"]:
