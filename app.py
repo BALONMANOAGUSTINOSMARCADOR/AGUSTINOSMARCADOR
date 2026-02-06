@@ -437,20 +437,21 @@ with st.container():
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
 
-# Contenedor para modificaciones
 with st.container():
     col1, col2 = st.columns(2)
 
+    # Ajustar reloj
     with col1:
         new_min = st.number_input("Minutos", 0, 60, value=st.session_state.get("mod_min", elapsed_seconds()//60), key="mod_min")
         new_sec = st.number_input("Segundos", 0, 59, value=st.session_state.get("mod_sec", elapsed_seconds()%60), key="mod_sec")
 
+    # Ajustar marcador
     with col2:
         new_a = st.number_input("Equipo A", 0, 99, value=st.session_state.get("mod_scoreA", st.session_state.match["scoreA"]), key="mod_scoreA")
         new_b = st.number_input("Equipo B", 0, 99, value=st.session_state.get("mod_scoreB", st.session_state.match["scoreB"]), key="mod_scoreB")
 
+    # Botón único para aplicar todo
     if st.button("Aplicar cambios"):
-        # Guardar en match directamente
         pause_match()
         set_match_time(new_min, new_sec)
         set_score(new_a, new_b)
