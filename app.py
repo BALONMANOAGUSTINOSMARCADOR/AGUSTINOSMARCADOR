@@ -437,6 +437,7 @@ with st.container():
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
 
+# --- Formulario para ajustes ---
 with st.form("form_modificaciones"):
     # ⏱️ Ajustar reloj
     st.subheader("⏱️ Ajustar reloj")
@@ -463,25 +464,18 @@ with st.form("form_modificaciones"):
         st.success("Reloj y marcador actualizados")
         st.experimental_rerun()
 
-    st.markdown("---")
-    # --- Parte del partido ---
-    st.subheader("🏁 Parte del partido")
-    st.info(f"Parte actual: {match['part']}ª")
+st.markdown("---")
+# --- Parte del partido — botón separado del form para que no aparezca difuminado ---
+st.subheader("🏁 Parte del partido")
+st.info(f"Parte actual: {match['part']}ª")
 
-    # ⚡ Botón de segunda parte dentro del bloque de modificaciones
 if match["part"] == 1:
     if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-        # 1️⃣ Pausar el reloj actual
         pause_match()
-
-        # 2️⃣ Reiniciar tiempo y pasar a parte 2
         start_second_half()
-
-        # 3️⃣ Arrancar la 2ª parte
         start_match()
-
         st.success("Segunda parte iniciada (00:00)")
-        st.rerun()
+        st.experimental_rerun()
 
 # =========================================================
 # EVENTOS
