@@ -431,60 +431,59 @@ with st.container():
     st.plotly_chart(fig, use_container_width=True)
 
 # =========================================================
-# MODIFICACIONES (SIEMPRE VISIBLES) — CORREGIDO
+# MODIFICACIONES (SIEMPRE VISIBLES) — BLOQUE DEFINITIVO
 # =========================================================
 
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
 
-with st.container():
-    col1, col2 = st.columns(2)
-
-    # Ajustar reloj
-    with col1:
-        new_min = st.number_input("Minutos", 0, 60, value=st.session_state.get("mod_min", elapsed_seconds()//60), key="mod_min")
-        new_sec = st.number_input("Segundos", 0, 59, value=st.session_state.get("mod_sec", elapsed_seconds()%60), key="mod_sec")
-
-    # Ajustar marcador
-    with col2:
-        new_a = st.number_input("Equipo A", 0, 99, value=st.session_state.get("mod_scoreA", st.session_state.match["scoreA"]), key="mod_scoreA")
-        new_b = st.number_input("Equipo B", 0, 99, value=st.session_state.get("mod_scoreB", st.session_state.match["scoreB"]), key="mod_scoreB")
-
-    # Botón único para aplicar todo
-    if st.button("Aplicar cambios"):
-        pause_match()
-        set_match_time(new_min, new_sec)
-        set_score(new_a, new_b)
-        st.success("Reloj y marcador actualizados")
-        st.experimental_rerun()
+# Usamos un único formulario para todo
+with st.form("form_modificaciones"):
+    # ⏱️ Ajustar reloj
+    t = elapsed_seconds()
+    col_time1, col_time2 = st.columns(2)
+    with col_time1:
+        new_min = st.number_input(
+            "Minutos",
+            0,
+            60,
+            value=st.session_state.get("mod_min", t // 60),
+            key="mod_min"
+        )
+    with col_time2:
+        new_sec = st.number_input(
+            "Segundos",
+            0,
+            59,
+            value=st.session_state.get("mod_sec", t % 60),
+            key="mod_sec"
+        )
 
     # 📊 Ajustar marcador
-    st.subheader("📊 Ajustar marcador")
-    colm3, colm4 = st.columns(2)
-    with colm3:
-        new_a = st.number_input("Equipo A", 0, 99, st.session_state.match["scoreA"], key="mod_scoreA")
-    with colm4:
-        new_b = st.number_input("Equipo B", 0, 99, st.session_state.match["scoreB"], key="mod_scoreB")
+    col_score1, col_score2 = st.columns(2)
+    with col_score1:
+        new_a = st.number_input(
+            "Equipo A",
+            0,
+            99,
+            value=st.session_state.get("mod_scoreA", st.session_state.match["scoreA"]),
+            key="mod_scoreA"
+        )
+    with col_score2:
+        new_b = st.number_input(
+            "Equipo B",
+            0,
+            99,
+            value=st.session_state.get("mod_scoreB", st.session_state.match["scoreB"]),
+            key="mod_scoreB"
+        )
 
-    # Botón aplicar todo
+    # Botón único para aplicar todos los cambios
     if st.form_submit_button("Aplicar cambios"):
         pause_match()
         set_match_time(new_min, new_sec)
         set_score(new_a, new_b)
-        st.success("Reloj y marcador actualizados")
-        st.experimental_rerun()
-
-st.markdown("---")
-# --- Parte del partido — botón separado del form para que no aparezca difuminado ---
-st.subheader("🏁 Parte del partido")
-st.info(f"Parte actual: {match['part']}ª")
-
-if match["part"] == 1:
-    if st.button("▶️ Iniciar 2ª parte", key="segunda_parte"):
-        pause_match()
-        start_second_half()
-        start_match()
-        st.success("Segunda parte iniciada (00:00)")
+        st.success("✅ Reloj y marcador actualizados")
         st.experimental_rerun()
 
 # =========================================================
