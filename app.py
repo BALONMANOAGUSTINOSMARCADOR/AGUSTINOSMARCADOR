@@ -266,12 +266,12 @@ with mid:
          # recalcular el tiempo siempre que se renderiza
          t = elapsed_seconds()
          # contenedor para reloj que se puede actualizar sin necesidad de registrar eventos
-        with st.container():
-            reloj_display = st.empty()
-            reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
+         with st.container():
+             reloj_display = st.empty()
+             reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
 
-        # refresco automático solo si el partido está activo y no en modo modificaciones
-        if st.session_state.get("partido_activo", False) and not st.session_state.get("modo_modificaciones", False):
+         # refresco automático solo si el partido está activo y no en modo modificaciones
+         if st.session_state.get("partido_activo", False) and not st.session_state.get("modo_modificaciones", False):
             st_autorefresh(interval=1000, key="auto_refresh_reloj")
 
          # botones de control
