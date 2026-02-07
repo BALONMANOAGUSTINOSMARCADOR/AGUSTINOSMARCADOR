@@ -453,6 +453,8 @@ modificaciones_habilitadas = match["started_at"] is None
 
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
+if not modificaciones_habilitadas:
+    st.info("⏸️ Para aplicar modificaciones, primero pausa el partido.")
 
 # ─────────────────────────────
 # ⏱️ MODIFICAR TIEMPO
@@ -474,7 +476,10 @@ with st.form("form_mod_tiempo"):
             key="mod_sec"
         )
 
-    if st.form_submit_button("⏱️ Aplicar tiempo"):
+    if st.form_submit_button(
+    "⏱️ Aplicar tiempo",
+    disabled=not modificaciones_habilitadas
+):
         pause_match()
         set_match_time(new_min, new_sec)
         st.success("⏱️ Tiempo actualizado")
@@ -500,7 +505,10 @@ with st.form("form_mod_marcador"):
             key="mod_scoreB"
         )
 
-    if st.form_submit_button("🧮 Aplicar marcador"):
+    if st.form_submit_button(
+    "🧮 Aplicar marcador",
+    disabled=not modificaciones_habilitadas
+):
         pause_match()
         set_score(new_a, new_b)
         st.success("🧮 Marcador actualizado")
