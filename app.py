@@ -228,6 +228,14 @@ with col2:
 if not st.session_state.partido_activo:
     st.info("Partido no activo. Los datos permanecen visibles.")
 
+if st.session_state.partido_activo and match["part"] == 1:
+    if st.button("⏭️ INICIAR 2ª PARTE"):
+        pause_match()
+        start_second_half()
+        start_match()
+        st.success("⏭️ Segunda parte iniciada")
+        st.experimental_rerun()
+
 # =========================================================
 # INTERFAZ PRINCIPAL
 # =========================================================
@@ -440,18 +448,22 @@ with st.container():
 # MODIFICACIONES (SIEMPRE VISIBLES) — BLOQUE DEFINITIVO
 # =========================================================
 
-# Bloque único de modificaciones
 st.markdown("---")
 st.subheader("🛠️ Modificaciones")
 
-with st.form("form_modificaciones"):
+# ─────────────────────────────
+# ⏱️ MODIFICAR TIEMPO
+# ─────────────────────────────
+with st.form("form_mod_tiempo"):
     col_time1, col_time2 = st.columns(2)
+
     with col_time1:
         new_min = st.number_input(
             "Minutos", 0, 60,
             value=st.session_state.get("mod_min", elapsed_seconds() // 60),
             key="mod_min"
         )
+
     with col_time2:
         new_sec = st.number_input(
             "Segundos", 0, 59,
@@ -459,25 +471,36 @@ with st.form("form_modificaciones"):
             key="mod_sec"
         )
 
+    if st.form_submit_button("⏱️ Aplicar tiempo"):
+        pause_match()
+        set_match_time(new_min, new_sec)
+        st.success("⏱️ Tiempo actualizado")
+        st.experimental_rerun()
+
+# ─────────────────────────────
+# 🧮 MODIFICAR MARCADOR
+# ─────────────────────────────
+with st.form("form_mod_marcador"):
     col_score1, col_score2 = st.columns(2)
+
     with col_score1:
         new_a = st.number_input(
             "Equipo A", 0, 99,
-            value=st.session_state.get("mod_scoreA", st.session_state.match["scoreA"]),
+            value=st.session_state.get("mod_scoreA", match["scoreA"]),
             key="mod_scoreA"
         )
+
     with col_score2:
         new_b = st.number_input(
             "Equipo B", 0, 99,
-            value=st.session_state.get("mod_scoreB", st.session_state.match["scoreB"]),
+            value=st.session_state.get("mod_scoreB", match["scoreB"]),
             key="mod_scoreB"
         )
 
-    if st.form_submit_button("Aplicar cambios"):
+    if st.form_submit_button("🧮 Aplicar marcador"):
         pause_match()
-        set_match_time(new_min, new_sec)
         set_score(new_a, new_b)
-        st.success("✅ Reloj y marcador actualizados")
+        st.success("🧮 Marcador actualizado")
         st.experimental_rerun()
 
 # =========================================================
