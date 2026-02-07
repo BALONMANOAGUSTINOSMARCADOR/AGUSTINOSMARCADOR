@@ -294,11 +294,51 @@ with mid:
         
 if st.button("⏸ Pausar"):
     pause_match()
-    st.experimental_rerun()
+    with col_time:
+    st.subheader("Tiempo de partido")
+
+    # Tiempo actual
+    t = elapsed_seconds()
+
+    reloj_display = st.empty()
+    reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
+
+    # Botones justo debajo del reloj
+    col_pausa, col_play = st.columns(2)
+
+    with col_pausa:
+        if st.button("⏸ Pausar"):
+            pause_match()
+            st.rerun()
+
+    with col_play:
+        if st.button("▶ Reanudar"):
+            start_match()
+            st.rerun()
 
 if st.button("▶ Reanudar"):
     start_match()
-    st.experimental_rerun()
+    with col_time:
+    st.subheader("Tiempo de partido")
+
+    # Tiempo actual
+    t = elapsed_seconds()
+
+    reloj_display = st.empty()
+    reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
+
+    # Botones justo debajo del reloj
+    col_pausa, col_play = st.columns(2)
+
+    with col_pausa:
+        if st.button("⏸ Pausar"):
+            pause_match()
+            st.rerun()
+
+    with col_play:
+        if st.button("▶ Reanudar"):
+            start_match()
+            st.rerun()
 
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
