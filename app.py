@@ -291,11 +291,14 @@ with mid:
              reloj_display = st.empty()
              reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
 
-         # botones de control
-         if st.button("⏸ Pausar"):
-             pause_match()
-         if st.button("▶ Reanudar"):
-             start_match()
+        
+if st.button("⏸ Pausar"):
+    pause_match()
+    st.experimental_rerun()
+
+if st.button("▶ Reanudar"):
+    start_match()
+    st.experimental_rerun()
 
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
