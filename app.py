@@ -214,6 +214,12 @@ with col1:
                 start_match()
                 st.session_state.show_team_form = False
 
+                # 🔹 Actualizar los inputs de modificaciones para reflejar los valores actuales
+                st.session_state["mod_scoreA"] = match["scoreA"]
+                st.session_state["mod_scoreB"] = match["scoreB"]
+                st.session_state["mod_min"] = 0
+                st.session_state["mod_sec"] = 0
+ 
 with col2:
     if st.button("⏹️ FINALIZAR PARTIDO", disabled=not st.session_state.partido_activo):
         st.session_state.partido_activo = False
