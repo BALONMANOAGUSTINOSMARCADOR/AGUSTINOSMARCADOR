@@ -166,7 +166,17 @@ def add_goal(team, zone, player=None):
 def add_exclusion(player, team, duration):
     m = st.session_state.match
 
-    # Registrar exclusión temporal como antes
+    stats = m["players_stats"][team].setdefault(
+        player,
+        {"exclusiones": 0, "amarilla": 0, "roja": 0, "azul": 0, "avisos": [], "inhabilitado": False}
+    )
+
+    # 🚫 Si ya está inhabilitado, no hacer nada
+    if stats.get("inhabilitado"):
+        st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
+        return
+
+    # Registrar exclusión temporal
     m["exclusions"].append({
         "player": player,
         "team": team,
@@ -174,18 +184,10 @@ def add_exclusion(player, team, duration):
         "duration": duration
     })
 
-    # Actualizar contador de exclusiones acumuladas
-    stats = m["players_stats"][team].setdefault(player, {"exclusiones":0, "amarilla":0, "roja":0, "azul":0, "avisos":[]})
+    # Contador acumulado
     stats["exclusiones"] += 1
 
-    # Avisos si llega a límite
-    if stats["exclusiones"] >= 3 or stats["roja"] == 1 or stats["azul"] == 1:
-        stats["avisos"].append("Jugador no puede seguir en pista")
-
-    if stats.get("inhabilitado"):
-        st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
-        return
-
+    # 🚫 Tres exclusiones = inhabilitado
     if stats["exclusiones"] >= 3:
         stats["inhabilitado"] = True
         stats["avisos"].append("Jugador inhabilitado (3 exclusiones)")
