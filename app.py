@@ -521,7 +521,7 @@ with st.form("form_mod_marcador"):
         st.success("🧮 Marcador actualizado")
         st.rerun()
     st.caption(
-    "⚠️ PARA CAMBIAR EL MARCADOR, TIENE QUE ESTAR EL TIEMPO EN PAUSA, INDICAR GOLES DE LOS DOS EQUIPOS)
+    "⚠️ PARA CAMBIAR EL MARCADOR, TIENE QUE ESTAR EL TIEMPO EN PAUSA, INDICAR GOLES DE LOS DOS EQUIPOS"
 )
 
 # =========================================================
