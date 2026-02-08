@@ -234,7 +234,7 @@ if st.session_state.partido_activo and match["part"] == 1:
         start_second_half()
         start_match()
         st.success("⏭️ Segunda parte iniciada")
-        st.experimental_rerun()
+        st.rerun()
 
 # =========================================================
 # INTERFAZ PRINCIPAL
@@ -489,7 +489,7 @@ with st.form("form_mod_tiempo"):
         pause_match()
         set_match_time(new_min, new_sec)
         st.success("⏱️ Tiempo actualizado")
-        st.experimental_rerun()
+        st.rerun()
 
 # ─────────────────────────────
 # 🧮 MODIFICAR MARCADOR
@@ -518,7 +518,7 @@ with st.form("form_mod_marcador"):
         pause_match()
         set_score(new_a, new_b)
         st.success("🧮 Marcador actualizado")
-        st.experimental_rerun()
+        st.rerun()
 
 # =========================================================
 # EVENTOS
