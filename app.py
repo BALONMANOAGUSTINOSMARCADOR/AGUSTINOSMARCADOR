@@ -314,73 +314,81 @@ with left:
         st.button(f"Gol {match['teamB']}", on_click=add_goal, args=("B", zone, player))
 
 # -------- TIEMPO + EXCLUSIONES --------
-exs = active_exclusions()
-
 with mid:
     col_time, col_ex = st.columns([2, 3])
-    
-        # ⏱️ TIEMPO
+
+    # ⏱️ TIEMPO
     with col_time:
         st.subheader("Tiempo de partido")
 
-        # Tiempo actual
         t = elapsed_seconds()
-
         reloj_display = st.empty()
         reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
 
-        # Botones justo debajo del reloj
         if st.button("⏸ Pausar"):
             pause_match()
             st.rerun()
 
         if st.button("▶ Reanudar"):
-           start_match()
-           st.rerun()
+            start_match()
+            st.rerun()
 
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
         exs = active_exclusions()
-
         st.subheader("🚫 Exclusiones")
+
         if exs:
             for ex in exs:
                 mm = ex["remaining"] // 60
                 ss = ex["remaining"] % 60
-                # Obtener cantidad acumulada
-                stats = match["players_stats"][ex["team"]].get(ex["player"], {"exclusiones":0})
+
+                stats = match["players_stats"][ex["team"]].get(
+                    ex["player"],
+                    {"exclusiones": 0}
+                )
                 count = stats["exclusiones"]
+
                 st.markdown(
                     f"**{ex['player']}** ({count}) | "
                     f"{match['teamA'] if ex['team']=='A' else match['teamB']} | "
                     f"⏱ {mm:02d}:{ss:02d}"
-            )
-    else:
-        st.write("—")
-            
+                )
+        else:
+            st.write("—")
+
+# -------- AÑADIR EXCLUSIÓN / TARJETA --------
 with right:
-
     with st.form("form_ex"):
-    p = st.text_input("Jugador (nº)")
-    team = st.selectbox(
-        "Equipo",
-        ["A", "B"],
-        format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+        p = st.text_input("Jugador (nº)")
+        team = st.selectbox(
+            "Equipo",
+            ["A", "B"],
+            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+        )
+
+        dur = st.number_input(
+            "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+        )
+
+        card_color = st.selectbox(
+            "Tarjeta (opcional)",
+            ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
+            index=0
+        )
+
+        if st.form_submit_button("Añadir exclusión / tarjeta"):
+            if dur > 0:
+                add_exclusion(p, team, dur)
+
+            if card_color != "NINGUNA":
+                add_card(p, team, card_color)
+
+    st.markdown(
+        "<div style='margin-top:-0.8rem'></div>",
+        unsafe_allow_html=True
     )
-    dur = st.number_input(
-        "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
-    )
 
-    card_color = st.selectbox("Tarjeta (opcional)", ["NINGUNA", "AMARILLA", "ROJA", "AZUL"], index=0)
-
-    if st.form_submit_button("Añadir exclusión / tarjeta"):
-        if dur > 0:
-            add_exclusion(p, team, dur)
-        if card_color != "NINGUNA":
-            add_card(p, team, card_color)
-
-    exs = active_exclusions()
-    st.markdown("<div style='margin-top:-0.8rem'></div>", unsafe_allow_html=True)
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
