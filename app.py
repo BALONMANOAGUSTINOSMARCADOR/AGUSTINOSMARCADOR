@@ -148,6 +148,13 @@ def reset_match():
 
 def add_goal(team, zone, player=None):
     m = st.session_state.match
+
+    if player:
+        stats = m["players_stats"][team].get(player)
+        if stats and stats.get("inhabilitado"):
+            st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
+            return
+
     m["events"].append({
         "time": iso_now(),
         "team": team,
