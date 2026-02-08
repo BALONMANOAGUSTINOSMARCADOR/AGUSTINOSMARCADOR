@@ -182,6 +182,10 @@ def add_exclusion(player, team, duration):
     if stats["exclusiones"] >= 3 or stats["roja"] == 1 or stats["azul"] == 1:
         stats["avisos"].append("Jugador no puede seguir en pista")
 
+    if stats.get("inhabilitado"):
+    st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
+    return
+
 def active_exclusions():
     m = st.session_state.match
     active = []
