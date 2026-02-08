@@ -291,17 +291,14 @@ with mid:
         reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
 
         # Botones justo debajo del reloj
-        col_pausa, col_play = st.columns(2)
+        if st.button("⏸ Pausar"):
+            pause_match()
+            st.rerun()
 
-        with col_pausa:
-            if st.button("⏸ Pausar"):
-                pause_match()
-                st.rerun()
+        if st.button("▶ Reanudar"):
+           start_match()
+           st.rerun()
 
-        with col_play:
-            if st.button("▶ Reanudar"):
-                start_match()
-                st.rerun()
 
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
@@ -490,6 +487,10 @@ with st.form("form_mod_tiempo"):
         set_match_time(new_min, new_sec)
         st.success("⏱️ Tiempo actualizado")
         st.rerun()
+    st.caption(
+    "⚠️ PARA CAMBIAR EL TIEMPO HAY QUE FINALIZAR EL PARTIDO Y LUEGO VOLVER A INICIARLO(No se borran los datos, solamente el nombre de los equipos. Reescribirlos)"
+)
+
 
 # ─────────────────────────────
 # 🧮 MODIFICAR MARCADOR
@@ -519,6 +520,9 @@ with st.form("form_mod_marcador"):
         set_score(new_a, new_b)
         st.success("🧮 Marcador actualizado")
         st.rerun()
+    st.caption(
+    "⚠️ PARA CAMBIAR EL MARCADOR, TIENE QUE ESTAR EL TIEMPO EN PAUSA, INDICAR GOLES DE LOS DOS EQUIPOS)
+)
 
 # =========================================================
 # EVENTOS
