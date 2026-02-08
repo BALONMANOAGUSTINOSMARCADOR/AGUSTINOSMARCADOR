@@ -412,6 +412,7 @@ with right:
         st.markdown(
             "<div style='margin-top:-0.8rem'></div>",
             unsafe_allow_html=True
+        )
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
