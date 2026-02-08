@@ -338,24 +338,26 @@ with mid:
            start_match()
            st.rerun()
 
-
     # 🚫 EXCLUSIONES ACTIVAS
     with col_ex:
         exs = active_exclusions()
 
+        st.subheader("🚫 Exclusiones")
         if exs:
-            st.subheader("🚫 Exclusiones")
             for ex in exs:
                 mm = ex["remaining"] // 60
                 ss = ex["remaining"] % 60
+                # Obtener cantidad acumulada
+                stats = match["players_stats"][ex["team"]].get(ex["player"], {"exclusiones":0})
+                count = stats["exclusiones"]
                 st.markdown(
-                    f"**{ex['player']}** | "
+                    f"**{ex['player']}** ({count}) | "
                     f"{match['teamA'] if ex['team']=='A' else match['teamB']} | "
                     f"⏱ {mm:02d}:{ss:02d}"
-                )
-        else:
-            st.subheader("🚫 Exclusiones")
-            st.write("—")
+            )
+    else:
+        st.write("—")
+            
 with right:
 
     with st.form("form_ex"):
