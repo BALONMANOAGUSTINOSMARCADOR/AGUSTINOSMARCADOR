@@ -466,25 +466,41 @@ if not modificaciones_habilitadas:
 # ─────────────────────────────
 # ⏱️ MODIFICAR TIEMPO
 # ─────────────────────────────
-if st.form_submit_button(
-    "⏱️ Aplicar tiempo",
-    disabled=not modificaciones_habilitadas
-):
-    pause_match()
-    old_elapsed = elapsed_seconds()  # tiempo antes de modificar
-    set_match_time(new_min, new_sec)
-    new_elapsed = elapsed_seconds()
+with st.form("form_mod_tiempo"):
+    col_time1, col_time2 = st.columns(2)
 
-    # 🔹 Ajustar exclusiones para mantener segundos restantes
-    for ex in match["exclusions"]:
-        ex["started_at_seconds"] += (new_elapsed - old_elapsed)
+    with col_time1:
+        new_min = st.number_input(
+            "Minutos", 0, 60,
+            value=st.session_state.get("mod_min", elapsed_seconds() // 60),
+            key="mod_min"
+        )
 
-    st.success("⏱️ Tiempo actualizado")
-    st.rerun()
+    with col_time2:
+        new_sec = st.number_input(
+            "Segundos", 0, 59,
+            value=st.session_state.get("mod_sec", elapsed_seconds() % 60),
+            key="mod_sec"
+        )
+
+    if st.form_submit_button(
+        "⏱️ Aplicar tiempo",
+        disabled=not modificaciones_habilitadas
+    ):
+        pause_match()
+        old_elapsed = elapsed_seconds()  # tiempo antes de modificar
+        set_match_time(new_min, new_sec)
+        new_elapsed = elapsed_seconds()
+
+        # 🔹 Ajustar exclusiones para mantener segundos restantes
+        for ex in match["exclusions"]:
+            ex["started_at_seconds"] += (new_elapsed - old_elapsed)
+
+        st.success("⏱️ Tiempo actualizado")
+
     st.caption(
-    "⚠️ PARA CAMBIAR EL TIEMPO HAY QUE FINALIZAR EL PARTIDO Y LUEGO VOLVER A INICIARLO(No se borran los datos, solamente el nombre de los equipos. Reescribirlos)"
-)
-
+        "⚠️ PARA CAMBIAR EL TIEMPO HAY QUE FINALIZAR EL PARTIDO Y LUEGO VOLVER A INICIARLO (No se borran los datos, solamente el nombre de los equipos. Reescribirlos)"
+    )
 
 # ─────────────────────────────
 # 🧮 MODIFICAR MARCADOR
