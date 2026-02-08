@@ -84,16 +84,20 @@ if "partido_activo" not in st.session_state:
 
 if "match" not in st.session_state:
     st.session_state.match = {
-    "teamA": "Equipo A",
-    "teamB": "Equipo B",
-    "scoreA": 0,
-    "scoreB": 0,
-    "events": [],
-    "exclusions": [],
-    "started_at": None,
-    "elapsed_before_pause": 0,
-    "part": 1
-}
+        "teamA": "Equipo A",
+        "teamB": "Equipo B",
+        "scoreA": 0,
+        "scoreB": 0,
+        "events": [],
+        "exclusions": [],
+        "players_stats": {  # Nuevo: historial de jugadores
+            "A": {},  # estructura: {numero_jugador: {"exclusiones": 0, "amarilla":0, "roja":0, "azul":0, "avisos":[]}}
+            "B": {}
+        },
+        "started_at": None,
+        "elapsed_before_pause": 0,
+        "part": 1
+    }
 
 match = st.session_state.match
 
