@@ -188,9 +188,14 @@ def set_score(scoreA, scoreB):
 
 def start_second_half():
     m = st.session_state.match
+    old_elapsed = elapsed_seconds()  # tiempo antes de poner a cero
     m["part"] = 2
     m["elapsed_before_pause"] = 0
     m["started_at"] = None
+
+    # 🔹 Ajustar exclusiones para mantener lo que queda
+    for ex in m["exclusions"]:
+        ex["started_at_seconds"] -= old_elapsed  # mantiene los segundos restantes
 
 # =========================================================
 # HEADER
