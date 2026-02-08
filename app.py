@@ -260,7 +260,6 @@ with left:
 
     # Zona y jugador
     zone = st.selectbox(
-        "Zona",
         list(ZONAS.keys()),
         format_func=lambda x: ZONAS[x],
         index=4
