@@ -248,7 +248,7 @@ with left:
     # Mostrar nombres y goles grandes
     st.markdown(
         f"""
-        <div style="display:flex; align-items:center; font-weight:bold; gap:20px;">
+        <div style="display:flex; align-items:center; font-weight:bold; gap:12px;">
             <span style="font-size:28px;">{match['teamA']}</span>
             <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  
             <span style="font-size:28px;">{match['teamB']}</span>
