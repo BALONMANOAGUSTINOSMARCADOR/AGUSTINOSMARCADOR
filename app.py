@@ -158,12 +158,22 @@ def add_goal(team, zone, player=None):
 
 def add_exclusion(player, team, duration):
     m = st.session_state.match
+
+    # Registrar exclusión temporal como antes
     m["exclusions"].append({
         "player": player,
         "team": team,
         "started_at_seconds": elapsed_seconds(),
         "duration": duration
     })
+
+    # Actualizar contador de exclusiones acumuladas
+    stats = m["players_stats"][team].setdefault(player, {"exclusiones":0, "amarilla":0, "roja":0, "azul":0, "avisos":[]})
+    stats["exclusiones"] += 1
+
+    # Avisos si llega a límite
+    if stats["exclusiones"] >= 3 or stats["roja"] == 1 or stats["azul"] == 1:
+        stats["avisos"].append("Jugador no puede seguir en pista")
 
 def active_exclusions():
     m = st.session_state.match
