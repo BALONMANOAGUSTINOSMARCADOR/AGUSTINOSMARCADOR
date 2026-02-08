@@ -498,6 +498,24 @@ with st.container():
 modificaciones_habilitadas = match["started_at"] is None
 
 # =========================================================
+# INCIDENCIAS: exclusiones acumuladas + tarjetas
+# =========================================================
+st.markdown("---")
+st.subheader("📋 INCIDENCIAS")
+
+for team_key, team_name in [("A", match["teamA"]), ("B", match["teamB"])]:
+    st.markdown(f"**Equipo {team_name}**")
+    stats_team = match["players_stats"][team_key]
+    if stats_team:
+        df_stats = pd.DataFrame.from_dict(stats_team, orient="index")
+        df_stats.index.name = "Jugador"
+        df_stats = df_stats[["exclusiones","amarilla","roja","azul","avisos"]]
+        st.dataframe(df_stats)
+    else:
+        st.write("—")
+
+
+# =========================================================
 # MODIFICACIONES (SIEMPRE VISIBLES) — BLOQUE DEFINITIVO
 # =========================================================
 
