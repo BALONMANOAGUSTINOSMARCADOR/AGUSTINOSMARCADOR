@@ -186,6 +186,10 @@ def add_exclusion(player, team, duration):
     st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
     return
 
+    if stats["exclusiones"] >= 3:
+    stats["inhabilitado"] = True
+    stats["avisos"].append("Jugador inhabilitado (3 exclusiones)")
+
 def active_exclusions():
     m = st.session_state.match
     active = []
