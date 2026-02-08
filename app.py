@@ -259,7 +259,6 @@ with left:
     )
 
     # Zona y jugador
-    st.markdown("<div style='margin-top:-20px;'></div>", unsafe_allow_html=True)
     zone = st.selectbox(
         "Zonas",
         list(ZONAS.keys()),
@@ -267,8 +266,6 @@ with left:
         index=4
     )
     player = st.text_input("Jugador")
-    st.markdown("<div style='margin-top:-30px;'></div>", unsafe_allow_html=True)
-
     # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2)
     with col_gol_a:
