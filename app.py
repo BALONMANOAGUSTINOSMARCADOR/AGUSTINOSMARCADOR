@@ -211,6 +211,27 @@ def start_second_half():
     for ex in m["exclusions"]:
         ex["started_at_seconds"] -= old_elapsed  # mantiene los segundos restantes
 
+def add_card(player, team, color):
+    """
+    Registra tarjeta amarilla/roja/azul
+    """
+    m = st.session_state.match
+    stats = m["players_stats"][team].setdefault(player, {"exclusiones":0, "amarilla":0, "roja":0, "azul":0, "avisos":[]})
+
+    color_key = color.lower()
+    if stats[color_key] >= 1:
+        st.error(f"Jugador {player} ya tiene tarjeta {color.upper()}")
+        return
+
+    stats[color_key] = 1
+
+    # Aviso si ya no puede jugar
+    if stats["exclusiones"] >= 3 or stats["roja"] == 1 or stats["azul"] == 1:
+        stats["avisos"].append("Jugador no puede seguir en pista")
+
+    st.success(f"Tarjeta {color.upper()} registrada para jugador {player}")
+
+
 # =========================================================
 # HEADER
 # =========================================================
