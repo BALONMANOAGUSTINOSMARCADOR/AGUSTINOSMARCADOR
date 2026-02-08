@@ -400,19 +400,18 @@ with right:
 
         if st.form_submit_button("Añadir exclusión / tarjeta"):
 
-    # Exclusión SOLO si no es amarilla
-    if card_color in ("NINGUNA", "ROJA", "AZUL"):
-        if dur > 0:
-            add_exclusion(p, team, dur)
+            # ⛔ Exclusión SOLO si NO es amarilla
+            if card_color in ("NINGUNA", "ROJA", "AZUL"):
+                if dur > 0:
+                    add_exclusion(p, team, dur)
 
-    # Tarjetas
-    if card_color != "NINGUNA":
-        add_card(p, team, card_color)
+            # 🟨🟥🟦 Tarjetas
+            if card_color != "NINGUNA":
+                add_card(p, team, card_color)
 
-    st.markdown(
-        "<div style='margin-top:-0.8rem'></div>",
-        unsafe_allow_html=True
-    )
+        st.markdown(
+            "<div style='margin-top:-0.8rem'></div>",
+            unsafe_allow_html=True
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
