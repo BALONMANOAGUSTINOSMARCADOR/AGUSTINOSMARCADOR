@@ -352,16 +352,19 @@ with left:
         unsafe_allow_html=True
     )
 
-    # Zona y jugador
-    zone = st.selectbox(
-        "Zonas",
-        list(ZONAS.keys()),
-        format_func=lambda x: ZONAS[x],
-        index=4
-    )
-    player = st.text_input("Jugador")
+    # Jugador y Zona en la misma fila
+    col_player, col_zone = st.columns([1, 1])
+    with col_player:
+        player = st.text_input("Jugador")
+    with col_zone:
+        zone = st.selectbox(
+            "Zonas",
+            list(ZONAS.keys()),
+            format_func=lambda x: ZONAS[x],
+            index=4
+        )
 
-    # Botones de goles en la misma columna, usando subcolumnas para alinearlos
+    # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2, gap="small")
 
     with col_gol_a:
