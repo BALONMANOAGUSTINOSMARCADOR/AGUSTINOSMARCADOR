@@ -383,39 +383,40 @@ with mid:
 
 # -------- AÑADIR EXCLUSIÓN / TARJETA --------
 with right:
-    with st.form("form_ex"):
-        p = st.text_input("Jugador (nº)")
-        team = st.selectbox(
-            "Equipo",
-            ["A", "B"],
-            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
-        )
+    if st.session_state.mostrar_form_ex:
+        with st.form("form_ex"):
+            p = st.text_input("Jugador (nº)")
+            team = st.selectbox(
+                "Equipo",
+                ["A", "B"],
+                format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+            )    
 
-        dur = st.number_input(
-            "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
-        )
+            dur = st.number_input(
+                "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+            )
 
-        card_color = st.selectbox(
-            "Tarjeta (opcional)",
-            ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
-            index=0
-        )
+            card_color = st.selectbox(
+                "Tarjeta (opcional)",
+                ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
+                index=0
+            )
 
-        if st.form_submit_button("Añadir exclusión / tarjeta"):
+            if st.form_submit_button("Añadir exclusión / tarjeta"):
 
-            # ⛔ Exclusión SOLO si NO es amarilla
-            if card_color in ("NINGUNA", "ROJA", "AZUL"):
-                if dur > 0:
-                    add_exclusion(p, team, dur)
+                # ⛔ Exclusión SOLO si NO es amarilla
+                if card_color in ("NINGUNA", "ROJA", "AZUL"):
+                    if dur > 0:
+                        add_exclusion(p, team, dur)
 
-            # 🟨🟥🟦 Tarjetas
-            if card_color != "NINGUNA":
-                add_card(p, team, card_color)
+                # 🟨🟥🟦 Tarjetas
+                if card_color != "NINGUNA":
+                    add_card(p, team, card_color)
 
-        st.markdown(
-            "<div style='margin-top:-0.8rem'></div>",
-            unsafe_allow_html=True
-        )
+            st.markdown(
+                "<div style='margin-top:-0.8rem'></div>",
+                unsafe_allow_html=True
+            )
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
