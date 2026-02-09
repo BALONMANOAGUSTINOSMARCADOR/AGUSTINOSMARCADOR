@@ -161,6 +161,14 @@ def add_goal(team, zone, player=None):
             st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
             return
 
+    m["events"].append({
+        "time": iso_now(),
+        "team": team,
+        "zone": ZONAS[int(zone)],
+        "player": player
+    })
+    m[f"score{team}"] += 1
+
 def jugador_inhabilitado(player, team):
     # ⚠️ Si no hay jugador, NO se bloquea nunca
     if not player:
