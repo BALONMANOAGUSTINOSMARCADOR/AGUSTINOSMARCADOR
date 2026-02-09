@@ -399,7 +399,20 @@ with right:
 # -------- BOTÓN CENTRADO PARA REGISTRAR --------
 with mid:
     st.markdown("<div style='text-align:center;'>", unsafe_allow_html=True)
-    if
+    if st.button("➕ Registrar exclusión / tarjeta"):
+        # Leer valores del formulario
+        player_input = st.session_state.form_player
+        team_input = st.session_state.form_team
+        duration_input = st.session_state.form_duration
+        card_input = st.session_state.form_card
+
+        # Registrar exclusión si procede
+        if card_input in ("NINGUNA", "ROJA", "AZUL") and duration_input > 0:
+            add_exclusion(player_input, team_input, duration_input)
+        # Registrar tarjeta si corresponde
+        if card_input != "NINGUNA":
+            add_card(player_input, team_input, card_input)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
