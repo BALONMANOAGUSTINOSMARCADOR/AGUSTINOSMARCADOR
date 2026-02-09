@@ -152,6 +152,9 @@ def reset_match():
 def add_goal(team, zone, player=None):
     m = st.session_state.match
 
+    if player and jugador_inhabilitado(player, team):
+        return
+
     if player:
         stats = m["players_stats"][team].get(player)
         if stats and stats.get("inhabilitado"):
