@@ -157,7 +157,13 @@ def add_goal(team, zone, player=None):
         if stats and stats.get("inhabilitado"):
             st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
             return
-
+def jugador_inhabilitado(player, team):
+    stats = st.session_state.match["players_stats"][team].get(player)
+    if stats and stats.get("inhabilitado"):
+        st.error("🚫 JUGADOR INHABILITADO")
+        return True
+    return False
+    
     m["events"].append({
         "time": iso_now(),
         "team": team,
