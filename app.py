@@ -178,6 +178,9 @@ def jugador_inhabilitado(player, team):
 def add_exclusion(player, team, duration):
     m = st.session_state.match
 
+    if jugador_inhabilitado(player, team):
+        return
+
     stats = m["players_stats"][team].setdefault(
         player,
         {"exclusiones": 0, "amarilla": 0, "roja": 0, "azul": 0, "avisos": [], "inhabilitado": False}
