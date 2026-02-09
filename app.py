@@ -408,6 +408,10 @@ with mid:
         st.write("—")
 
 # -------- AÑADIR EXCLUSIÓN / TARJETA --------
+# Pegamento para subir la columna de la derecha
+st_empty_right = st.empty()
+st_empty_right.markdown("<div style='margin-top:-1rem'></div>", unsafe_allow_html=True)
+
 with right:
     with st.form("form_ex", clear_on_submit=True):
         p = st.text_input("Jugador (nº)")
