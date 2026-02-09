@@ -359,6 +359,9 @@ with mid:
         exs = active_exclusions()
         st.subheader("🚫 Exclusiones")
 
+        if st.button("➕ Añadir exclusión / tarjeta"):
+            st.session_state.mostrar_form_ex = True
+        
         if exs:
             for ex in exs:
                 mm = ex["remaining"] // 60
