@@ -372,47 +372,38 @@ with mid:
     else:
         st.write("—")
 
-# -------- FORMULARIO A LA DERECHA (SIN BOTÓN) --------
+# -------- AÑADIR EXCLUSIÓN / TARJETA --------
 with right:
     with st.form("form_ex", clear_on_submit=True):
-        st.text_input("Jugador (nº)", key="form_player")
-        st.selectbox(
+        p = st.text_input("Jugador (nº)")
+        team = st.selectbox(
             "Equipo",
             ["A", "B"],
-            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"],
-            key="form_team"
+            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
         )
-        st.number_input(
+
+        dur = st.number_input(
             "Duración (seg)",
             30, 600,
-            value=DEFAULT_EXCLUSION_SECONDS,
-            key="form_duration"
+            DEFAULT_EXCLUSION_SECONDS
         )
-        st.selectbox(
+
+        card_color = st.selectbox(
             "Tarjeta (opcional)",
             ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
-            index=0,
-            key="form_card"
+            index=0
         )
-        # ⚠️ NO hay botón dentro del formulario
 
-# -------- BOTÓN CENTRADO PARA REGISTRAR --------
-with mid:
-    st.markdown("<div style='text-align:center;'>", unsafe_allow_html=True)
-    if st.button("➕ Registrar exclusión / tarjeta"):
-        # Leer valores del formulario
-        player_input = st.session_state.form_player
-        team_input = st.session_state.form_team
-        duration_input = st.session_state.form_duration
-        card_input = st.session_state.form_card
+        if st.form_submit_button("➕ Añadir exclusión / tarjeta"):
 
-        # Registrar exclusión si procede
-        if card_input in ("NINGUNA", "ROJA", "AZUL") and duration_input > 0:
-            add_exclusion(player_input, team_input, duration_input)
-        # Registrar tarjeta si corresponde
-        if card_input != "NINGUNA":
-            add_card(player_input, team_input, card_input)
-    st.markdown("</div>", unsafe_allow_html=True)
+            # ⛔ Exclusión SOLO si NO es amarilla
+            if card_color in ("NINGUNA", "ROJA", "AZUL"):
+                if dur > 0:
+                    add_exclusion(p, team, dur)
+
+            # 🟨🟥🟦 Tarjetas
+            if card_color != "NINGUNA":
+                add_card(p, team, card_color)
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
