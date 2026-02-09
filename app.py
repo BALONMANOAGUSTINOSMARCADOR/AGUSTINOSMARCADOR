@@ -358,68 +358,69 @@ with mid:
             st.rerun()
 
     # 🚫 EXCLUSIONES ACTIVAS
-    with col_ex:
-        exs = active_exclusions()
-        st.subheader("🚫 Exclusiones")
+with col_ex:
+    exs = active_exclusions()
+    st.subheader("🚫 Exclusiones")
 
-        if st.button("➕ Añadir exclusión / tarjeta"):
-            st.session_state.mostrar_form_ex = True
-        
-        if exs:
-            for ex in exs:
-                mm = ex["remaining"] // 60
-                ss = ex["remaining"] % 60
+    # 1️⃣ BOTÓN DE AÑADIR EXCLUSIÓN DEBAJO DEL TÍTULO
+    if st.button("➕ Añadir exclusión / tarjeta"):
+        # Si quieres, aquí podemos abrir un modal o solo activar el formulario
+        st.session_state.mostrar_form_ex = True
 
-                stats = match["players_stats"][ex["team"]].get(
-                    ex["player"],
-                    {"exclusiones": 0}
-                )
-                count = stats["exclusiones"]
+    # 2️⃣ Mostrar exclusiones activas
+    if exs:
+        for ex in exs:
+            mm = ex["remaining"] // 60
+            ss = ex["remaining"] % 60
 
-                st.markdown(
-                    f"**{ex['player']}** ({count}) | "
-                    f"{match['teamA'] if ex['team']=='A' else match['teamB']} | "
-                    f"⏱ {mm:02d}:{ss:02d}"
-                )
-        else:
-            st.write("—")
-
-# -------- AÑADIR EXCLUSIÓN / TARJETA --------
-with right:
-    if st.session_state.get("mostrar_form_ex", False):
-        with st.form("form_ex"):
-            p = st.text_input("Jugador (nº)")
-            team = st.selectbox(
-                "Equipo",
-                ["A", "B"],
-                format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
-            )    
-
-            dur = st.number_input(
-                "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+            stats = match["players_stats"][ex["team"]].get(
+                ex["player"],
+                {"exclusiones": 0}
             )
-
-            card_color = st.selectbox(
-                "Tarjeta (opcional)",
-                ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
-                index=0
-            )
-
-            if st.form_submit_button("Añadir exclusión / tarjeta"):
-
-                # ⛔ Exclusión SOLO si NO es amarilla
-                if card_color in ("NINGUNA", "ROJA", "AZUL"):
-                    if dur > 0:
-                        add_exclusion(p, team, dur)
-
-                # 🟨🟥🟦 Tarjetas
-                if card_color != "NINGUNA":
-                    add_card(p, team, card_color)
+            count = stats["exclusiones"]
 
             st.markdown(
-                "<div style='margin-top:-0.8rem'></div>",
-                unsafe_allow_html=True
+                f"**{ex['player']}** ({count}) | "
+                f"{match['teamA'] if ex['team']=='A' else match['teamB']} | "
+                f"⏱ {mm:02d}:{ss:02d}"
             )
+    else:
+        st.write("—")
+        
+# -------- AÑADIR EXCLUSIÓN / TARJETA --------
+with right:
+    with st.form("form_ex"):
+        p = st.text_input("Jugador (nº)")
+        team = st.selectbox(
+            "Equipo",
+            ["A", "B"],
+            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+        )    
+
+        dur = st.number_input(
+            "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+        )
+
+        card_color = st.selectbox(
+            "Tarjeta (opcional)",
+            ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
+            index=0
+        )
+
+        if st.form_submit_button("Añadir exclusión / tarjeta"):
+            # ⛔ Exclusión SOLO si NO es amarilla
+            if card_color in ("NINGUNA", "ROJA", "AZUL"):
+                if dur > 0:
+                    add_exclusion(p, team, dur)
+
+            # 🟨🟥🟦 Tarjetas
+            if card_color != "NINGUNA":
+                add_card(p, team, card_color)
+
+    st.markdown(
+        "<div style='margin-top:-0.8rem'></div>",
+        unsafe_allow_html=True
+    )
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
