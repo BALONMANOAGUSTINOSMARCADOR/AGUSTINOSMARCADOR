@@ -17,7 +17,8 @@ st.set_page_config(
     page_title="AGUSTINOS MARCADOR",
     layout="wide",
     page_icon="🏐"
-)st.markdown("""
+)
+st.markdown("""
 <style>
 div[data-testid="stVerticalBlock"] > div {
     gap: 0.25rem;
