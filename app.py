@@ -414,25 +414,34 @@ st_empty_right.markdown("<div style='margin-top:-1rem'></div>", unsafe_allow_htm
 
 with right:
     with st.form("form_ex", clear_on_submit=True):
-        p = st.text_input("Jugador (nº)")
-        team = st.selectbox(
-            "Equipo",
-            ["A", "B"],
-            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
-        )
 
-        dur = st.number_input(
-            "Duración (seg)",
-            30, 600,
-            DEFAULT_EXCLUSION_SECONDS
-        )
+        # Número de jugador y equipo en columnas
+        col_player, col_team = st.columns([1, 1])
+        with col_player:
+            p = st.text_input("Jugador (nº)")
+        with col_team:
+            team = st.selectbox(
+                "Equipo",
+                ["A", "B"],
+                format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
+            )
 
-        card_color = st.selectbox(
-            "Tarjeta (opcional)",
-            ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
-            index=0
-        )
+        # Duración y Tarjeta en la misma fila
+        col_dur, col_card = st.columns([1, 1])
+        with col_dur:
+            dur = st.number_input(
+                "Duración (seg)",
+                30, 600,
+                DEFAULT_EXCLUSION_SECONDS
+            )
+        with col_card:
+            card_color = st.selectbox(
+                "Tarjeta (opcional)",
+                ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
+                index=0
+            )
 
+        # Botón de registro
         if st.form_submit_button("➕ Añadir exclusión / tarjeta"):
 
             # ⛔ Exclusión SOLO si NO es amarilla
