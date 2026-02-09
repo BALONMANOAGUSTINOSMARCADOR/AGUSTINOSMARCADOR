@@ -353,11 +353,15 @@ with left:
     )
     player = st.text_input("Jugador")
     # Botones de goles uno al lado del otro
-    col_gol_a, col_gol_b = st.columns(2, gap="small")
-    with col_gol_a:
-        st.button(f"Gol {match['teamA']}", on_click=add_goal, args=("A", zone, player))
-    with col_gol_b:
-        st.button(f"Gol {match['teamB']}", on_click=add_goal, args=("B", zone, player))
+col_gol_a, col_gol_b = st.columns(2, gap="small")
+
+with col_gol_a:
+    if st.button(f"Gol {match['teamA']}"):
+        add_goal("A", zone, player)
+
+with col_gol_b:
+    if st.button(f"Gol {match['teamB']}"):
+        add_goal("B", zone, player)
 
 # -------- TIEMPO + EXCLUSIONES --------
 with mid:
