@@ -501,7 +501,13 @@ with st.container():
                  elif zone_name == "LD":  # derecha interna → izquierda interna
                      x = 1 - ZONE_COORDS["LI"][0]
                      y = ZONE_COORDS["LI"][1]
-                 # Centro, P, EXI, EXC, EXD se mantienen igual
+                 elif zone_name == "EXI":  # invertir EXI ↔ EXD
+                     x = 1 - ZONE_COORDS["EXD"][0]
+                     y = ZONE_COORDS["EXD"][1]
+                 elif zone_name == "EXD":  # invertir EXD ↔ EXI
+                     x = 1 - ZONE_COORDS["EXI"][0]
+                     y = ZONE_COORDS["EXI"][1]
+    # Centro, P, EXC se mantienen igual
 
              xs.append(x)
              ys.append(y)
