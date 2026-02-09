@@ -341,6 +341,21 @@ with left:
 with mid:
     st.subheader("🚫 Exclusiones")
 
+    # ⏱️ TIEMPO DE PARTIDO
+    t = elapsed_seconds()
+    reloj_display = st.empty()
+    reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
+
+    col_pause, col_resume = st.columns(2)
+    with col_pause:
+        if st.button("⏸ Pausar"):
+            pause_match()
+            st.rerun()
+    with col_resume:
+        if st.button("▶ Reanudar"):
+            start_match()
+            st.rerun()
+
     # Mostrar exclusiones activas
     exs = active_exclusions()
     if exs:
@@ -360,33 +375,31 @@ with mid:
 # -------- FORMULARIO A LA DERECHA (SIN BOTÓN) --------
 with right:
     with st.form("form_ex", clear_on_submit=True):
-        player_input = st.text_input("Jugador (nº)")
-        team_input = st.selectbox(
+        st.text_input("Jugador (nº)", key="form_player")
+        st.selectbox(
             "Equipo",
             ["A", "B"],
-            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"]
-        )    
-        duration_input = st.number_input(
-            "Duración (seg)", 30, 600, DEFAULT_EXCLUSION_SECONDS
+            format_func=lambda x: match["teamA"] if x == "A" else match["teamB"],
+            key="form_team"
         )
-        card_input = st.selectbox(
+        st.number_input(
+            "Duración (seg)",
+            30, 600,
+            value=DEFAULT_EXCLUSION_SECONDS,
+            key="form_duration"
+        )
+        st.selectbox(
             "Tarjeta (opcional)",
             ["NINGUNA", "AMARILLA", "ROJA", "AZUL"],
-            index=0
+            index=0,
+            key="form_card"
         )
-        # ⚠️ ELIMINADO: no hay botón dentro del formulario
-        # El formulario seguirá registrando cuando el botón central sea pulsado
+        # ⚠️ NO hay botón dentro del formulario
 
 # -------- BOTÓN CENTRADO PARA REGISTRAR --------
 with mid:
     st.markdown("<div style='text-align:center;'>", unsafe_allow_html=True)
-    if st.button("➕ Registrar exclusión / tarjeta"):
-        # Al pulsar, lee los valores del formulario de la derecha
-        if card_input in ("NINGUNA", "ROJA", "AZUL") and duration_input > 0:
-            add_exclusion(player_input, team_input, duration_input)
-        if card_input != "NINGUNA":
-            add_card(player_input, team_input, card_input)
-    st.markdown("</div>", unsafe_allow_html=True)
+    if
 
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
