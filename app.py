@@ -9,9 +9,15 @@ import datetime, json, glob
 from PIL import Image
 from streamlit_autorefresh import st_autorefresh
 from collections import defaultdict
-
 from modules import recorder, loader
-st.markdown("""
+# =========================================================
+# CONFIG
+# =========================================================
+st.set_page_config(
+    page_title="AGUSTINOS MARCADOR",
+    layout="wide",
+    page_icon="🏐"
+)st.markdown("""
 <style>
 div[data-testid="stVerticalBlock"] > div {
     gap: 0.25rem;
@@ -29,15 +35,11 @@ p {
 </style>
 """, unsafe_allow_html=True)
 
-
 # =========================================================
-# CONFIG
+# SESSION STATE (INICIALIZACIÓN GLOBAL)
 # =========================================================
-st.set_page_config(
-    page_title="AGUSTINOS MARCADOR",
-    layout="wide",
-    page_icon="🏐"
-)
+if "mostrar_form_ex" not in st.session_state:
+    st.session_state.mostrar_form_ex = False
 
 DEFAULT_EXCLUSION_SECONDS = 120
 
@@ -383,7 +385,7 @@ with mid:
 
 # -------- AÑADIR EXCLUSIÓN / TARJETA --------
 with right:
-    if st.session_state.mostrar_form_ex:
+    if st.session_state.get("mostrar_form_ex", False):
         with st.form("form_ex"):
             p = st.text_input("Jugador (nº)")
             team = st.selectbox(
