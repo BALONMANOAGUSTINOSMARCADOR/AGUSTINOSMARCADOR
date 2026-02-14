@@ -699,3 +699,42 @@ st.subheader("💾 Guardar partido")
 
 rival = st.text_input("Rival")
 competicion = st.text_input("Competición")
+if st.button("💾 Guardar en histórico"):
+    if not rival or not competicion:
+        st.error("Debes indicar Rival y Competición")
+    else:
+        pause_match()  # congelar tiempo exacto antes de guardar
+
+        partido_guardado = {
+            "rival": rival,
+            "competicion": competicion,
+            "fecha": datetime.datetime.utcnow().isoformat(),
+            "data": st.session_state.match
+        }
+
+        filename = f"partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(partido_guardado, f, indent=4)
+
+        st.success("✅ Partido guardado correctamente")
+
+st.markdown("### 📂 Histórico de partidos")
+
+files = sorted(glob.glob("partido_*.json"), reverse=True)
+
+if files:
+    selected_file = st.selectbox("Seleccionar partido", files)
+
+    if st.button("🔄 Cargar partido seleccionado"):
+        with open(selected_file, "r", encoding="utf-8") as f:
+            partido_cargado = json.load(f)
+
+        st.session_state.match = partido_cargado["data"]
+        st.session_state.partido_activo = False
+        st.success("✅ Partido cargado correctamente")
+        st.rerun()
+else:
+    st.write("No hay partidos guardados todavía.")
+
+
