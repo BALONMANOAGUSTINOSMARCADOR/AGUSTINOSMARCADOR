@@ -868,55 +868,86 @@ if match["events"]:
         fig5.update_layout(height=400)
         st.plotly_chart(fig5, use_container_width=True)
 
-    # =====================================================
+# =====================================================
 # 6️⃣ GOLES JUGADOR POR ZONA
 # =====================================================
 st.subheader("🎯 GOLES JUGADOR POR ZONA")
-st.caption("Producción ofensiva individual segmentada espacialmente")
+st.caption("Producción individual comparada con media equipo")
 
-# Construir estructura jugador → zona → goles
-jugador_zona = {}
+# Estructura: equipo → jugador → zona → goles
+estructura = {
+    "A": {},
+    "B": {}
+}
 
 for ev in match["events"]:
     jugador = ev.get("player")
     if not jugador:
         continue
 
+    equipo = ev["team"]
     zona = ev["zone"]
 
-    if jugador not in jugador_zona:
-        jugador_zona[jugador] = {z: 0 for z in ZONAS.values()}
+    if jugador not in estructura[equipo]:
+        estructura[equipo][jugador] = {z: 0 for z in ZONAS.values()}
 
-    jugador_zona[jugador][zona] += 1
+    estructura[equipo][jugador][zona] += 1
 
-# Solo jugadores con al menos 1 gol
-jugadores_con_gol = [
-    j for j in jugador_zona
-    if sum(jugador_zona[j].values()) > 0
-]
+for equipo in ["A", "B"]:
 
-for jugador in jugadores_con_gol:
+    jugadores = estructura[equipo]
 
-    datos = jugador_zona[jugador]
+    if not jugadores:
+        continue
 
-    # ordenar zonas de mayor a menor para ese jugador
-    zonas_ordenadas = sorted(datos.items(), key=lambda x: x[1], reverse=True)
+    st.markdown(f"### Equipo {match['teamA'] if equipo=='A' else match['teamB']}")
 
-    zonas_x = [z for z, v in zonas_ordenadas]
-    valores_y = [v for z, v in zonas_ordenadas]
+    # calcular media por zona del equipo
+    total_por_zona = {z: 0 for z in ZONAS.values()}
+    num_jugadores = len(jugadores)
 
-    fig_jugador = go.Figure()
+    for jugador in jugadores:
+        for zona in ZONAS.values():
+            total_por_zona[zona] += jugadores[jugador][zona]
 
-    fig_jugador.add_trace(go.Bar(
-        x=zonas_x,
-        y=valores_y,
-        name=f"Jugador {jugador}"
-    ))
+    media_equipo = {
+        z: total_por_zona[z] / num_jugadores
+        for z in ZONAS.values()
+    }
 
-    fig_jugador.update_layout(
-        height=350,
-        xaxis_title="Zona de lanzamiento",
-        yaxis_title="Número de goles"
-    )
+    for jugador, datos in jugadores.items():
 
-    st.plotly_chart(fig_jugador, use_container_width=True)
+        if sum(datos.values()) == 0:
+            continue
+
+        zonas_ordenadas = sorted(datos.items(), key=lambda x: x[1], reverse=True)
+
+        zonas_x = [z for z, v in zonas_ordenadas]
+        valores_y = [v for z, v in zonas_ordenadas]
+        media_y = [media_equipo[z] for z in zonas_x]
+
+        fig_jugador = go.Figure()
+
+        # Barras jugador
+        fig_jugador.add_trace(go.Bar(
+            x=zonas_x,
+            y=valores_y,
+            name=f"Goles jugador {jugador}"
+        ))
+
+        # Línea media equipo
+        fig_jugador.add_trace(go.Scatter(
+            x=zonas_x,
+            y=media_y,
+            mode="lines+markers",
+            name="Media equipo"
+        ))
+
+        fig_jugador.update_layout(
+            height=350,
+            title=f"Jugador {jugador}",
+            xaxis_title="Zona de lanzamiento",
+            yaxis_title="Número de goles"
+        )
+
+        st.plotly_chart(fig_jugador, use_container_width=True)
