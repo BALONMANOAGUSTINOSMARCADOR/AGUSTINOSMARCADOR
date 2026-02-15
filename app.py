@@ -869,48 +869,54 @@ if match["events"]:
         st.plotly_chart(fig5, use_container_width=True)
 
     # =====================================================
-    # 6️⃣ GOLES JUGADOR POR ZONA
-    # =====================================================
-    st.subheader("🎯 GOLES JUGADOR POR ZONA")
-    st.caption("Producción individual segmentada espacialmente")
+# 6️⃣ GOLES JUGADOR POR ZONA
+# =====================================================
+st.subheader("🎯 GOLES JUGADOR POR ZONA")
+st.caption("Producción ofensiva individual segmentada espacialmente")
 
-    # Construcción matriz jugador-zona
-    jugador_zona = {}
+# Construir estructura jugador → zona → goles
+jugador_zona = {}
 
-    for ev in match["events"]:
-        jugador = ev.get("player") or "Sin identificar"
-        zona = ev["zone"]
+for ev in match["events"]:
+    jugador = ev.get("player")
+    if not jugador:
+        continue
 
-        if jugador not in jugador_zona:
-            jugador_zona[jugador] = {z: 0 for z in ZONAS.values()}
+    zona = ev["zone"]
 
-        jugador_zona[jugador][zona] += 1
+    if jugador not in jugador_zona:
+        jugador_zona[jugador] = {z: 0 for z in ZONAS.values()}
 
-    jugadores_ordenados = sorted(
-        jugador_zona.keys(),
-        key=lambda j: sum(jugador_zona[j].values()),
-        reverse=True
-    )
+    jugador_zona[jugador][zona] += 1
 
-    matriz = []
-    zonas = list(ZONAS.values())
+# Solo jugadores con al menos 1 gol
+jugadores_con_gol = [
+    j for j in jugador_zona
+    if sum(jugador_zona[j].values()) > 0
+]
 
-    for jugador in jugadores_ordenados:
-        valores = jugador_zona[jugador]
+for jugador in jugadores_con_gol:
 
-        # ordenar columnas de mayor a menor para cada jugador
-        zonas_ordenadas = sorted(valores.items(), key=lambda x: x[1], reverse=True)
+    datos = jugador_zona[jugador]
 
-        fila = [v for z, v in zonas_ordenadas]
-        matriz.append(fila)
+    # ordenar zonas de mayor a menor para ese jugador
+    zonas_ordenadas = sorted(datos.items(), key=lambda x: x[1], reverse=True)
 
-    fig6 = go.Figure(data=go.Heatmap(
-        z=matriz,
-        x=[z for z, _ in zonas_ordenadas],
-        y=jugadores_ordenados
+    zonas_x = [z for z, v in zonas_ordenadas]
+    valores_y = [v for z, v in zonas_ordenadas]
+
+    fig_jugador = go.Figure()
+
+    fig_jugador.add_trace(go.Bar(
+        x=zonas_x,
+        y=valores_y,
+        name=f"Jugador {jugador}"
     ))
 
-    fig6.update_layout(height=500)
-    st.plotly_chart(fig6, use_container_width=True)
+    fig_jugador.update_layout(
+        height=350,
+        xaxis_title="Zona de lanzamiento",
+        yaxis_title="Número de goles"
+    )
 
-
+    st.plotly_chart(fig_jugador, use_container_width=True)
