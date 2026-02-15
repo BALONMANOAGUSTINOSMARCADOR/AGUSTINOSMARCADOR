@@ -737,4 +737,124 @@ if files:
 else:
     st.write("No hay partidos guardados todavía.")
 
+# =========================================================
+# 📊 DASHBOARD GRÁFICO DEL PARTIDO
+# =========================================================
+
+if match["events"]:
+
+    st.markdown("---")
+    st.header("📊 Análisis gráfico del partido")
+
+    # =====================================================
+    # 1️⃣ EVOLUCIÓN DEL MARCADOR
+    # =====================================================
+    st.subheader("📈 Evolución del marcador")
+
+    goals_sorted = sorted(match["events"], key=lambda x: x["time"])
+
+    times = []
+    scoreA = []
+    scoreB = []
+
+    a = 0
+    b = 0
+
+    for ev in goals_sorted:
+        t = datetime.datetime.fromisoformat(ev["time"])
+        minute = int((t - datetime.datetime.fromisoformat(goals_sorted[0]["time"])).total_seconds())
+        times.append(minute)
+
+        if ev["team"] == "A":
+            a += 1
+        else:
+            b += 1
+
+        scoreA.append(a)
+        scoreB.append(b)
+
+    fig1 = go.Figure()
+    fig1.add_trace(go.Scatter(x=times, y=scoreA, mode="lines+markers", name=match["teamA"]))
+    fig1.add_trace(go.Scatter(x=times, y=scoreB, mode="lines+markers", name=match["teamB"]))
+
+    fig1.update_layout(height=400)
+    st.plotly_chart(fig1, use_container_width=True)
+
+    # =====================================================
+    # 2️⃣ GOLES POR JUGADOR
+    # =====================================================
+    st.subheader("📊 Goles por jugador")
+
+    player_goals = {}
+
+    for ev in match["events"]:
+        player = ev.get("player") or "Sin identificar"
+        player_goals[player] = player_goals.get(player, 0) + 1
+
+    fig2 = go.Figure([go.Bar(x=list(player_goals.keys()), y=list(player_goals.values()))])
+    fig2.update_layout(height=400)
+    st.plotly_chart(fig2, use_container_width=True)
+
+    # =====================================================
+    # 3️⃣ GOLES POR ZONA
+    # =====================================================
+    st.subheader("📊 Distribución de goles por zona")
+
+    zone_data = {"A": {}, "B": {}}
+
+    for ev in match["events"]:
+        z = ev["zone"]
+        team = ev["team"]
+        zone_data[team][z] = zone_data[team].get(z, 0) + 1
+
+    zonas = list(ZONAS.values())
+
+    fig3 = go.Figure()
+    fig3.add_trace(go.Bar(
+        x=zonas,
+        y=[zone_data["A"].get(z, 0) for z in zonas],
+        name=match["teamA"]
+    ))
+    fig3.add_trace(go.Bar(
+        x=zonas,
+        y=[zone_data["B"].get(z, 0) for z in zonas],
+        name=match["teamB"]
+    ))
+
+    fig3.update_layout(barmode="group", height=400)
+    st.plotly_chart(fig3, use_container_width=True)
+
+    # =====================================================
+    # 4️⃣ MOMENTUM (DIFERENCIAL)
+    # =====================================================
+    st.subheader("📈 Momentum del partido")
+
+    diferencial = []
+    diff = 0
+
+    for ev in goals_sorted:
+        if ev["team"] == "A":
+            diff += 1
+        else:
+            diff -= 1
+        diferencial.append(diff)
+
+    fig4 = go.Figure()
+    fig4.add_trace(go.Scatter(x=times, y=diferencial, mode="lines+markers"))
+    fig4.update_layout(height=400)
+    st.plotly_chart(fig4, use_container_width=True)
+
+    # =====================================================
+    # 5️⃣ EXCLUSIONES EN EL TIEMPO
+    # =====================================================
+    if match["exclusions"]:
+        st.subheader("🚫 Exclusiones durante el partido")
+
+        ex_times = [ex["started_at_seconds"] for ex in match["exclusions"]]
+
+        fig5 = go.Figure([go.Histogram(x=ex_times)])
+        fig5.update_layout(height=400)
+        st.plotly_chart(fig5, use_container_width=True)
+
+
 
