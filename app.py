@@ -712,12 +712,14 @@ if st.button("💾 Guardar en histórico"):
             "data": st.session_state.match
         }
 
-        filename = f"partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+        # Carpeta de guardado
+        save_path = os.path.join("data", "partidos")
+        os.makedirs(save_path, exist_ok=True)  # crea la carpeta si no existe
+
+        filename = os.path.join(save_path, f"partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json")
 
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(partido_guardado, f, indent=4)
-
-        st.success("✅ Partido guardado correctamente")
 
 import os
 
