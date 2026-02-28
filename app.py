@@ -719,22 +719,42 @@ if st.button("💾 Guardar en histórico"):
 
         st.success("✅ Partido guardado correctamente")
 
+import os
+
 st.markdown("### 📂 Histórico de partidos")
 
-files = sorted(glob.glob("partido_*.json"), reverse=True)
+# 🔹 Buscar todos los archivos JSON en data/partidos
+files = sorted(glob.glob(os.path.join("data", "partidos", "partido_*.json")), reverse=True)
 
 if files:
     selected_file = st.selectbox("Seleccionar partido", files)
 
     if st.button("🔄 Cargar partido seleccionado"):
         with open(selected_file, "r", encoding="utf-8") as f:
-            partido_cargado = json.load(f)
+            data = json.load(f)
 
-        st.session_state.match = partido_cargado["data"]
+        # 🔹 Detectar si es JSON antiguo o nuevo
+        if "data" in data:
+            # JSON nuevo
+            st.session_state.match = data["data"]
+        else:
+            # JSON antiguo → adaptamos a la estructura que usa la app
+            st.session_state.match = {
+                "teamA": "Equipo A",
+                "teamB": "Equipo B",
+                "scoreA": data.get("scoreA", 0),
+                "scoreB": data.get("scoreB", 0),
+                "events": data.get("events", []),
+                "exclusions": data.get("exclusions", []),
+                "players_stats": {"A": {}, "B": {}},
+                "started_at": None,
+                "elapsed_before_pause": data.get("elapsed_seconds", 0),
+                "part": 1
+            }
+
         st.session_state.partido_activo = False
         st.success("✅ Partido cargado correctamente")
         st.rerun()
-
 else:
     st.write("No hay partidos guardados todavía.")
 
