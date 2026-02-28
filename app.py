@@ -726,7 +726,7 @@ import os
 st.markdown("### 📂 Histórico de partidos")
 
 # 🔹 Buscar todos los archivos JSON en data/partidos
-files = sorted(glob.glob(os.path.join("data", "partidos", "partido_*.json")), reverse=True)
+files = sorted(glob.glob(os.path.join("data", "partidos", "*.json")), reverse=True)
 
 if files:
     selected_file = st.selectbox("Seleccionar partido", files)
