@@ -734,6 +734,7 @@ if files:
         st.session_state.partido_activo = False
         st.success("✅ Partido cargado correctamente")
         st.rerun()
+
 else:
     st.write("No hay partidos guardados todavía.")
 
