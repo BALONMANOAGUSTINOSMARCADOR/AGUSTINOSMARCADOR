@@ -6,3 +6,4 @@ openpyxl
 streamlit-autorefresh
 reportlab
 requests
+PyGithub
