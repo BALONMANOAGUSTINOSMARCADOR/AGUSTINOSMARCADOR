@@ -732,7 +732,7 @@ filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_
 contenido_json = json.dumps(partido_guardado, indent=4)
 
 g = Github(st.secrets["GITHUB_TOKEN"])
-repo = g.get_repo("agustinosmarcador/agustinosmarcador")  # ⚠️ CONFÍRMA QUE ESTE ES TU REPO
+BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR
 
 repo.create_file(
     filename,
