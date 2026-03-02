@@ -10,6 +10,7 @@ from PIL import Image
 from streamlit_autorefresh import st_autorefresh
 from collections import defaultdict
 from modules import recorder, loader
+from github import Github
 import os
 # =========================================================
 # CONFIG
@@ -713,14 +714,25 @@ if st.button("💾 Guardar en histórico"):
             "data": st.session_state.match
         }
 
-        # Carpeta de guardado
-        save_path = os.path.join("data", "partidos")
-        os.makedirs(save_path, exist_ok=True)  # crea la carpeta si no existe
+        # Carpeta de guardad
+from github import Github
+import datetime
+import json
 
-        filename = os.path.join(save_path, f"partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json")
+filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+contenido_json = json.dumps(partido_guardado, indent=4)
 
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(partido_guardado, f, indent=4)
+g = Github(st.secrets["GITHUB_TOKEN"])
+repo = g.get_repo("agustinosmarcador/agustinosmarcador")  # ⚠️ CONFÍRMA QUE ESTE ES TU REPO
+
+repo.create_file(
+    filename,
+    f"Nuevo partido {datetime.datetime.utcnow()}",
+    contenido_json,
+    branch="main"
+)
+
+st.success("✅ Partido guardado en GitHub correctamente")
 
 import os
 
