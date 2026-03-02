@@ -706,17 +706,22 @@ if st.button("💾 Guardar en histórico"):
         st.error("Debes indicar Rival y Competición")
     else:
         pause_match()  # congelar tiempo exacto antes de guardar   # ────────────────
-# CREAR OBJETO DEL PARTIDO
+
+# ────────────────
+# CREAR OBJETO DEL PARTIDO (USANDO st.session_state.match)
 # ────────────────
 partido_guardado = {
-    "equipo_local": equipo_local,        # variable que tengas en la app
-    "equipo_visitante": equipo_visitante, # idem
-    "goles_local": goles_local,          # idem
-    "goles_visitante": goles_visitante,  # idem
+    "equipo_local": match["teamA"],
+    "equipo_visitante": match["teamB"],
+    "goles_local": match["scoreA"],
+    "goles_visitante": match["scoreB"],
     "fecha": datetime.datetime.utcnow().isoformat(),
-    "acciones": acciones_partido,        # si tienes lista de jugadas o eventos
-    # agrega aquí cualquier otro campo que quieras guardar
-}
+    "acciones": match["events"],
+    "exclusiones": match["exclusions"],
+    "players_stats": match["players_stats"],
+    "rival": rival,
+    "competicion": competicion
+    }
 
         # Carpeta de guardad
 from github import Github
