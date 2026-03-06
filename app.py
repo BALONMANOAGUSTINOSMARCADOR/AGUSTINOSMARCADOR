@@ -744,13 +744,6 @@ g = Github(st.secrets["GITHUB_TOKEN"])
 # obtener el repo correcto
 repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
 
-repo.create_file(
-    filename,
-    f"Nuevo partido {datetime.datetime.utcnow()}",
-    contenido_json,
-    branch="main"
-)
-
 st.success("✅ Partido guardado en GitHub correctamente")
 
 import os
