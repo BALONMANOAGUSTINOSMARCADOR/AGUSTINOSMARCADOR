@@ -731,6 +731,13 @@ import json
 filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
 contenido_json = json.dumps(partido_guardado, indent=4)
 
+repo.create_file(
+    filename,
+    "Nuevo partido guardado",
+    contenido_json,
+    branch="main"
+)
+
 # usar tu token de secrets
 g = Github(st.secrets["GITHUB_TOKEN"])
 
