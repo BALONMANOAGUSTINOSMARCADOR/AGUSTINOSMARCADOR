@@ -724,19 +724,12 @@ partido_guardado = {
     }
 
         # Carpeta de guardad
+# ────────────────
+# Inicializar GitHub y repo
+# ────────────────
 from github import Github
 import datetime
 import json
-
-filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
-contenido_json = json.dumps(partido_guardado, indent=4)
-
-repo.create_file(
-    filename,
-    "Nuevo partido guardado",
-    contenido_json,
-    branch="main"
-)
 
 # usar tu token de secrets
 g = Github(st.secrets["GITHUB_TOKEN"])
@@ -744,11 +737,23 @@ g = Github(st.secrets["GITHUB_TOKEN"])
 # obtener el repo correcto
 repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
 
+# ────────────────
+# Nombre del archivo
+# ────────────────
+filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+contenido_json = json.dumps(partido_guardado, indent=4)
+
+# ────────────────
+# Subir archivo a GitHub
+# ────────────────
+repo.create_file(
+    filename,
+    "Nuevo partido guardado",
+    contenido_json,
+    branch="main"
+)
+
 st.success("✅ Partido guardado en GitHub correctamente")
-
-import os
-
-st.markdown("### 📂 Histórico de partidos")
 
 # 🔹 Buscar todos los archivos JSON en data/partidos
 files = sorted(glob.glob(os.path.join("data", "partidos", "*.json")), reverse=True)
