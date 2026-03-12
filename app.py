@@ -732,7 +732,7 @@ import datetime
 import json
 
 # usar tu token de secrets
-           g = Github(st.secrets["GITHUB_TOKEN"])
+        g = Github(st.secrets["GITHUB_TOKEN"])
 
 # obtener el repo correcto
            repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
