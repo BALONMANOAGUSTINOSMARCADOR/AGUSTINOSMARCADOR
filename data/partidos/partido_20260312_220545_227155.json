@@ -1,0 +1,100 @@
+{
+    "equipo_local": "A",
+    "equipo_visitante": "B",
+    "goles_local": 8,
+    "goles_visitante": 6,
+    "fecha": "2026-03-12T22:05:44.965807",
+    "acciones": [
+        {
+            "time": "2026-03-12T22:05:05.145292",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:06.693172",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:07.075863",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:07.315593",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:09.510344",
+            "team": "B",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:09.655519",
+            "team": "B",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:19.198558",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:19.351139",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:19.505772",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:19.676397",
+            "team": "A",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:20.863148",
+            "team": "B",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:20.969000",
+            "team": "B",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:21.265928",
+            "team": "B",
+            "zone": "ED",
+            "player": "3"
+        },
+        {
+            "time": "2026-03-12T22:05:21.362897",
+            "team": "B",
+            "zone": "ED",
+            "player": "3"
+        }
+    ],
+    "exclusiones": [],
+    "players_stats": {
+        "A": {},
+        "B": {}
+    },
+    "rival": "B",
+    "competicion": "Buff"
+}
