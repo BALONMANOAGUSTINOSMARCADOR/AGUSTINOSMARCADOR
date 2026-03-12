@@ -701,59 +701,60 @@ st.subheader("💾 Guardar partido")
 
 rival = st.text_input("Rival")
 competicion = st.text_input("Competición")
+
 if st.button("💾 Guardar en histórico"):
+
     if not rival or not competicion:
         st.error("Debes indicar Rival y Competición")
+
     else:
-        pause_match()  # congelar tiempo exacto antes de guardar   # ────────────────
+        pause_match()  # congelar tiempo exacto antes de guardar
 
-# ────────────────
-# CREAR OBJETO DEL PARTIDO (USANDO st.session_state.match)
-# ────────────────
+        # ─────────────────────────
+        # CREAR OBJETO DEL PARTIDO
+        # ─────────────────────────
         partido_guardado = {
-           "equipo_local": match["teamA"],
-           "equipo_visitante": match["teamB"],
-           "goles_local": match["scoreA"],
-           "goles_visitante": match["scoreB"],
-           "fecha": datetime.datetime.utcnow().isoformat(),
-           "acciones": match["events"],
-           "exclusiones": match["exclusions"],
-           "players_stats": match["players_stats"],
-           "rival": rival,
-           "competicion": competicion
-           }
+            "equipo_local": match["teamA"],
+            "equipo_visitante": match["teamB"],
+            "goles_local": match["scoreA"],
+            "goles_visitante": match["scoreB"],
+            "fecha": datetime.datetime.utcnow().isoformat(),
+            "acciones": match["events"],
+            "exclusiones": match["exclusions"],
+            "players_stats": match["players_stats"],
+            "rival": rival,
+            "competicion": competicion
+        }
 
-        # Carpeta de guardad
-# ────────────────
-# Inicializar GitHub y repo
-# ────────────────
-from github import Github
-import datetime
-import json
+        # ─────────────────────────
+        # CONECTAR CON GITHUB
+        # ─────────────────────────
+        from github import Github
+        import datetime
+        import json
 
-# usar tu token de secrets
         g = Github(st.secrets["GITHUB_TOKEN"])
 
-# obtener el repo correcto
-           repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
+        repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
 
-# ────────────────
-# Nombre del archivo
-# ────────────────
-           filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
-           contenido_json = json.dumps(partido_guardado, indent=4)
+        # ─────────────────────────
+        # NOMBRE DEL ARCHIVO
+        # ─────────────────────────
+        filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
 
-# ────────────────
-# Subir archivo a GitHub
-# ────────────────
-           repo.create_file(
-               filename,
-               "Nuevo partido guardado",
-               contenido_json,
-               branch=repo.default_branch
-           ) 
+        contenido_json = json.dumps(partido_guardado, indent=4)
 
-           st.success("✅ Partido guardado en GitHub correctamente")
+        # ─────────────────────────
+        # SUBIR A GITHUB
+        # ─────────────────────────
+        repo.create_file(
+            filename,
+            "Nuevo partido guardado",
+            contenido_json,
+            branch=repo.default_branch
+        )
+
+        st.success("✅ Partido guardado en GitHub correctamente")
 
 # 🔹 Buscar todos los archivos JSON en data/partidos
 files = sorted(glob.glob(os.path.join("data", "partidos", "*.json")), reverse=True)
