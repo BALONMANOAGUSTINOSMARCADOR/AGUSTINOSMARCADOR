@@ -762,8 +762,6 @@ if st.button("💾 Guardar en histórico"):
             st.error(f"❌ Error guardando en GitHub: {e}")
             st.warning("Revisa que el token tenga permisos y que la rama exista.")
 
-
-
 # 🔹 Buscar todos los archivos JSON en data/partidos
 files = sorted(glob.glob(os.path.join("data", "partidos", "*.json")), reverse=True)
 
@@ -774,19 +772,37 @@ if files:
         with open(selected_file, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        # 🔹 Detectar si es JSON antiguo o nuevo
+        # =====================================================
+        # Detectar el tipo de JSON y adaptar a la estructura de la app
+        # =====================================================
         if "data" in data:
-            # JSON nuevo
+            # JSON muy nuevo (con 'data')
             st.session_state.match = data["data"]
+
+        elif "equipo_local" in data and "acciones" in data:
+            # JSON reciente guardado con la nueva función
+            st.session_state.match = {
+                "teamA": data.get("equipo_local", "Equipo A"),
+                "teamB": data.get("equipo_visitante", "Equipo B"),
+                "scoreA": data.get("goles_local", 0),
+                "scoreB": data.get("goles_visitante", 0),
+                "events": data.get("acciones", []),
+                "exclusions": data.get("exclusiones", []),
+                "players_stats": data.get("players_stats", {"A": {}, "B": {}}),
+                "started_at": None,
+                "elapsed_before_pause": 0,
+                "part": 1
+            }
+
         else:
-            # JSON antiguo → adaptamos a la estructura que usa la app
+            # JSON antiguo (viejos partidos)
             st.session_state.match = {
                 "teamA": "Equipo A",
                 "teamB": "Equipo B",
                 "scoreA": data.get("scoreA", 0),
                 "scoreB": data.get("scoreB", 0),
                 "events": data.get("events", []),
-                "exclusions": data.get("exclusions", []),
+                "exclusions": data.get("exclusiones", []),
                 "players_stats": {"A": {}, "B": {}},
                 "started_at": None,
                 "elapsed_before_pause": data.get("elapsed_seconds", 0),
@@ -796,8 +812,11 @@ if files:
         st.session_state.partido_activo = False
         st.success("✅ Partido cargado correctamente")
         st.rerun()
+
 else:
     st.write("No hay partidos guardados todavía.")
+
+
 
 # =========================================================
 # 📊 DASHBOARD GRÁFICO DEL PARTIDO
