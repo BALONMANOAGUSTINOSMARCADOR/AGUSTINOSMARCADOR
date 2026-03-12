@@ -864,64 +864,64 @@ if match["events"]:
     st.plotly_chart(fig1, use_container_width=True)
 
     # =====================================================
-# 2️⃣ GOLES POR JUGADOR (COMBINADO)
-# =====================================================
-st.subheader("📊 Goles por jugador (combinado)")
-st.caption("Distribución individual total, ordenado de máximo a mínimo, colores por equipo")
+    # 2️⃣ GOLES POR JUGADOR (COMBINADO)
+    # =====================================================
+    st.subheader("📊 Goles por jugador (combinado)")
+    st.caption("Distribución individual total, ordenado de máximo a mínimo, colores por equipo")
 
-# 🔹 Contar goles por jugador por equipo
-player_goals = []
-for ev in match["events"]:
-    jugador = ev.get("player") or "Sin identificar"
-    equipo = ev["team"]
-    player_goals.append({"jugador": str(jugador), "goles": 1, "equipo": equipo})
+    # 🔹 Contar goles por jugador por equipo
+    player_goals = []
+    for ev in match["events"]:
+        jugador = ev.get("player") or "Sin identificar"
+        equipo = ev["team"]
+        player_goals.append({"jugador": str(jugador), "goles": 1, "equipo": equipo})
 
-# 🔹 Agregar los goles por jugador
-from collections import defaultdict
-goals_count = defaultdict(lambda: {"A": 0, "B": 0})
-for pg in player_goals:
-    goals_count[pg["jugador"]][pg["equipo"]] += pg["goles"]
+    # 🔹 Agregar los goles por jugador
+    from collections import defaultdict
+    goals_count = defaultdict(lambda: {"A": 0, "B": 0})
+    for pg in player_goals:
+        goals_count[pg["jugador"]][pg["equipo"]] += pg["goles"]
 
-# 🔹 Crear lista final para Plotly
-final_data = []
-for jugador, goles in goals_count.items():
-    if goles["A"] > 0:
-        final_data.append({"jugador": jugador, "goles": goles["A"], "equipo": "A"})
-    if goles["B"] > 0:
-        final_data.append({"jugador": jugador, "goles": goles["B"], "equipo": "B"})
+    # 🔹 Crear lista final para Plotly
+    final_data = []
+    for jugador, goles in goals_count.items():
+        if goles["A"] > 0:
+            final_data.append({"jugador": jugador, "goles": goles["A"], "equipo": "A"})
+        if goles["B"] > 0:
+            final_data.append({"jugador": jugador, "goles": goles["B"], "equipo": "B"})
 
-# 🔹 Ordenar de mayor a menor
-final_data_sorted = sorted(final_data, key=lambda x: x["goles"], reverse=True)
+    # 🔹 Ordenar de mayor a menor
+    final_data_sorted = sorted(final_data, key=lambda x: x["goles"], reverse=True)
 
-# 🔹 Preparar datos para Plotly
-jugadores = [d["jugador"] for d in final_data_sorted]
-goles = [d["goles"] for d in final_data_sorted]
-colores = ['steelblue' if d["equipo"]=="A" else 'orange' for d in final_data_sorted]
+    # 🔹 Preparar datos para Plotly
+    jugadores = [d["jugador"] for d in final_data_sorted]
+    goles = [d["goles"] for d in final_data_sorted]
+    colores = ['steelblue' if d["equipo"]=="A" else 'orange' for d in final_data_sorted]
 
-# 🔹 Gráfico de barras
-fig = go.Figure(go.Bar(
-    x=jugadores,
-    y=goles,
-    marker_color=colores,
-    width=0.8
-))
+    # 🔹 Gráfico de barras
+    fig = go.Figure(go.Bar(
+        x=jugadores,
+        y=goles,
+        marker_color=colores,
+        width=0.8
+    ))
 
-fig.update_layout(
-    title="Goles por jugador (equipos combinados)",
-    xaxis_title="Jugador",
-    yaxis_title="Goles",
-    xaxis=dict(tickmode='linear'),
-    bargap=0,  # Sin separación entre barras
-    height=400,
-    legend_title_text="Equipo",
-    showlegend=True
-)
+    fig.update_layout(
+        title="Goles por jugador (equipos combinados)",
+        xaxis_title="Jugador",
+        yaxis_title="Goles",
+        xaxis=dict(tickmode='linear'),
+        bargap=0,  # Sin separación entre barras
+        height=400,
+        legend_title_text="Equipo",
+        showlegend=True
+    )
 
-# 🔹 Añadir leyenda manual (A/B)
-fig.add_trace(go.Bar(x=[], y=[], marker_color='steelblue', name=f"Equipo {match['teamA']}"))
-fig.add_trace(go.Bar(x=[], y=[], marker_color='orange', name=f"Equipo {match['teamB']}"))
+    # 🔹 Añadir leyenda manual (A/B)
+    fig.add_trace(go.Bar(x=[], y=[], marker_color='steelblue', name=f"Equipo {match['teamA']}"))
+    fig.add_trace(go.Bar(x=[], y=[], marker_color='orange', name=f"Equipo {match['teamB']}"))
 
-st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
     # =====================================================
     # 3️⃣ GOLES POR ZONA
