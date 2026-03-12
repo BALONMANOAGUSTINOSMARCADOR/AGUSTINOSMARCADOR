@@ -706,7 +706,6 @@ if st.button("💾 Guardar en histórico"):
 
     if not rival or not competicion:
         st.error("Debes indicar Rival y Competición")
-
     else:
         pause_match()  # congelar tiempo exacto antes de guardar
 
@@ -733,32 +732,37 @@ if st.button("💾 Guardar en histórico"):
         import datetime
         import json
 
-        g = Github(st.secrets["GITHUB_TOKEN"])
+        try:
+            g = Github(st.secrets["GITHUB_TOKEN"])
+            repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
 
-        repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
-        
-        st.write("Repo detectado:", repo.full_name)
-        st.write("Branch detectada:", repo.default_branch)
+            # ─────────────────────────
+            # NOMBRE DEL ARCHIVO
+            # ─────────────────────────
+            timestamp = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S_%f")
+            filename = f"data/partidos/partido_{timestamp}.json"
+            contenido_json = json.dumps(partido_guardado, indent=4)
+
+            # ─────────────────────────
+            # SUBIR A GITHUB
+            # ─────────────────────────
+            # Forzar branch 'main' (cambia si antes usabas otra)
+            branch_name = "main"  
+
+            repo.create_file(
+                path=filename,
+                message=f"Nuevo partido guardado {timestamp}",
+                content=contenido_json,
+                branch=branch_name
+            )
+
+            st.success(f"✅ Partido guardado en GitHub correctamente: {filename}")
+
+        except Exception as e:
+            st.error(f"❌ Error guardando en GitHub: {e}")
+            st.warning("Revisa que el token tenga permisos y que la rama exista.")
 
 
-        # ─────────────────────────
-        # NOMBRE DEL ARCHIVO
-        # ─────────────────────────
-        filename = f"data/partidos/partido_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
-
-        contenido_json = json.dumps(partido_guardado, indent=4)
-
-        # ─────────────────────────
-        # SUBIR A GITHUB
-        # ─────────────────────────
-        repo.create_file(
-            filename,
-            "Nuevo partido guardado",
-            contenido_json,
-            branch=repo.default_branch
-        )
-
-        st.success("✅ Partido guardado en GitHub correctamente")
 
 # 🔹 Buscar todos los archivos JSON en data/partidos
 files = sorted(glob.glob(os.path.join("data", "partidos", "*.json")), reverse=True)
