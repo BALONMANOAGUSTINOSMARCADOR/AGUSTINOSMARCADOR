@@ -736,6 +736,10 @@ if st.button("💾 Guardar en histórico"):
         g = Github(st.secrets["GITHUB_TOKEN"])
 
         repo = g.get_repo("BALONMANOAGUSTINOSMARCADOR/AGUSTINOSMARCADOR")
+        
+        st.write("Repo detectado:", repo.full_name)
+        st.write("Branch detectada:", repo.default_branch)
+
 
         # ─────────────────────────
         # NOMBRE DEL ARCHIVO
