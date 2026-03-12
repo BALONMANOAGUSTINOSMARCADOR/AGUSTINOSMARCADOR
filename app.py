@@ -863,7 +863,6 @@ if match["events"]:
     fig1.update_layout(height=400)
     st.plotly_chart(fig1, use_container_width=True)
 
-
     # =====================================================
     # 2️⃣ GOLES POR JUGADOR (POR EQUIPO)
     # =====================================================
@@ -883,12 +882,73 @@ if match["events"]:
     # 🔹 Función para dibujar gráfico de un equipo
     def plot_goals_team(team_key, team_name, color):
         data = player_goals[team_key]
-        if not data:
+
+        # 🔹 Filtrar solo jugadores con goles
+        data_filtered = {j: g for j, g in data.items() if g > 0}
+
+        if not data_filtered:
             st.write(f"— No hay goles registrados para {team_name}")
             return
 
-        # Ordenar de mayor a menor
-        jugadores_sorted = sorted(data.items(), key=lambda x: x[1], reverse=True)
+    # =====================================================
+# 2️⃣ GOLES POR JUGADOR (POR EQUIPO)
+# =====================================================
+st.subheader("📊 Goles por jugador por equipo")
+st.caption("Distribución individual total, ordenado de máximo a mínimo, colores por equipo")
+
+from collections import defaultdict
+
+# 🔹 Contar goles por jugador por equipo
+player_goals = {"A": defaultdict(int), "B": defaultdict(int)}
+for ev in match["events"]:
+    jugador = ev.get("player")
+    if not jugador:
+        continue
+    player_goals[ev["team"]][str(jugador)] += 1
+
+# 🔹 Función para dibujar gráfico de un equipo
+def plot_goals_team(team_key, team_name, color):
+    data = player_goals[team_key]
+
+    # 🔹 Filtrar solo jugadores con goles
+    data_filtered = {j: g for j, g in data.items() if g > 0}
+
+    if not data_filtered:
+        st.write(f"— No hay goles registrados para {team_name}")
+        return
+
+    # 🔹 Ordenar de mayor a menor
+    jugadores_sorted = sorted(data_filtered.items(), key=lambda x: x[1], reverse=True)
+    jugadores = [j for j, g in jugadores_sorted]
+    goles = [g for j, g in jugadores_sorted]
+
+    fig = go.Figure(go.Bar(
+        x=jugadores,
+        y=goles,
+        marker_color=color,
+        width=0.8
+    ))
+
+    fig.update_layout(
+        title=f"Goles por jugador - {team_name}",
+        xaxis_title="Jugador",
+        yaxis_title="Goles",
+        xaxis=dict(tickangle=-90),  # Números en vertical
+        bargap=0,  # Sin separación entre barras
+        height=400,
+        showlegend=False
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    # 🔹 Graficar equipo A
+    plot_goals_team("A", match["teamA"], "steelblue")
+
+    # 🔹 Graficar equipo B
+    plot_goals_team("B", match["teamB"], "orange")
+
+    # 🔹 Ordenar de mayor a menor
+        jugadores_sorted = sorted(data_filtered.items(), key=lambda x: x[1], reverse=True)
         jugadores = [j for j, g in jugadores_sorted]
         goles = [g for j, g in jugadores_sorted]
 
@@ -911,7 +971,7 @@ if match["events"]:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # 🔹 Graficar equipo A
+     # 🔹 Graficar equipo A
     plot_goals_team("A", match["teamA"], "steelblue")
 
     # 🔹 Graficar equipo B
