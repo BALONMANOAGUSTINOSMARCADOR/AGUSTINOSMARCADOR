@@ -374,6 +374,16 @@ with left:
     with col_finta2:
         finta_der = st.checkbox("DCHA")
 
+    # 🔒 Control de selección de finta
+    finta = None
+
+    if finta_iz and finta_der:
+        st.warning("⚠️ No puedes marcar IZ y DCHA a la vez")
+    elif finta_iz:
+        finta = "IZ"
+    elif finta_der:
+        finta = "DCHA"
+
     
     # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2, gap="small")
