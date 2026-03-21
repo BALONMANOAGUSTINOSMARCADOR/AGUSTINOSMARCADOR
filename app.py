@@ -515,7 +515,9 @@ with st.container():
     def build_team_points(team):
          xs, ys, sizes, texts = [], [], [], []
 
-         for zone_name, n in goals[team].items():
+        for zone_name, data in goals[team].items():
+            n = data["total"]
+            
              if zone_name not in ZONE_COORDS:
                  continue
 
