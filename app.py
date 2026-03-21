@@ -549,12 +549,12 @@ with st.container():
                     
     # Centro, P, EXC se mantienen igual
 
-             xs.append(x)
-             ys.append(y)
-             sizes.append(18 + n*6)
-             texts.append(str(n))
+            xs.append(x)
+            ys.append(y)
+            sizes.append(18 + n*6)
+            texts.append(str(n))
 
-         return xs, ys, sizes, texts
+        return xs, ys, sizes, texts
 
     xsA, ysA, sizesA, textsA = build_team_points("A")
     xsB, ysB, sizesB, textsB = build_team_points("B")
