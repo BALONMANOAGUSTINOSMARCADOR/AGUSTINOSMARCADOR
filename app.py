@@ -513,39 +513,40 @@ with st.container():
 
     # 2️⃣ función para construir coordenadas, tamaño y texto
     def build_team_points(team):
-         xs, ys, sizes, texts = [], [], [], []
+        xs, ys, sizes, texts = [], [], [], []
 
         for zone_name, data in goals[team].items():
             n = data["total"]
             
-             if zone_name not in ZONE_COORDS:
-                 continue
+            if zone_name not in ZONE_COORDS:
+                continue
 
-             x, y = ZONE_COORDS[zone_name]
+            x, y = ZONE_COORDS[zone_name]
 
-             if team == "B":
-                 # Reflejar horizontalmente el eje X
-                 x = 1 - x
+            if team == "B":
+                # Reflejar horizontalmente el eje X
+                x = 1 - x
 
-                 # Ajustar las zonas laterales
-                 if zone_name == "EI":  # izquierda → derecha
-                     x = 1 - ZONE_COORDS["ED"][0]
-                     y = ZONE_COORDS["ED"][1]
-                 elif zone_name == "ED":  # derecha → izquierda
-                     x = 1 - ZONE_COORDS["EI"][0]
-                     y = ZONE_COORDS["EI"][1]
-                 elif zone_name == "LI":  # izquierda interna → derecha interna
-                     x = 1 - ZONE_COORDS["LD"][0]
-                     y = ZONE_COORDS["LD"][1]
-                 elif zone_name == "LD":  # derecha interna → izquierda interna
-                     x = 1 - ZONE_COORDS["LI"][0]
-                     y = ZONE_COORDS["LI"][1]
-                 elif zone_name == "EXI":  # invertir EXI ↔ EXD
-                     x = 1 - ZONE_COORDS["EXD"][0]
-                     y = ZONE_COORDS["EXD"][1]
-                 elif zone_name == "EXD":  # invertir EXD ↔ EXI
-                     x = 1 - ZONE_COORDS["EXI"][0]
-                     y = ZONE_COORDS["EXI"][1]
+                # Ajustar las zonas laterales
+                if zone_name == "EI":  # izquierda → derecha
+                    x = 1 - ZONE_COORDS["ED"][0]
+                    y = ZONE_COORDS["ED"][1]
+                elif zone_name == "ED":  # derecha → izquierda
+                    x = 1 - ZONE_COORDS["EI"][0]
+                    y = ZONE_COORDS["EI"][1]
+                elif zone_name == "LI":  # izquierda interna → derecha interna
+                    x = 1 - ZONE_COORDS["LD"][0]
+                    y = ZONE_COORDS["LD"][1]
+                elif zone_name == "LD":  # derecha interna → izquierda interna
+                    x = 1 - ZONE_COORDS["LI"][0]
+                    y = ZONE_COORDS["LI"][1]
+                elif zone_name == "EXI":  # invertir EXI ↔ EXD
+                    x = 1 - ZONE_COORDS["EXD"][0]
+                    y = ZONE_COORDS["EXD"][1]
+                elif zone_name == "EXD":  # invertir EXD ↔ EXI
+                    x = 1 - ZONE_COORDS["EXI"][0]
+                    y = ZONE_COORDS["EXI"][1]
+                    
     # Centro, P, EXC se mantienen igual
 
              xs.append(x)
@@ -731,7 +732,7 @@ def draw_fintas(team):
 draw_fintas("A")
 draw_fintas("B")
 
-    st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
 # Modificaciones permitidas solo si el reloj NO está corriendo
 modificaciones_habilitadas = match["started_at"] is None
