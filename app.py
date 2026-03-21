@@ -395,7 +395,7 @@ with left:
             if finta is None:
                 st.warning("⚠️ Debes seleccionar tipo de finta")
             else:
-            add_goal("A", zone, player, finta)
+                add_goal("A", zone, player, finta)
 
     with col_gol_b:
         if st.button(f"Gol {match['teamB']}"):
