@@ -494,14 +494,22 @@ with st.container():
     st_empty = st.empty()  # "pegamento" para quitar espacio vertical
     st_empty.markdown("<div style='margin-top:-1rem'></div>", unsafe_allow_html=True)
 
-    # 1️⃣ contar goles por zona y equipo
+    # 1️⃣ contar goles por zona y equipo (CON FINTAS)
     goals = {
-        "A": defaultdict(int),
-        "B": defaultdict(int)
+        "A": defaultdict(lambda: {"total": 0, "IZ": 0, "DCHA": 0}),
+        "B": defaultdict(lambda: {"total": 0, "IZ": 0, "DCHA": 0})
     }
 
     for ev in match["events"]:
-        goals[ev["team"]][ev["zone"]] += 1
+        z = ev["zone"]
+        t = ev["team"]
+
+        goals[t][z]["total"] += 1
+
+        if ev.get("finta") == "IZ":
+            goals[t][z]["IZ"] += 1
+        elif ev.get("finta") == "DCHA":
+            goals[t][z]["DCHA"] += 1
 
     # 2️⃣ función para construir coordenadas, tamaño y texto
     def build_team_points(team):
