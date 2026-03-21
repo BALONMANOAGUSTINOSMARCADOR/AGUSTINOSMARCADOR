@@ -365,7 +365,16 @@ with left:
             format_func=lambda x: ZONAS[x],
             index=4
         )
+    # 👇 NUEVO: FINTA IZQUIERDA / DERECHA
+    col_finta1, col_finta2 = st.columns(2)
 
+    with col_finta1:
+        finta_iz = st.checkbox("IZ")
+
+    with col_finta2:
+        finta_der = st.checkbox("DCHA")
+
+    
     # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2, gap="small")
 
