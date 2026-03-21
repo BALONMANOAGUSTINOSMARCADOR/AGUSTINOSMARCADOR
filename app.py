@@ -612,6 +612,125 @@ with st.container():
     margin=dict(l=0, r=0, t=0, b=0)  # sin márgenes
 )
 
+# =========================================================
+# FLECHAS DE FINTAS
+# =========================================================
+
+def draw_fintas(team):
+    for zone_name, data in goals[team].items():
+
+        if zone_name not in ZONE_COORDS:
+            continue
+
+        total = data["total"]
+        if total == 0:
+            continue
+
+        iz = data["IZ"]
+        dcha = data["DCHA"]
+
+        pct_iz = int((iz / total) * 100)
+        pct_dcha = int((dcha / total) * 100)
+
+        x, y = ZONE_COORDS[zone_name]
+
+        # REFLEJO para equipo B (igual que ya haces)
+        if team == "B":
+            x = 1 - x
+
+            if zone_name == "EI":
+                x = 1 - ZONE_COORDS["ED"][0]
+                y = ZONE_COORDS["ED"][1]
+            elif zone_name == "ED":
+                x = 1 - ZONE_COORDS["EI"][0]
+                y = ZONE_COORDS["EI"][1]
+            elif zone_name == "LI":
+                x = 1 - ZONE_COORDS["LD"][0]
+                y = ZONE_COORDS["LD"][1]
+            elif zone_name == "LD":
+                x = 1 - ZONE_COORDS["LI"][0]
+                y = ZONE_COORDS["LI"][1]
+            elif zone_name == "EXI":
+                x = 1 - ZONE_COORDS["EXD"][0]
+                y = ZONE_COORDS["EXD"][1]
+            elif zone_name == "EXD":
+                x = 1 - ZONE_COORDS["EXI"][0]
+                y = ZONE_COORDS["EXI"][1]
+
+        offset = 0.04
+        curva = 0.05
+
+        # ================================
+        # EQUIPO A (flechas desde derecha)
+        # ================================
+        if team == "A":
+
+            # 🔼 FINTA DCHA (flecha superior)
+            fig.add_annotation(
+                x=x - offset,
+                y=y - curva,
+                ax=x + offset,
+                ay=y,
+                showarrow=True,
+                arrowhead=2,
+                arrowwidth=1,
+                arrowcolor="gray",
+                text=f"{pct_dcha}%",
+                font=dict(size=10),
+            )
+
+            # 🔽 FINTA IZ (flecha inferior)
+            fig.add_annotation(
+                x=x - offset,
+                y=y + curva,
+                ax=x + offset,
+                ay=y,
+                showarrow=True,
+                arrowhead=2,
+                arrowwidth=1,
+                arrowcolor="gray",
+                text=f"{pct_iz}%",
+                font=dict(size=10),
+            )
+
+        # ================================
+        # EQUIPO B (flechas desde izquierda)
+        # ================================
+        else:
+
+            # 🔼 FINTA DCHA (flecha superior)
+            fig.add_annotation(
+                x=x + offset,
+                y=y - curva,
+                ax=x - offset,
+                ay=y,
+                showarrow=True,
+                arrowhead=2,
+                arrowwidth=1,
+                arrowcolor="gray",
+                text=f"{pct_dcha}%",
+                font=dict(size=10),
+            )
+
+            # 🔽 FINTA IZ (flecha inferior)
+            fig.add_annotation(
+                x=x + offset,
+                y=y + curva,
+                ax=x - offset,
+                ay=y,
+                showarrow=True,
+                arrowhead=2,
+                arrowwidth=1,
+                arrowcolor="gray",
+                text=f"{pct_iz}%",
+                font=dict(size=10),
+            )
+
+
+# ejecutar para ambos equipos
+draw_fintas("A")
+draw_fintas("B")
+
     st.plotly_chart(fig, use_container_width=True)
 
 # Modificaciones permitidas solo si el reloj NO está corriendo
