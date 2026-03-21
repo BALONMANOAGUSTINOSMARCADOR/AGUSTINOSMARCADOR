@@ -389,12 +389,18 @@ with left:
     col_gol_a, col_gol_b = st.columns(2, gap="small")
 
     with col_gol_a:
-        if st.button(f"Gol {match['teamA']}"):
-            add_goal("A", zone, player)
+    if st.button(f"Gol {match['teamA']}"):
+        if finta is None:
+            st.warning("⚠️ Debes seleccionar tipo de finta")
+        else:
+            add_goal("A", zone, player, finta)
 
     with col_gol_b:
         if st.button(f"Gol {match['teamB']}"):
-            add_goal("B", zone, player)
+            if finta is None:
+                st.warning("⚠️ Debes seleccionar tipo de finta")
+            else:
+                add_goal("B", zone, player, finta)
 
 # -------- TIEMPO + EXCLUSIONES --------
 with mid:
