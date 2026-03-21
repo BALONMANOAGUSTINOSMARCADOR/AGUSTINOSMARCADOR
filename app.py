@@ -151,7 +151,7 @@ def reset_match():
         "part": 1
     }
 
-def add_goal(team, zone, player=None):
+def add_goal(team, zone, player=None, finta=None):
     m = st.session_state.match
 
     if player and jugador_inhabilitado(player, team):
@@ -167,8 +167,10 @@ def add_goal(team, zone, player=None):
         "time": iso_now(),
         "team": team,
         "zone": ZONAS[int(zone)],
-        "player": player
+        "player": player,
+        "finta": finta  # 👈 NUEVO CAMPO
     })
+
     m[f"score{team}"] += 1
 
 def jugador_inhabilitado(player, team):
