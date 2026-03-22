@@ -1270,99 +1270,99 @@ for equipo in ["A", "B"]:
 
         st.plotly_chart(fig_jugador, use_container_width=True)
 
-# ================================
-# 🔵 BOLAS RESUMEN EN LÍNEA
-# ================================
+        # ================================
+        # 🔵 BOLAS RESUMEN EN LÍNEA
+        # ================================
 
-total, pct_iz, pct_dcha = resumen_jugador(match["events"], team, player)
-resumen_zonas = resumen_jugador_por_zona(match["events"], team, player)
+        total, pct_iz, pct_dcha = resumen_jugador(match["events"], team, player)
+        resumen_zonas = resumen_jugador_por_zona(match["events"], team, player)
 
-import plotly.graph_objects as go
+        import plotly.graph_objects as go
 
-fig_resumen = go.Figure()
+        fig_resumen = go.Figure()
 
-x_pos = 0
-separacion = 0.12  # espacio entre bolas
+        x_pos = 0
+        separacion = 0.12  # espacio entre bolas
 
-# ----------------
-# 🔵 BOLA TOTAL
-# ----------------
-fig_resumen.add_trace(go.Scatter(
-    x=[x_pos],
-    y=[0.5],
-    mode="markers+text",
-    marker=dict(
-        size=60,
-        color="blue" if team == "A" else "red"
-    ),
-    text=[f"{total}<br>{pct_dcha}% / {pct_iz}%"],
-    textfont=dict(color="white", size=11),
-    textposition="middle center",
-    showlegend=False
-))
+        # ----------------
+        # 🔵 BOLA TOTAL
+        # ----------------
+        fig_resumen.add_trace(go.Scatter(
+            x=[x_pos],
+            y=[0.5],
+            mode="markers+text",
+            marker=dict(
+                size=60,
+                color="blue" if team == "A" else "red"
+            ),
+            text=[f"{total}<br>{pct_dcha}% / {pct_iz}%"],
+            textfont=dict(color="white", size=11),
+            textposition="middle center",
+            showlegend=False
+        ))
 
-# título
-fig_resumen.add_annotation(
-    x=x_pos,
-    y=0.9,
-    text="<b>TOTAL</b>",
-    showarrow=False,
-    font=dict(size=11, color="black")
-)
+        # título
+        fig_resumen.add_annotation(
+            x=x_pos,
+            y=0.9,
+            text="<b>TOTAL</b>",
+            showarrow=False,
+            font=dict(size=11, color="black")
+        )
 
-x_pos += separacion
+        x_pos += separacion
 
-# ----------------
-# 🔵 BOLAS POR ZONA
-# ----------------
-orden_zonas = ["EI", "LI", "C", "LD", "ED", "EXI", "EXD"]
+        # ----------------
+        # 🔵 BOLAS POR ZONA
+        # ----------------
+        orden_zonas = ["EI", "LI", "C", "LD", "ED", "EXI", "EXD"]
 
-for zona in orden_zonas:
-    if zona not in resumen_zonas:
-        continue
-    data = resumen_zonas[zona]
+        for zona in orden_zonas:
+            if zona not in resumen_zonas:
+                continue
+            data = resumen_zonas[zona]
 
-    total_z = data["total"]
-    if total_z == 0:
-        continue
+            total_z = data["total"]
+            if total_z == 0:
+                continue
 
-    pct_iz_z = int((data["IZ"] / total_z) * 100) if total_z > 0 else 0
-    pct_dcha_z = int((data["DCHA"] / total_z) * 100) if total_z > 0 else 0
+            pct_iz_z = int((data["IZ"] / total_z) * 100) if total_z > 0 else 0
+            pct_dcha_z = int((data["DCHA"] / total_z) * 100) if total_z > 0 else 0
 
-    fig_resumen.add_trace(go.Scatter(
-        x=[x_pos],
-        y=[0.5],
-        mode="markers+text",
-        marker=dict(
-            size=50,
-            color="blue" if team == "A" else "red"
-        ),
-        text=[f"{total_z}<br>{pct_dcha_z}% / {pct_iz_z}%"],
-        textfont=dict(color="white", size=10),
-        textposition="middle center",
-        showlegend=False
-    ))
+            fig_resumen.add_trace(go.Scatter(
+                x=[x_pos],
+                y=[0.5],
+                mode="markers+text",
+                marker=dict(
+                    size=50,
+                    color="blue" if team == "A" else "red"
+                ),
+                text=[f"{total_z}<br>{pct_dcha_z}% / {pct_iz_z}%"],
+                textfont=dict(color="white", size=10),
+                textposition="middle center",
+                showlegend=False
+            ))
 
-    # título zona (EI, C, ED, etc.)
-    fig_resumen.add_annotation(
-        x=x_pos,
-        y=0.9,
-        text=f"<b>{zona}</b>",
-        showarrow=False,
-        font=dict(size=10, color="black")
-    )
+            # título zona (EI, C, ED, etc.)
+            fig_resumen.add_annotation(
+                x=x_pos,
+                y=0.9,
+                text=f"<b>{zona}</b>",
+                showarrow=False,
+                font=dict(size=10, color="black")
+            )
 
-    x_pos += separacion
+            x_pos += separacion
 
-# ----------------
-# LAYOUT
-# ----------------
-fig_resumen.update_xaxes(visible=False, range=[-0.05, 1])
-fig_resumen.update_yaxes(visible=False, range=[0, 1])
+        # ----------------
+        # LAYOUT
+        # ----------------
+        fig_resumen.update_xaxes(visible=False, range=[-0.05, 1])
+        fig_resumen.update_yaxes(visible=False, range=[0, 1])
 
-fig_resumen.update_layout(
-    height=140,
-    margin=dict(l=0, r=0, t=0, b=0)
-)
+        fig_resumen.update_layout(
+            height=140,
+            margin=dict(l=0, r=0, t=0, b=0)
+        )
 
-st.plotly_chart(fig_resumen, use_container_width=True)
+        st.plotly_chart(fig_resumen, use_container_width=True)
