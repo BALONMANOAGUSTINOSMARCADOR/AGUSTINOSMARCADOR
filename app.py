@@ -712,7 +712,8 @@ def draw_fintas(team):
                 arrowwidth=1,
                 arrowcolor="gray",
                 text=f"{pct_dcha}%",
-                font=dict(size=10),
+                font=dict(size=11, color="black"),
+                text=f"<b>{texto}</b>",
             )
 
             # 🔽 FINTA IZ (flecha inferior)
@@ -726,7 +727,8 @@ def draw_fintas(team):
                 arrowwidth=1,
                 arrowcolor="gray",
                 text=f"{pct_iz}%",
-                font=dict(size=10),
+                font=dict(size=11, color="black"),
+                text=f"<b>{texto}</b>",
             )
 
 
