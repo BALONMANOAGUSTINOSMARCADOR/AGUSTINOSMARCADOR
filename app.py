@@ -1118,11 +1118,10 @@ if match["events"]:
         goles_ordenados = [goles_jugador[j] for j in jugadores_ordenados]
 
         # 🔹 Crear gráfico
-        fig = go.Figure(go.Bar(
-            x=jugadores,
-            y=goles,
-            marker_color=color,
-            width=0.8
+        fig.add_trace(go.Bar(
+            x=[str(j) for j in jugadores_ordenados],  # 👈 número jugador en eje X
+            y=goles_ordenados,
+            marker=dict(color="blue" if equipo == "A" else "red")
         ))
 
         fig.update_layout(
