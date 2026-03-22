@@ -1274,8 +1274,8 @@ for equipo in ["A", "B"]:
         # 🔵 BOLAS RESUMEN EN LÍNEA
         # ================================
 
-        total, pct_iz, pct_dcha = resumen_jugador(match["events"], team, player)
-        resumen_zonas = resumen_jugador_por_zona(match["events"], team, player)
+        total, pct_iz, pct_dcha = resumen_jugador(match["events"], equipo, jugador)
+        resumen_zonas = resumen_jugador_por_zona(match["events"], equipo, jugador)
 
         import plotly.graph_objects as go
 
