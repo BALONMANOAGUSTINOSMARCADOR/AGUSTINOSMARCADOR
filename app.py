@@ -681,7 +681,6 @@ def draw_fintas(team):
                 arrowcolor="gray",
                 text=f"<b>{texto_sup}</b>",
                 font=dict(size=11, color="black"),
-                text=f"<b>{texto}</b>",
             )
 
             # 🔽 FINTA IZ (flecha inferior)
@@ -696,7 +695,6 @@ def draw_fintas(team):
                 arrowcolor="gray",
                 text=f"<b>{texto_inf}</b>",
                 font=dict(size=11, color="black"),
-                text=f"<b>{texto}</b>",
             )
 
         # ================================
@@ -716,7 +714,6 @@ def draw_fintas(team):
                 arrowcolor="gray",
                 text=f"<b>{texto_sup}</b>",
                 font=dict(size=11, color="black"),
-                text=f"<b>{texto}</b>",
             )
 
             # 🔽 FINTA IZ (flecha inferior)
@@ -731,7 +728,6 @@ def draw_fintas(team):
                 arrowcolor="gray",
                 text=f"<b>{texto_inf}</b>",
                 font=dict(size=11, color="black"),
-                text=f"<b>{texto}</b>",
             )
 
 
