@@ -1268,7 +1268,11 @@ for equipo in ["A", "B"]:
             yaxis_title="Número de goles"
         )
 
-        st.plotly_chart(fig_jugador, use_container_width=True)
+        st.plotly_chart(
+            fig_jugador,
+            use_container_width=True,
+            key=f"grafico_{equipo}_{jugador}"
+        )
 
         # ================================
         # 🔵 BOLAS RESUMEN EN LÍNEA
