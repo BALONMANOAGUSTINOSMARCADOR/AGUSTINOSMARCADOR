@@ -1129,7 +1129,6 @@ if match["events"]:
             xaxis_title="Jugador",
             yaxis_title="Goles",
             xaxis=dict(type="category"),
-            xaxis=dict(tickangle=-90),  # Números en vertical
             bargap=0,  # Sin separación entre barras
             height=400,
             showlegend=False
