@@ -1080,17 +1080,6 @@ if match["events"]:
             continue
         player_goals[ev["team"]][str(jugador)] += 1
 
-    # 🔹 Función para dibujar gráfico de un equipo
-    def plot_goals_team(team_key, team_name, color):
-        data = player_goals[team_key]
-
-        # 🔹 Filtrar solo jugadores con goles
-        data_filtered = {j: g for j, g in data.items() if g > 0}
-
-        if not data_filtered:
-            st.write(f"— No hay goles registrados para {team_name}")
-            return
-
         # 🔹 Ordenar de mayor a menor
         # ================================
         # 🔵 GOLES POR JUGADOR (ORDENADO)
