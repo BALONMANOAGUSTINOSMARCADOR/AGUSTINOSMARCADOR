@@ -1096,10 +1096,12 @@ if match["events"]:
         # 🔵 GOLES POR JUGADOR (ORDENADO)
         # ================================
 
+    def plot_goals_team(team, team_name, color):
+        
         goles_jugador = {}
 
         for ev in match["events"]:
-            if ev["team"] == equipo:
+            if ev["team"] == team:
                 jugador = ev.get("player")
                 if not jugador:
                     continue
@@ -1118,10 +1120,13 @@ if match["events"]:
         goles_ordenados = [goles_jugador[j] for j in jugadores_ordenados]
 
         # 🔹 Crear gráfico
+
+        fig = go.Figure()
+        
         fig.add_trace(go.Bar(
             x=[str(j) for j in jugadores_ordenados],  # 👈 número jugador en eje X
             y=goles_ordenados,
-            marker=dict(color="blue" if equipo == "A" else "red")
+            marker=dict(color=color)
         ))
 
         fig.update_layout(
