@@ -1092,9 +1092,30 @@ if match["events"]:
             return
 
         # 🔹 Ordenar de mayor a menor
-        jugadores_sorted = sorted(data_filtered.items(), key=lambda x: x[1], reverse=True)
-        jugadores = [j for j, g in jugadores_sorted]
-        goles = [g for j, g in jugadores_sorted]
+        # ================================
+        # 🔵 GOLES POR JUGADOR (ORDENADO)
+        # ================================
+
+        goles_jugador = {}
+
+        for ev in match["events"]:
+            if ev["team"] == equipo:
+                jugador = ev.get("player")
+                if not jugador:
+                    continue
+
+                goles_jugador[jugador] = goles_jugador.get(jugador, 0) + 1
+
+        # ❌ eliminar jugadores sin goles (ya queda implícito)
+
+        # ✅ ordenar de mayor a menor
+        jugadores_ordenados = sorted(
+            goles_jugador,
+            key=goles_jugador.get,
+            reverse=True
+        )
+
+        goles_ordenados = [goles_jugador[j] for j in jugadores_ordenados]
 
         # 🔹 Crear gráfico
         fig = go.Figure(go.Bar(
