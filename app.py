@@ -740,6 +740,28 @@ st.plotly_chart(fig, use_container_width=True)
 # Modificaciones permitidas solo si el reloj NO está corriendo
 modificaciones_habilitadas = match["started_at"] is None
 
+def resumen_jugador(events, team, player):
+    total = 0
+    iz = 0
+    dcha = 0
+
+    for ev in events:
+        if ev["team"] == team and ev.get("player") == player:
+            total += 1
+
+            if ev.get("finta") == "IZ":
+                iz += 1
+            elif ev.get("finta") == "DCHA":
+                dcha += 1
+
+    if total == 0:
+        return 0, 0, 0
+
+    pct_iz = int((iz / total) * 100)
+    pct_dcha = int((dcha / total) * 100)
+
+    return total, pct_iz, pct_dcha
+
 # =========================================================
 # INCIDENCIAS: exclusiones acumuladas + tarjetas
 # =========================================================
@@ -1228,3 +1250,31 @@ for equipo in ["A", "B"]:
         )
 
         st.plotly_chart(fig_jugador, use_container_width=True)
+
+        # 🔵 RESUMEN TOTAL DEL JUGADOR
+total, pct_iz, pct_dcha = resumen_jugador(match["events"], team, player)
+
+fig_resumen = go.Figure()
+
+fig_resumen.add_trace(go.Scatter(
+    x=[0.5],
+    y=[0.5],
+    mode="markers+text",
+    marker=dict(
+        size=60,
+        color="blue" if team == "A" else "red"
+    ),
+    text=[f"{total}<br>{pct_dcha}% / {pct_iz}%"],
+    textfont=dict(color="white", size=12),
+    textposition="middle center"
+))
+
+fig_resumen.update_xaxes(visible=False, range=[0, 1])
+fig_resumen.update_yaxes(visible=False, range=[0, 1])
+
+fig_resumen.update_layout(
+    height=120,
+    margin=dict(l=0, r=0, t=0, b=0)
+)
+
+st.plotly_chart(fig_resumen, use_container_width=False)
