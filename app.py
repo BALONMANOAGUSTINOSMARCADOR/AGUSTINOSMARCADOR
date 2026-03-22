@@ -679,7 +679,7 @@ def draw_fintas(team):
                 arrowhead=2,
                 arrowwidth=1,
                 arrowcolor="gray",
-                text="",
+                text=f"<b>{pct_dcha}%</b>",
                 font=dict(size=11, color="black"),
             )
 
@@ -693,7 +693,7 @@ def draw_fintas(team):
                 arrowhead=2,
                 arrowwidth=1,
                 arrowcolor="gray",
-                text="",
+                text=f"<b>{pct_iz}%</b>",
                 font=dict(size=11, color="black"),
             )
 
@@ -712,7 +712,7 @@ def draw_fintas(team):
                 arrowhead=2,
                 arrowwidth=1,
                 arrowcolor="gray",
-                text="",
+                text=f"<b>{pct_dcha}%</b>",
                 font=dict(size=11, color="black"),
             )
 
@@ -726,7 +726,7 @@ def draw_fintas(team):
                 arrowhead=2,
                 arrowwidth=1,
                 arrowcolor="gray",
-                text="",
+                text=f"<b>{pct_iz}%</b>",
                 font=dict(size=11, color="black"),
             )
 
