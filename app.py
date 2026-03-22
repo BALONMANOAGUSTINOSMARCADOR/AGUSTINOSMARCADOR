@@ -633,6 +633,16 @@ def draw_fintas(team):
         pct_iz = int((iz / total) * 100)
         pct_dcha = int((dcha / total) * 100)
 
+        # ================================
+        # NOMENCLATURA INT / EXT
+        # ================================
+        if team == "A":
+            texto_sup = f"INT {pct_dcha}%"   # derecha = interior
+            texto_inf = f"EXT {pct_iz}%"     # izquierda = exterior
+        else:
+            texto_sup = f"EXT {pct_dcha}%"   # derecha = exterior
+            texto_inf = f"INT {pct_iz}%"     # izquierda = interior
+
         x, y = ZONE_COORDS[zone_name]
 
         # REFLEJO para equipo B (igual que ya haces)
