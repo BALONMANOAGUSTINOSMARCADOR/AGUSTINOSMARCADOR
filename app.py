@@ -1365,4 +1365,8 @@ for equipo in ["A", "B"]:
             margin=dict(l=0, r=0, t=0, b=0)
         )
 
-        st.plotly_chart(fig_resumen, use_container_width=True)
+        st.plotly_chart(
+            fig_resumen,
+            use_container_width=True,
+            key=f"resumen_{equipo}_{jugador}"
+        )
