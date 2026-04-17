@@ -1,0 +1,37 @@
+{
+    "equipo_local": "Ffffff",
+    "equipo_visitante": "Hhh",
+    "goles_local": 0,
+    "goles_visitante": 3,
+    "fecha": "2026-04-17T12:11:39.278185",
+    "acciones": [
+        {
+            "time": "2026-04-17T12:11:14.393270",
+            "team": "B",
+            "zone": "ED",
+            "player": "",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-17T12:11:15.351657",
+            "team": "B",
+            "zone": "ED",
+            "player": "",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-17T12:11:17.032093",
+            "team": "B",
+            "zone": "ED",
+            "player": "",
+            "finta": "DCHA"
+        }
+    ],
+    "exclusiones": [],
+    "players_stats": {
+        "A": {},
+        "B": {}
+    },
+    "rival": "Dfgbb",
+    "competicion": "Fffgg"
+}
