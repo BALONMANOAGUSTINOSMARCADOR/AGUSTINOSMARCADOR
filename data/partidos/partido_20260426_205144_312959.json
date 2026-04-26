@@ -1,0 +1,492 @@
+{
+    "equipo_local": "URCI",
+    "equipo_visitante": "MIJAS",
+    "goles_local": 36,
+    "goles_visitante": 22,
+    "fecha": "2026-04-26T20:51:44.083782",
+    "acciones": [
+        {
+            "time": "2026-04-26T19:48:43.635336",
+            "team": "B",
+            "zone": "LI",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:49:01.793889",
+            "team": "A",
+            "zone": "LD",
+            "player": "8",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:49:25.287181",
+            "team": "A",
+            "zone": "C",
+            "player": "17",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:49:55.414527",
+            "team": "B",
+            "zone": "EXC",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:50:49.017811",
+            "team": "B",
+            "zone": "EI",
+            "player": "8",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:51:10.997559",
+            "team": "B",
+            "zone": "LI",
+            "player": "22",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:51:32.242367",
+            "team": "A",
+            "zone": "ED",
+            "player": "32",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:52:11.190550",
+            "team": "A",
+            "zone": "LI",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T19:54:55.624419",
+            "team": "B",
+            "zone": "LD",
+            "player": "66",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T19:55:51.594091",
+            "team": "B",
+            "zone": "C",
+            "player": "16",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T19:56:16.428877",
+            "team": "A",
+            "zone": "P",
+            "player": "15",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T19:56:59.824821",
+            "team": "B",
+            "zone": "ED",
+            "player": "76",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T19:59:27.892807",
+            "team": "A",
+            "zone": "LI",
+            "player": "17",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:01:41.989902",
+            "team": "A",
+            "zone": "P",
+            "player": "15",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:01:52.168118",
+            "team": "B",
+            "zone": "C",
+            "player": "15",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:02:08.101890",
+            "team": "A",
+            "zone": "LD",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:04:12.769737",
+            "team": "B",
+            "zone": "LD",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:04:26.840394",
+            "team": "A",
+            "zone": "LD",
+            "player": "8",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:05:03.050143",
+            "team": "A",
+            "zone": "EI",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:06:28.633395",
+            "team": "A",
+            "zone": "ED",
+            "player": "32",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:08:21.854223",
+            "team": "A",
+            "zone": "LD",
+            "player": "8",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:10:50.014193",
+            "team": "A",
+            "zone": "LI",
+            "player": "2",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:12:21.589851",
+            "team": "B",
+            "zone": "LD",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:12:42.891027",
+            "team": "B",
+            "zone": "LI",
+            "player": "31",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:13:33.032335",
+            "team": "A",
+            "zone": "LD",
+            "player": "8",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:13:39.523476",
+            "team": "B",
+            "zone": "LD",
+            "player": "66",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:14:03.180226",
+            "team": "A",
+            "zone": "EI",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:14:41.760909",
+            "team": "A",
+            "zone": "ED",
+            "player": "7",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:14:54.532092",
+            "team": "B",
+            "zone": "LD",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:15:37.032675",
+            "team": "A",
+            "zone": "LD",
+            "player": "7",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:16:03.816994",
+            "team": "A",
+            "zone": "C",
+            "player": "6",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:16:33.670449",
+            "team": "A",
+            "zone": "C",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:17:20.573359",
+            "team": "B",
+            "zone": "P",
+            "player": "74",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:18:34.911978",
+            "team": "A",
+            "zone": "P",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:20:52.183007",
+            "team": "A",
+            "zone": "EI",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:21:20.820192",
+            "team": "B",
+            "zone": "EI",
+            "player": "66",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:21:58.796303",
+            "team": "A",
+            "zone": "LD",
+            "player": "38",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:25:47.554509",
+            "team": "A",
+            "zone": "LI",
+            "player": "17",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:27:20.304754",
+            "team": "A",
+            "zone": "LD",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:28:55.268002",
+            "team": "A",
+            "zone": "LI",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:29:23.001882",
+            "team": "A",
+            "zone": "LD",
+            "player": "7",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:30:12.196451",
+            "team": "B",
+            "zone": "P",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:30:34.098483",
+            "team": "A",
+            "zone": "LI",
+            "player": "7",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:30:56.105129",
+            "team": "A",
+            "zone": "C",
+            "player": "17",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:31:49.203770",
+            "team": "A",
+            "zone": "EI",
+            "player": "15",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:32:13.312976",
+            "team": "A",
+            "zone": "LD",
+            "player": "7",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:32:25.375864",
+            "team": "B",
+            "zone": "LI",
+            "player": "66",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:33:10.820319",
+            "team": "A",
+            "zone": "LD",
+            "player": "8",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:33:53.097745",
+            "team": "A",
+            "zone": "C",
+            "player": "15",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:37:24.149557",
+            "team": "A",
+            "zone": "LI",
+            "player": "2",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:38:18.528160",
+            "team": "B",
+            "zone": "P",
+            "player": "6",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:38:33.763297",
+            "team": "A",
+            "zone": "LD",
+            "player": "38",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:39:50.508432",
+            "team": "B",
+            "zone": "P",
+            "player": "6",
+            "finta": "IZ"
+        },
+        {
+            "time": "2026-04-26T20:44:55.443271",
+            "team": "A",
+            "zone": "LD",
+            "player": "2",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:46:26.051149",
+            "team": "B",
+            "zone": "LD",
+            "player": "6",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:46:51.826881",
+            "team": "A",
+            "zone": "EXC",
+            "player": "88",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:47:51.172878",
+            "team": "B",
+            "zone": "LI",
+            "player": "79",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:48:24.213671",
+            "team": "A",
+            "zone": "ED",
+            "player": "32",
+            "finta": "DCHA"
+        },
+        {
+            "time": "2026-04-26T20:49:20.467012",
+            "team": "B",
+            "zone": "P",
+            "player": "6",
+            "finta": "DCHA"
+        }
+    ],
+    "exclusiones": [
+        {
+            "player": "16",
+            "team": "B",
+            "started_at_seconds": -724,
+            "duration": 120,
+            "remaining": 2
+        },
+        {
+            "player": "32",
+            "team": "B",
+            "started_at_seconds": 24,
+            "duration": 120,
+            "remaining": 1
+        },
+        {
+            "player": "86",
+            "team": "B",
+            "started_at_seconds": 250,
+            "duration": 120,
+            "remaining": 1
+        },
+        {
+            "player": "74",
+            "team": "A",
+            "started_at_seconds": 344,
+            "duration": 120,
+            "remaining": 1
+        }
+    ],
+    "players_stats": {
+        "A": {
+            "74": {
+                "exclusiones": 1,
+                "amarilla": 0,
+                "roja": 0,
+                "azul": 0,
+                "avisos": [],
+                "inhabilitado": false
+            }
+        },
+        "B": {
+            "16": {
+                "exclusiones": 1,
+                "amarilla": 0,
+                "roja": 0,
+                "azul": 0,
+                "avisos": [],
+                "inhabilitado": false
+            },
+            "32": {
+                "exclusiones": 1,
+                "amarilla": 0,
+                "roja": 0,
+                "azul": 0,
+                "avisos": [],
+                "inhabilitado": false
+            },
+            "86": {
+                "exclusiones": 1,
+                "amarilla": 0,
+                "roja": 0,
+                "azul": 0,
+                "avisos": [],
+                "inhabilitado": false
+            }
+        }
+    },
+    "rival": "URCI-MIJAS",
+    "competicion": "CADEBA 2026 INFANTIL"
+}
