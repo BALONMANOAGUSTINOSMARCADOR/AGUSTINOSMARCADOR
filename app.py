@@ -93,12 +93,19 @@ if "match" not in st.session_state:
         "teamB": "Equipo B",
         "scoreA": 0,
         "scoreB": 0,
+
+        # Eventos del partido
         "events": [],
+
+        # NUEVO - Lanzamiento seleccionado sobre el campo
+        "selected_shot": None,
+
+        # NUEVO - Zona seleccionada de la portería (1-9)
+        "selected_goal_zone": None,
+
         "exclusions": [],
-        "players_stats": {  # Nuevo: historial de jugadores
-            "A": {},  # estructura: {numero_jugador: {"exclusiones": 0, "amarilla":0, "roja":0, "azul":0, "avisos":[]}}
-            "B": {}
-        },
+
+        "players_stats": {        },
         "started_at": None,
         "elapsed_before_pause": 0,
         "part": 1
