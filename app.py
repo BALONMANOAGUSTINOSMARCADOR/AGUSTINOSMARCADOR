@@ -188,10 +188,25 @@ def add_goal(team, zone, player=None, finta=None):
         "zone": ZONAS[int(zone)],
         "player": player,
         "finta": finta  # 👈 NUEVO CAMPO
+        "result": resultado,
     })
 
     m[f"score{team}"] += 1
 
+# -----------------------------
+# RESULTADO DEL LANZAMIENTO
+# -----------------------------
+resultado = st.radio(
+    "Resultado",
+    [
+        "Gol",
+        "Parada",
+        "Poste",
+        "Fuera",
+        "Pérdida"
+    ],
+    horizontal=True
+)
 def jugador_inhabilitado(player, team):
     # ⚠️ Si no hay jugador, NO se bloquea nunca
     if not player:
