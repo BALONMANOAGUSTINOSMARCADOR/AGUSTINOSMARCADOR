@@ -72,6 +72,12 @@ ZONAS = {
 
 COURT_IMG=Image.open("court.png")
 
+# =========================================================
+# CONFIGURACIÓN CAMPO (AGUSTINOS MARCADOR PRO)
+# =========================================================
+
+FIELD_WIDTH = COURT_IMG.size[0]
+FIELD_HEIGHT = COURT_IMG.size[1]
 ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 
 # Bloque para modificaciones
@@ -574,6 +580,27 @@ with st.container():
 
     fig = go.Figure()
 
+    # Si el usuario ya ha marcado un punto de lanzamiento,
+    # dibujarlo sobre el campo.
+
+    if match.get("selected_shot"):
+
+    sx, sy = match["selected_shot"]
+
+    fig.add_trace(
+        go.Scatter(
+            x=[sx],
+            y=[sy],
+            mode="markers",
+            marker=dict(
+                size=16,
+                color="lime",
+                symbol="x"
+            ),
+            showlegend=False,
+            hoverinfo="skip"
+        )
+    )    
     fig.add_layout_image(
         dict(
             source=COURT_IMG,
