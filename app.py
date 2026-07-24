@@ -151,7 +151,13 @@ def reset_match():
         "teamB": "",
         "scoreA": 0,
         "scoreB": 0,
+
         "events": [],
+
+        # NUEVO
+        "selected_shot": None,
+        "selected_goal_zone": None,
+
         "exclusions": [],
         "started_at": None,
         "elapsed_before_pause": 0,
