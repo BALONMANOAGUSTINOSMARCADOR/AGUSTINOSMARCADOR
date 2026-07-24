@@ -520,6 +520,11 @@ with st.container():
     }
 
     for ev in match["events"]:
+
+        # Solo contar los goles
+        if ev.get("type") != "goal":
+            continue
+
         z = ev["zone"]
         t = ev["team"]
 
@@ -529,7 +534,7 @@ with st.container():
             goals[t][z]["IZ"] += 1
         elif ev.get("finta") == "DCHA":
             goals[t][z]["DCHA"] += 1
-
+            
     # 2️⃣ función para construir coordenadas, tamaño y texto
     def build_team_points(team):
         xs, ys, sizes, texts = [], [], [], []
