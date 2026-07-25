@@ -3,7 +3,7 @@
 # =========================================================
 
 import streamlit as st
-import pandas as pd
+st.write("Versión Streamlit:", st.__version__)import pandas as pd
 import plotly.graph_objects as go
 import datetime, json, glob
 from PIL import Image
