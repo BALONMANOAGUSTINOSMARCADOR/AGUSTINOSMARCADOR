@@ -673,33 +673,32 @@ with st.container():
 
     fig = go.Figure()
 
-    # Punto seleccionado para el lanzamiento
-    selected_shot = st.session_state.match.get("selected_shot")
+# Punto seleccionado para el lanzamiento
+selected_shot = match.get("selected_shot")
 
-    # Zona de portería seleccionada
-    selected_goal_zone = st.session_state.match.get("selected_goal_zone")
+# Zona de portería seleccionada
+selected_goal_zone = match.get("selected_goal_zone")
 
-    # Si el usuario ya ha marcado un punto de lanzamiento,
-    # dibujarlo sobre el campo.
+# Si el usuario ya ha marcado un punto de lanzamiento,
+# dibujarlo sobre el campo.
+if selected_shot:
 
-    if match.get("selected_shot"):
+    sx, sy = selected_shot
 
-        sx, sy = match["selected_shot"]
-
-        fig.add_trace(
-            go.Scatter(
-                x=[sx],
-                y=[sy],
-                mode="markers",
-                marker=dict(
-                    size=16,
-                    color="lime",
-                    symbol="x"
-                ),
-                showlegend=False,
-                hoverinfo="skip"
+    fig.add_trace(
+        go.Scatter(
+            x=[sx],
+            y=[sy],
+            mode="markers",
+            marker=dict(
+                size=14,
+                color="lime",
+                symbol="x"
+            ),
+            showlegend=False
         )
     )    
+    
     fig.add_layout_image(
         dict(
             source=COURT_IMG,
