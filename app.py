@@ -3,7 +3,7 @@
 # =========================================================
 
 import streamlit as st
-st.write("Versión Streamlit:", st.__version__)import pandas as pd
+import pandas as pd
 import plotly.graph_objects as go
 import datetime, json, glob
 from PIL import Image
@@ -12,6 +12,7 @@ from collections import defaultdict
 from modules import recorder, loader
 from github import Github
 import os
+st.write("Versión Streamlit:", st.__version__)
 # =========================================================
 # CONFIG
 # =========================================================
