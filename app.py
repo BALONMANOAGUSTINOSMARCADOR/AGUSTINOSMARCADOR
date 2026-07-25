@@ -189,6 +189,7 @@ def reset_match():
         "player": player,
         "finta": finta,  # 👈 NUEVO CAMPO
         "result": resultado,
+        "goal_zone": zona_porteria,
     })
 
     # Solo los goles modifican el marcador
