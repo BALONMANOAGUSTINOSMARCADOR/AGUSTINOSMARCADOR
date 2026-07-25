@@ -191,6 +191,8 @@ def reset_match():
         "result": resultado,
     })
 
+    # Solo los goles modifican el marcador
+if resultado == "Gol":
     m[f"score{team}"] += 1
 
 # -----------------------------
@@ -207,6 +209,19 @@ resultado = st.radio(
     ],
     horizontal=True
 )
+
+st.markdown("#### Zona de la portería")
+
+zona_porteria = st.radio(
+    "Selecciona dónde terminó el lanzamiento",
+    [
+        "1", "2", "3",
+        "4", "5", "6",
+        "7", "8", "9"
+    ],
+    horizontal=True
+)
+
 def jugador_inhabilitado(player, team):
     # ⚠️ Si no hay jugador, NO se bloquea nunca
     if not player:
