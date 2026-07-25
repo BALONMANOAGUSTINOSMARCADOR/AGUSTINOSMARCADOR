@@ -420,24 +420,38 @@ with left:
     elif finta_der:
         finta = "DCHA"
 
+    # -----------------------------
+    # RESULTADO DEL LANZAMIENTO
+    # -----------------------------
+    resultado = st.radio(
+        "Resultado",
+        [
+            "Gol",
+            "Parada",
+            "Poste",
+            "Fuera",
+            "Pérdida"
+        ],
+        horizontal=True
+    )
     
     # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2, gap="small")
 
     with col_gol_a:
-        if st.button(f"Gol {match['teamA']}"):
+        if st.button(f"{resultado} {match['teamA']}"):
             if finta is None:
                 st.warning("⚠️ Debes seleccionar tipo de finta")
             else:
-                add_goal("A", zone, player, finta)
+                add_goal("A", zone, player, finta, resultado)
 
     with col_gol_b:
-        if st.button(f"Gol {match['teamB']}"):
+        if st.button(f"{resultado} {match['teamB']}"):
             if finta is None:
                 st.warning("⚠️ Debes seleccionar tipo de finta")
             else:
-                add_goal("B", zone, player, finta)
-
+                add_goal("B", zone, player, finta, resultado)
+                
 # -------- TIEMPO + EXCLUSIONES --------
 with mid:
     st.subheader("🚫 Exclusiones")
