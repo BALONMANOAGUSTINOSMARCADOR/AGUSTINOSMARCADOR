@@ -211,17 +211,59 @@ resultado = st.radio(
     horizontal=True
 )
 
-st.markdown("#### Zona de la portería")
+st.markdown("### 🥅 ¿Dónde terminó el lanzamiento?")
 
-zona_porteria = st.radio(
-    "Selecciona dónde terminó el lanzamiento",
-    [
-        "1", "2", "3",
-        "4", "5", "6",
-        "7", "8", "9"
-    ],
-    horizontal=True
-)
+if "selected_goal_zone" not in st.session_state.match:
+    st.session_state.match["selected_goal_zone"] = None
+
+cols = st.columns(3)
+
+# FILA 1
+with cols[0]:
+    if st.button("1", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 1
+
+with cols[1]:
+    if st.button("2", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 2
+
+with cols[2]:
+    if st.button("3", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 3
+
+cols = st.columns(3)
+
+# FILA 2
+with cols[0]:
+    if st.button("4", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 4
+
+with cols[1]:
+    if st.button("5", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 5
+
+with cols[2]:
+    if st.button("6", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 6
+
+cols = st.columns(3)
+
+# FILA 3
+with cols[0]:
+    if st.button("7", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 7
+
+with cols[1]:
+    if st.button("8", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 8
+
+with cols[2]:
+    if st.button("9", use_container_width=True):
+        st.session_state.match["selected_goal_zone"] = 9
+
+zona_porteria = st.session_state.match["selected_goal_zone"]
+
+st.write(f"Zona seleccionada: **{zona_porteria}**")
 
 def jugador_inhabilitado(player, team):
     # ⚠️ Si no hay jugador, NO se bloquea nunca
@@ -629,6 +671,12 @@ with st.container():
     xsB, ysB, sizesB, textsB = build_team_points("B")
 
     fig = go.Figure()
+
+# Punto seleccionado para el lanzamiento
+selected_shot = st.session_state.match.get("selected_shot")
+
+# Zona de portería seleccionada
+selected_goal_zone = st.session_state.match.get("selected_goal_zone")
 
     # Si el usuario ya ha marcado un punto de lanzamiento,
     # dibujarlo sobre el campo.
