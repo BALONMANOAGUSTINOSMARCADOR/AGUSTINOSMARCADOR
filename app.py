@@ -751,6 +751,27 @@ selected_goal_zone = st.session_state.match.get("selected_goal_zone")
     margin=dict(l=0, r=0, t=0, b=0)  # sin márgenes
 )
 
+# ==========================================
+# DIBUJAR PUNTO DE LANZAMIENTO SELECCIONADO
+# ==========================================
+
+if selected_shot is not None:
+
+    x, y = selected_shot
+
+    fig.add_trace(
+        go.Scatter(
+            x=[x],
+            y=[y],
+            mode="markers",
+            marker=dict(
+                size=16,
+                color="yellow",
+                line=dict(color="black", width=2)
+            ),
+            showlegend=False
+        )
+    )
 # =========================================================
 # FLECHAS DE FINTAS
 # =========================================================
