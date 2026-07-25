@@ -894,6 +894,10 @@ def draw_fintas(team):
 draw_fintas("A")
 draw_fintas("B")
 
+config = {
+    "displayModeBar": False
+}
+
 st.plotly_chart(fig, use_container_width=True)
 
 # Modificaciones permitidas solo si el reloj NO está corriendo
@@ -1287,6 +1291,9 @@ if match["events"]:
             showlegend=False
         )
 
+        config = {
+    "displayModeBar": False
+}        
         st.plotly_chart(fig, use_container_width=True)
 
     # 🔹 Graficar equipo A
