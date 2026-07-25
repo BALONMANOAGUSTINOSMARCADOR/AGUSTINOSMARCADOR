@@ -158,7 +158,6 @@ def reset_match():
         "teamB": "",
         "scoreA": 0,
         "scoreB": 0,
-
         "events": [],
 
         # NUEVO
@@ -171,8 +170,9 @@ def reset_match():
         "part": 1
     }
 
-    def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria=None):
-        m = st.session_state.match
+def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria=None):
+        
+    m = st.session_state.match
 
     if player and jugador_inhabilitado(player, team):
         return
@@ -194,8 +194,8 @@ def reset_match():
     })
 
     # Solo los goles modifican el marcador
-if resultado == "Gol":
-    m[f"score{team}"] += 1
+    if resultado == "Gol":
+        m[f"score{team}"] += 1
 
 # -----------------------------
 # RESULTADO DEL LANZAMIENTO
