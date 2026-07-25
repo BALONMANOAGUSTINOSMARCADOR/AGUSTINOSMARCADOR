@@ -112,7 +112,7 @@ if "match" not in st.session_state:
 
         "exclusions": [],
 
-        "players_stats": {        },
+        "players_stats": {"A": {}, "B": {}},
         "started_at": None,
         "elapsed_before_pause": 0,
         "part": 1
