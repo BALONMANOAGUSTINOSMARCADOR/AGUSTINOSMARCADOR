@@ -480,7 +480,7 @@ with col_gol_a:
                 zona_porteria
             )    
 
-    with col_gol_b:
+with col_gol_b:
     if st.button(f"{resultado} {match['teamB']}"):
         if finta is None:
                 st.warning("⚠️ Debes seleccionar tipo de finta")
