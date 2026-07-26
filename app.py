@@ -425,39 +425,39 @@ with left:
         horizontal=True
     )
 
-st.markdown("### 🥅 Zona de finalización")
+    st.markdown("### 🥅 Zona de finalización")
 
-st.markdown("""
-<style>
-div.stButton > button {
-    height:60px;
-    width:100%;
-    font-size:22px;
-    font-weight:bold;
-}
-</style>
-""", unsafe_allow_html=True)
+    st.markdown("""
+    <style>
+    div.stButton > button {
+        height:60px;
+        width:100%;
+        font-size:22px;
+        font-weight:bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-if "selected_goal_zone" not in st.session_state.match:
-    st.session_state.match["selected_goal_zone"] = None
+    if "selected_goal_zone" not in st.session_state.match:
+        st.session_state.match["selected_goal_zone"] = None
 
-for fila in [[1,2,3],[4,5,6],[7,8,9]]:
+    for fila in [[1,2,3],[4,5,6],[7,8,9]]:
 
-    c1,c2,c3 = st.columns(3)
+        c1,c2,c3 = st.columns(3)
 
-    for col,zona in zip([c1,c2,c3],fila):
+        for col,zona in zip([c1,c2,c3],fila):
 
-        with col:
+            with col:
 
-            if st.button(str(zona), key=f"goal_{zona}"):
+                if st.button(str(zona), key=f"goal_{zona}"):
 
-                st.session_state.match["selected_goal_zone"] = zona
+                    st.session_state.match["selected_goal_zone"] = zona
 
-zona_porteria = st.session_state.match["selected_goal_zone"]
+    zona_porteria = st.session_state.match["selected_goal_zone"]
 
-if zona_porteria:
+    if zona_porteria:
 
-    st.info(f"🎯 Zona seleccionada: {zona_porteria}")    
+        st.info(f"🎯 Zona seleccionada: {zona_porteria}")    
         
 # Botones de goles uno al lado del otro
 col_gol_a, col_gol_b = st.columns(2, gap="small")
