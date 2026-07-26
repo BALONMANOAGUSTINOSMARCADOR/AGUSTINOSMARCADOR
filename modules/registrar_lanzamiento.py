@@ -42,6 +42,19 @@ def registrar_lanzamiento(match):
         # Zona seleccionada
         zona_actual = st.session_state.match.get("selected_goal_zone")        
 
+        # Coordenadas de cada sector de la portería
+        SECTORES_PORTERIA = {
+            1: (0, 2),
+            2: (1, 2),
+            3: (2, 2),
+            4: (0, 1),
+            5: (1, 1),
+            6: (2, 1),
+            7: (0, 0),
+            8: (1, 0),
+            9: (2, 0),
+        }
+        
         for n, (x, y) in zonas.items():
 
             color = "#d9d9d9"
