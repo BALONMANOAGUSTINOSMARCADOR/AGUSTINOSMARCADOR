@@ -465,18 +465,37 @@ if zona_porteria:
     col_gol_a, col_gol_b = st.columns(2, gap="small")
 
     with col_gol_a:
-        if st.button(f"{resultado} {match['teamA']}"):
-            if finta is None:
-                st.warning("⚠️ Debes seleccionar tipo de finta")
-            else:
-                add_goal("A", zone, player, finta, resultado, None)
+    if st.button(f"{resultado} {match['teamA']}"):
+        if finta is None:
+            st.warning("⚠️ Debes seleccionar tipo de finta")
+        elif zona_porteria is None:
+            st.warning("⚠️ Debes seleccionar una zona de la portería")
+        else:
+            add_goal(
+                "A",
+                zone,
+                player,
+                finta,
+                resultado,
+                zona_porteria
+            )    
 
     with col_gol_b:
-        if st.button(f"{resultado} {match['teamB']}"):
-            if finta is None:
+    if st.button(f"{resultado} {match['teamB']}"):
+        if finta is None:
                 st.warning("⚠️ Debes seleccionar tipo de finta")
-            else:
-                add_goal("B", zone, player, finta, resultado, None)
+        elif zona_porteria is None:
+            st.warning("⚠️ Debes seleccionar una zona de la portería")
+        else:
+            add_goal(
+                "B",
+                zone,
+                player,
+                finta,
+                resultado,
+                zona_porteria
+            )    
+   
                 
 # -------- TIEMPO + EXCLUSIONES --------
 with mid:
