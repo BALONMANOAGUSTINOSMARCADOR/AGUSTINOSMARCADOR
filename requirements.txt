@@ -7,4 +7,4 @@ streamlit-autorefresh
 reportlab
 requests
 PyGithub
-streamlit-plotly-events
+streamlit-image-coordinates
