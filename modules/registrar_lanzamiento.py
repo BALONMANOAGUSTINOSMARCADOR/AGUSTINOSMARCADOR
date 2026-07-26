@@ -1,3 +1,4 @@
+from streamlit_plotly_events import plotly_events
 import streamlit as st
 import plotly.graph_objects as go
 
