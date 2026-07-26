@@ -10,6 +10,7 @@ from PIL import Image
 from streamlit_autorefresh import st_autorefresh
 from collections import defaultdict
 from modules import recorder, loader
+from modules.registrar_lanzamiento import registrar_lanzamiento
 from github import Github
 import os
 st.write("Versión Streamlit:", st.__version__)
