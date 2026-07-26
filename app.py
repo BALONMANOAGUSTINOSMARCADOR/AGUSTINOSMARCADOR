@@ -461,10 +461,10 @@ zona_porteria = st.session_state.match["selected_goal_zone"]
 if zona_porteria:
     st.success(f"Zona seleccionada: {zona_porteria}")
     
-    # Botones de goles uno al lado del otro
-    col_gol_a, col_gol_b = st.columns(2, gap="small")
+# Botones de goles uno al lado del otro
+col_gol_a, col_gol_b = st.columns(2, gap="small")
 
-    with col_gol_a:
+with col_gol_a:
     if st.button(f"{resultado} {match['teamA']}"):
         if finta is None:
             st.warning("⚠️ Debes seleccionar tipo de finta")
