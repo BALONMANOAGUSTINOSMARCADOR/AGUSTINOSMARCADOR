@@ -42,16 +42,31 @@ def registrar_lanzamiento(match):
         # Zona seleccionada
         zona_actual = st.session_state.match.get("selected_goal_zone")        
 
-        for n,(x,y) in zonas.items():
+        for n, (x, y) in zonas.items():
+
+            color = "#d9d9d9"
+
+            if zona_actual == n:
+                color = "#3CB371"   # Verde
+
+            fig.add_shape(
+                type="rect",
+                x0=x-0.48,
+                x1=x+0.48,
+                y0=y-0.48,
+                y1=y+0.48,
+                fillcolor=color,
+                line=dict(color="black", width=1)
+            )
 
             fig.add_annotation(
                 x=x,
                 y=y,
                 text=f"<b>{n}</b>",
                 showarrow=False,
-                font=dict(size=18)
-            )
-
+                font=dict(size=18, color="black")
+            )        
+        
         fig.update_xaxes(
             visible=False,
             range=[0,3]
