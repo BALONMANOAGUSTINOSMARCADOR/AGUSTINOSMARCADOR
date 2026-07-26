@@ -424,6 +424,42 @@ with left:
         ],
         horizontal=True
     )
+
+    st.markdown("### 🥅 Zona de finalización")
+
+col1, col2, col3 = st.columns(3)
+
+if "selected_goal_zone" not in st.session_state.match:
+    st.session_state.match["selected_goal_zone"] = None
+
+with col1:
+    if st.button("1"):
+        st.session_state.match["selected_goal_zone"] = 1
+    if st.button("4"):
+        st.session_state.match["selected_goal_zone"] = 4
+    if st.button("7"):
+        st.session_state.match["selected_goal_zone"] = 7
+
+with col2:
+    if st.button("2"):
+        st.session_state.match["selected_goal_zone"] = 2
+    if st.button("5"):
+        st.session_state.match["selected_goal_zone"] = 5
+    if st.button("8"):
+        st.session_state.match["selected_goal_zone"] = 8
+
+with col3:
+    if st.button("3"):
+        st.session_state.match["selected_goal_zone"] = 3
+    if st.button("6"):
+        st.session_state.match["selected_goal_zone"] = 6
+    if st.button("9"):
+        st.session_state.match["selected_goal_zone"] = 9
+
+zona_porteria = st.session_state.match["selected_goal_zone"]
+
+if zona_porteria:
+    st.success(f"Zona seleccionada: {zona_porteria}")
     
     # Botones de goles uno al lado del otro
     col_gol_a, col_gol_b = st.columns(2, gap="small")
