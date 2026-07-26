@@ -39,6 +39,9 @@ def registrar_lanzamiento(match):
             7:(0.5,0.5),8:(1.5,0.5),9:(2.5,0.5)
         }
 
+        # Zona seleccionada
+        zona_actual = st.session_state.match.get("selected_goal_zone")        
+
         for n,(x,y) in zonas.items():
 
             fig.add_annotation(
