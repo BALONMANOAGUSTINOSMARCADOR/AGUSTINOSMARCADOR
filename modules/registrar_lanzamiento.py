@@ -98,4 +98,11 @@ def registrar_lanzamiento(match):
             margin=dict(l=0,r=0,t=0,b=0)
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        selected = plotly_events(
+            fig,
+            click_event=True,
+            hover_event=False,
+            select_event=False,
+            override_height=330,
+            override_width="100%"
+        )
