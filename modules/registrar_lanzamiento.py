@@ -54,31 +54,31 @@ def registrar_lanzamiento(match):
             8: (1, 0),
             9: (2, 0),
         }
-        
-        for n, (x, y) in zonas.items():
 
-            color = "#d9d9d9"
+        for zona, (cx, cy) in SECTORES_PORTERIA.items():
 
-            if zona_actual == n:
-                color = "#3CB371"   # Verde
+            color = "#F2F2F2"
+
+            if zona_actual == zona:
+                color = "#2ECC71"
 
             fig.add_shape(
                 type="rect",
-                x0=x-0.48,
-                x1=x+0.48,
-                y0=y-0.48,
-                y1=y+0.48,
+                x0=cx,
+                y0=cy,
+                x1=cx + 1,
+                y1=cy + 1,
                 fillcolor=color,
-                line=dict(color="black", width=1)
+                line=dict(color="black", width=2),
             )
 
             fig.add_annotation(
-                x=x,
-                y=y,
-                text=f"<b>{n}</b>",
+                x=cx + 0.5,
+                y=cy + 0.5,
+                text=f"<b>{zona}</b>",
                 showarrow=False,
-                font=dict(size=18, color="black")
-            )        
+                font=dict(size=20, color="black"),
+            )
         
         fig.update_xaxes(
             visible=False,
