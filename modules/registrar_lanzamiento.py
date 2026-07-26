@@ -106,3 +106,10 @@ def registrar_lanzamiento(match):
             override_height=330,
             override_width="100%"
         )
+
+        if selected:
+
+            x = selected[0]["x"]
+            y = selected[0]["y"]
+
+            st.write(f"x={x:.2f}  y={y:.2f}")
