@@ -415,9 +415,6 @@ with left:
     # REGISTRO DEL LANZAMIENTO (AGUSTINOS MARCADOR PRO)
     # =====================================================
 
-    st.markdown("---")
-    st.subheader("⚽ REGISTRO DEL LANZAMIENTO")
-
     contenedor = st.container()
 
     with contenedor:
