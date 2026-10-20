@@ -442,44 +442,6 @@ with left:
         }
         </style>
         """, unsafe_allow_html=True)
-
-        if "selected_goal_zone" not in st.session_state.match:
-            st.session_state.match["selected_goal_zone"] = None
-
-        for fila in [[1,2,3],[4,5,6],[7,8,9]]:
-            c1, c2, c3 = st.columns(3)
-
-            for col, zona in zip([c1,c2,c3], fila):
-                with col:
-                    if st.button(str(zona), key=f"goal_{zona}"):
-                        st.session_state.match["selected_goal_zone"] = zona
-
-        zona_porteria = st.session_state.match["selected_goal_zone"]
-
-        if zona_porteria:
-            st.info(f"🎯 Zona seleccionada: {zona_porteria}")
-
-
-    if "selected_goal_zone" not in st.session_state.match:
-        st.session_state.match["selected_goal_zone"] = None
-
-    for fila in [[1,2,3],[4,5,6],[7,8,9]]:
-
-        c1,c2,c3 = st.columns(3)
-
-        for col,zona in zip([c1,c2,c3],fila):
-
-            with col:
-
-                if st.button(str(zona), key=f"goal_{zona}"):
-
-                    st.session_state.match["selected_goal_zone"] = zona
-
-    zona_porteria = st.session_state.match["selected_goal_zone"]
-
-    if zona_porteria:
-
-        st.info(f"🎯 Zona seleccionada: {zona_porteria}")    
         
 # Botones de goles uno al lado del otro
 col_gol_a, col_gol_b = st.columns(2, gap="small")
