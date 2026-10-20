@@ -430,7 +430,29 @@ with left:
     
     with st.container(key="zona_finalizacion"):
         st.markdown("### 🥅 Zona de finalización")
+        
+    if "selected_goal_zone" not in st.session_state.match:
+        st.session_state.match["selected_goal_zone"] = None
 
+    for fila in [[1,2,3],[4,5,6],[7,8,9]]:
+
+        c1,c2,c3 = st.columns(3)
+
+        for col,zona in zip([c1,c2,c3],fila):
+
+            with col:
+
+                if st.button(str(zona), key=f"goal_{zona}"):
+
+                    st.session_state.match["selected_goal_zone"] = zona
+
+    zona_porteria = st.session_state.match["selected_goal_zone"]
+
+    if zona_porteria:
+
+        st.info(f"🎯 Zona seleccionada: {zona_porteria}")
+
+        
         st.markdown("""
         <style>
         .st-key-zona_finalizacion div.stButton > button {
