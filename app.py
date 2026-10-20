@@ -411,19 +411,6 @@ with left:
     elif finta_der:
         finta = "DCHA"
 
-    # =====================================================
-    # REGISTRO DEL LANZAMIENTO (AGUSTINOS MARCADOR PRO)
-    # =====================================================
-
-    contenedor = st.container()
-
-    with contenedor:
-
-        col_campo, col_porteria = st.columns([2.4,1.2], gap="large")  
-
-    st.markdown("---")
-    registrar_lanzamiento(match)
-    st.markdown("---")
 
     # -----------------------------
     # RESULTADO DEL LANZAMIENTO
@@ -508,7 +495,21 @@ with col_gol_b:
                 resultado,
                 zona_porteria
             )    
-   
+
+    # =====================================================
+    # REGISTRO DEL LANZAMIENTO (AGUSTINOS MARCADOR PRO)
+    # =====================================================
+
+    contenedor = st.container()
+
+    with contenedor:
+
+        col_campo, col_porteria = st.columns([2.4,1.2], gap="large")  
+
+    st.markdown("---")
+    registrar_lanzamiento(match)
+    st.markdown("---")
+
                 
 # -------- TIEMPO + EXCLUSIONES --------
 with mid:
