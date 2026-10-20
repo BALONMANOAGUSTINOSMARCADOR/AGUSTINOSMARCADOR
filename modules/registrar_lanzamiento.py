@@ -5,8 +5,6 @@ import plotly.graph_objects as go
 
 def registrar_lanzamiento(match):
 
-    st.markdown("## ⚽ Registro del lanzamiento")
-
     col_campo, col_porteria = st.columns([2.3, 1.2], gap="large")
 
     with col_campo:
