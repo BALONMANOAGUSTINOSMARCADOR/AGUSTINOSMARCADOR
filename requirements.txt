@@ -8,3 +8,4 @@ reportlab
 requests
 PyGithub
 streamlit-image-coordinates
+streamlit-plotly-events
