@@ -179,16 +179,18 @@ def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria
             st.error(f"🚫 JUGADOR Nº {player} NO PUEDE PARTICIPAR EN EL PARTIDO")
             return
 
+
     m["events"].append({
+        "type": "goal" if resultado == "Gol" else "shot",
         "time": iso_now(),
         "team": team,
         "zone": ZONAS[int(zone)],
         "player": player,
-        "finta": finta,  # 👈 NUEVO CAMPO
+        "finta": finta,
         "result": resultado,
         "goal_zone": zona_porteria,
     })
-
+    
     # Solo los goles modifican el marcador
     if resultado == "Gol":
         m[f"score{team}"] += 1
