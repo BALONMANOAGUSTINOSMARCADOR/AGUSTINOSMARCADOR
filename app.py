@@ -913,7 +913,7 @@ config = {
     "displayModeBar": False
 }
 
-st.plotly_chart(fig, use_container_width=True)
+court_placeholder.plotly_chart(fig, use_container_width=True)
 
 # Modificaciones permitidas solo si el reloj NO está corriendo
 modificaciones_habilitadas = match["started_at"] is None
