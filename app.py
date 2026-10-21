@@ -691,76 +691,77 @@ selected_shot = match.get("selected_shot")
 # Zona de portería seleccionada
 selected_goal_zone = match.get("selected_goal_zone")
 
-# Si el usuario ya ha marcado un punto de lanzamiento,
-# dibujarlo sobre el campo.
-if selected_shot:
+# Dibujar el campo SIEMPRE, aunque no haya lanzamiento seleccionado
+fig.add_layout_image(
+    dict(
+        source=COURT_IMG,
+        xref="x",
+        yref="y",
+        x=0,
+        y=1,
+        sizex=1,
+        sizey=1,
+        sizing="stretch",
+        layer="below"
+    )
+)
 
+# Puntos del equipo A
+fig.add_trace(go.Scatter(
+    x=xsA,
+    y=ysA,
+    mode="markers+text",
+    name=match["teamA"],
+    marker=dict(size=sizesA, color="blue"),
+    text=textsA,
+    textfont=dict(color="white", size=14),
+    textposition="middle center"
+))
+
+# Puntos del equipo B
+fig.add_trace(go.Scatter(
+    x=xsB,
+    y=ysB,
+    mode="markers+text",
+    name=match["teamB"],
+    marker=dict(size=sizesB, color="red"),
+    text=textsB,
+    textfont=dict(color="white", size=14),
+    textposition="middle center"
+))
+
+# Dibujar una X verde donde se seleccione un lanzamiento
+selected_shot = match.get("selected_shot")
+
+if selected_shot is not None:
     sx, sy = selected_shot
 
-    fig.add_trace(
-        go.Scatter(
-            x=[sx],
-            y=[sy],
-            mode="markers",
-            marker=dict(
-                size=14,
-                color="lime",
-                symbol="x"
-            ),
-            showlegend=False
-        )
-    )    
-    
-    fig.add_layout_image(
-        dict(
-            source=COURT_IMG,
-            xref="x",
-            yref="y",
-            x=0,
-            y=1,
-            sizex=1,
-            sizey=1,
-            sizing="stretch",
-            layer="below"
-        )
-    )
-
     fig.add_trace(go.Scatter(
-        x=xsA,
-        y=ysA,
-        mode="markers+text",
-        name=match["teamA"],
-        marker=dict(size=sizesA, color="blue"),
-        text=textsA,
-        textfont=dict(color="white", size=14),
-        textposition="middle center"
+        x=[sx],
+        y=[sy],
+        mode="markers",
+        marker=dict(
+            size=14,
+            color="lime",
+            symbol="x"
+        ),
+        showlegend=False
     ))
 
-    fig.add_trace(go.Scatter(
-        x=xsB,
-        y=ysB,
-        mode="markers+text",
-        name=match["teamB"],
-        marker=dict(size=sizesB, color="red"),
-        text=textsB,
-        textfont=dict(color="white", size=14),
-        textposition="middle center"
-    ))
+# Configuración del campo
+fig.update_xaxes(visible=False, range=[0, 1])
+fig.update_yaxes(
+    visible=False,
+    range=[0, 1],
+    scaleanchor="x",
+    scaleratio=1
+)
 
-    fig.update_xaxes(visible=False, range=[0, 1])
-    fig.update_yaxes(
-        visible=False,
-        range=[0, 1],
-        scaleanchor="x",
-        scaleratio=1
-    )
-
-    # margen mínimo para pegarlo arriba pero sin bloquear botones
-    fig.update_layout(
-    height=380,           # más estrecho verticalmente
-    width=800,           # un poco más ancho
-    autosize=False,       # desactivamos autosize para respetar width/height
-    margin=dict(l=0, r=0, t=0, b=0)  # sin márgenes
+fig.update_layout(
+    height=380,
+    width=800,
+    autosize=False,
+    margin=dict(l=0, r=0, t=0, b=0)
 )
 
 # ==========================================
