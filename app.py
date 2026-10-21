@@ -766,19 +766,24 @@ if selected_shot is not None:
         showlegend=False
     ))
 
-# Configuración del campo
-fig.update_xaxes(visible=False, range=[0, 1])
+# Configuración del campo: mantener el ajuste automático
+fig.update_xaxes(
+    visible=False,
+    range=[0, 1],
+    autorange=True
+)
+
 fig.update_yaxes(
     visible=False,
     range=[0, 1],
+    autorange=True,
     scaleanchor="x",
     scaleratio=1
 )
 
 fig.update_layout(
-    height=380,
-    width=800,
-    autosize=False,
+    height=500,
+    autosize=True,
     margin=dict(l=0, r=0, t=0, b=0)
 )
 
