@@ -84,10 +84,6 @@ ZONA_NOMBRE_A_ID = {v: k for k, v in ZONAS.items()}
 # Bloque para modificaciones
 modificaciones_activo = True
 
-# 🔁 Refresco automático del reloj mientras el partido esté activo
-if st.session_state.get("partido_activo", False):
-    st_autorefresh(interval=1000, key="auto_refresh_reloj")
-
 # =========================================================
 # ESTADO PERSISTENTE (NO SE BORRA AL RECARGAR)
 # =========================================================
