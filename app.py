@@ -522,11 +522,6 @@ with left:
     with contenedor:
 
         col_campo, col_porteria = st.columns([2.4,1.2], gap="large")  
-
-    st.markdown("---")
-    registrar_lanzamiento(match)
-    st.markdown("---")
-
                 
 # -------- TIEMPO + EXCLUSIONES --------
 with mid:
