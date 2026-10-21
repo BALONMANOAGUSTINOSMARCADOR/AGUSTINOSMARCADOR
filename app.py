@@ -428,110 +428,91 @@ with left:
     )
 
     
+    # -----------------------------
+    # ZONA DE FINALIZACIÓN Y GOLES
+    # -----------------------------
     with st.container(key="zona_finalizacion"):
+
         st.markdown("### 🥅 Zona de finalización")
-        
-    if "selected_goal_zone" not in st.session_state.match:
-        st.session_state.match["selected_goal_zone"] = None
 
-    
-    for fila in [[1, 2, 3], [4, 5, 6], [7, 8, 9]]:
-        c1, c2, c3 = st.columns(3, gap="small")
-
-        for col, zona in zip([c1, c2, c3], fila):
-            with col:
-                if st.button(
-                    str(zona),
-                    key=f"goal_{zona}",
-                    use_container_width=True
-                ):
-                    st.session_state.match["selected_goal_zone"] = zona
-
-        for col,zona in zip([c1,c2,c3],fila):
-
-            with col:
-
-                if st.button(str(zona), key=f"goal_{zona}"):
-
-                    st.session_state.match["selected_goal_zone"] = zona
-
-    zona_porteria = st.session_state.match["selected_goal_zone"]
-
-    if zona_porteria:
-
-        st.info(f"🎯 Zona seleccionada: {zona_porteria}")
-
-        
+        # Estilo únicamente para los botones 1-9
         st.markdown("""
         <style>
-        .st-key-zona_finalizacion div.stButton > button {
+        .st-key-botonera_zonas div.stButton > button {
             height: 30px;
             min-height: 30px;
             padding: 0px;
             font-size: 11px;
             font-weight: bold;
+            margin: 0px !important;
+        }
+
+        .st-key-zona_finalizacion div[data-testid="stHorizontalBlock"] {
+            gap: 0.15rem !important;
+        }
+
+        .st-key-goles_equipos div[data-testid="stHorizontalBlock"] {
+            gap: 0.1rem !important;
+        }
+
+        .st-key-goles_equipos div.stButton > button {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
         }
         </style>
         """, unsafe_allow_html=True)
 
-    # Botones de goles, juntos y debajo de la zona de finalización
-    col_gol_a, col_gol_b = st.columns([1, 1], gap="small")
+        if "selected_goal_zone" not in st.session_state.match:
+            st.session_state.match["selected_goal_zone"] = None
 
-    with col_gol_a:
-        if st.button(
-            f"⚽ GOL {match['teamA']}",
-            use_container_width=True
-        ):
-            if finta is None:
-                st.warning("⚠️ Debes seleccionar tipo de finta")
-            elif zona_porteria is None:
-                st.warning("⚠️ Debes seleccionar una zona de la portería")
-            else:
-                add_goal("A", zone, player, finta, resultado, zona_porteria)
+        # Botonera 1-9
+        with st.container(key="botonera_zonas"):
+            for fila in [[1, 2, 3], [4, 5, 6], [7, 8, 9]]:
+                c1, c2, c3 = st.columns(3, gap="small")
 
-    with col_gol_b:
-        if st.button(
-            f"⚽ GOL {match['teamB']}",
-            use_container_width=True
-        ):
-            if finta is None:
-                st.warning("⚠️ Debes seleccionar tipo de finta")
-            elif zona_porteria is None:
-                st.warning("⚠️ Debes seleccionar una zona de la portería")
-            else:
-                add_goal("B", zone, player, finta, resultado, zona_porteria)
+                for col, zona in zip([c1, c2, c3], fila):
+                    with col:
+                        if st.button(
+                            str(zona),
+                            key=f"goal_{zona}",
+                            use_container_width=True
+                        ):
+                            st.session_state.match["selected_goal_zone"] = zona
 
-with col_gol_a:
-    if st.button(f"{resultado} {match['teamA']}"):
-        if finta is None:
-            st.warning("⚠️ Debes seleccionar tipo de finta")
-        elif zona_porteria is None:
-            st.warning("⚠️ Debes seleccionar una zona de la portería")
-        else:
-            add_goal(
-                "A",
-                zone,
-                player,
-                finta,
-                resultado,
-                zona_porteria
-            )    
+        zona_porteria = st.session_state.match["selected_goal_zone"]
 
-with col_gol_b:
-    if st.button(f"{resultado} {match['teamB']}"):
-        if finta is None:
-                st.warning("⚠️ Debes seleccionar tipo de finta")
-        elif zona_porteria is None:
-            st.warning("⚠️ Debes seleccionar una zona de la portería")
-        else:
-            add_goal(
-                "B",
-                zone,
-                player,
-                finta,
-                resultado,
-                zona_porteria
-            )    
+        if zona_porteria:
+            st.caption(f"🎯 Zona seleccionada: {zona_porteria}")
+
+        # Botones de los dos equipos, inmediatamente debajo
+        with st.container(key="goles_equipos"):
+            col_gol_a, col_gol_b = st.columns([1, 1], gap="small")
+
+            with col_gol_a:
+                if st.button(
+                    f"⚽ GOL {match['teamA']}",
+                    key="gol_equipo_a",
+                    use_container_width=True
+                ):
+                    if finta is None:
+                        st.warning("⚠️ Debes seleccionar tipo de finta")
+                    elif zona_porteria is None:
+                        st.warning("⚠️ Debes seleccionar una zona de la portería")
+                    else:
+                        add_goal("A", zone, player, finta, resultado, zona_porteria)
+
+            with col_gol_b:
+                if st.button(
+                    f"⚽ GOL {match['teamB']}",
+                    key="gol_equipo_b",
+                    use_container_width=True
+                ):
+                    if finta is None:
+                        st.warning("⚠️ Debes seleccionar tipo de finta")
+                    elif zona_porteria is None:
+                        st.warning("⚠️ Debes seleccionar una zona de la portería")
+                    else:
+                        add_goal("B", zone, player, finta, resultado, zona_porteria)
 
     # =====================================================
     # REGISTRO DEL LANZAMIENTO (AGUSTINOS MARCADOR PRO)
