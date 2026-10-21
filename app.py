@@ -618,7 +618,13 @@ with right:
                 add_card(p, team, card_color)
 
     # Espacio reservado para mostrar el campo debajo de exclusiones y tarjetas
-    court_placeholder = st.empty()
+    
+    court_placeholder.plotly_chart(
+        fig,
+        use_container_width=True,
+        key="campo_heatmap_fijo"
+    )
+
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
