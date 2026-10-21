@@ -604,6 +604,8 @@ with right:
             if card_color != "NINGUNA":
                 add_card(p, team, card_color)
 
+    # Espacio reservado para mostrar el campo debajo de exclusiones y tarjetas
+    court_placeholder = st.empty()
 # =========================================================
 # HEATMAP (ANCHO COMPLETO, pegado arriba)
 # =========================================================
