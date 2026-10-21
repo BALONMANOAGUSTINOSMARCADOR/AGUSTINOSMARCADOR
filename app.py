@@ -434,9 +434,18 @@ with left:
     if "selected_goal_zone" not in st.session_state.match:
         st.session_state.match["selected_goal_zone"] = None
 
-    for fila in [[1,2,3],[4,5,6],[7,8,9]]:
+    
+    for fila in [[1, 2, 3], [4, 5, 6], [7, 8, 9]]:
+        c1, c2, c3 = st.columns(3, gap="small")
 
-        c1,c2,c3 = st.columns(3)
+        for col, zona in zip([c1, c2, c3], fila):
+            with col:
+                if st.button(
+                    str(zona),
+                    key=f"goal_{zona}",
+                    use_container_width=True
+                ):
+                    st.session_state.match["selected_goal_zone"] = zona
 
         for col,zona in zip([c1,c2,c3],fila):
 
@@ -464,9 +473,33 @@ with left:
         }
         </style>
         """, unsafe_allow_html=True)
-        
-# Botones de goles uno al lado del otro
-col_gol_a, col_gol_b = st.columns(2, gap="small")
+
+    # Botones de goles, juntos y debajo de la zona de finalización
+    col_gol_a, col_gol_b = st.columns([1, 1], gap="small")
+
+    with col_gol_a:
+        if st.button(
+            f"⚽ GOL {match['teamA']}",
+            use_container_width=True
+        ):
+            if finta is None:
+                st.warning("⚠️ Debes seleccionar tipo de finta")
+            elif zona_porteria is None:
+                st.warning("⚠️ Debes seleccionar una zona de la portería")
+            else:
+                add_goal("A", zone, player, finta, resultado, zona_porteria)
+
+    with col_gol_b:
+        if st.button(
+            f"⚽ GOL {match['teamB']}",
+            use_container_width=True
+        ):
+            if finta is None:
+                st.warning("⚠️ Debes seleccionar tipo de finta")
+            elif zona_porteria is None:
+                st.warning("⚠️ Debes seleccionar una zona de la portería")
+            else:
+                add_goal("B", zone, player, finta, resultado, zona_porteria)
 
 with col_gol_a:
     if st.button(f"{resultado} {match['teamA']}"):
