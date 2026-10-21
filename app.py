@@ -522,34 +522,45 @@ with left:
     with contenedor:
 
         col_campo, col_porteria = st.columns([2.4,1.2], gap="large")  
-                
+
+
 # -------- TIEMPO + EXCLUSIONES --------
-with mid:
+
+@st.fragment(
+    run_every="1s" if st.session_state.get("partido_activo", False) else None
+)
+def render_timer_exclusions():
     st.subheader("🚫 Exclusiones")
 
     # ⏱️ TIEMPO DE PARTIDO
     t = elapsed_seconds()
-    reloj_display = st.empty()
-    reloj_display.markdown(f"## {t//60:02d}:{t%60:02d}")
+    st.markdown(f"## {t//60:02d}:{t%60:02d}")
 
     col_pause, col_resume = st.columns(2)
+
     with col_pause:
-        if st.button("⏸ Pausar"):
+        if st.button("⏸ Pausar", key="pausar_reloj"):
             pause_match()
             st.rerun()
+
     with col_resume:
-        if st.button("▶ Reanudar"):
+        if st.button("▶ Reanudar", key="reanudar_reloj"):
             start_match()
             st.rerun()
 
     # Mostrar exclusiones activas
     exs = active_exclusions()
+
     if exs:
         for ex in exs:
             mm = ex["remaining"] // 60
             ss = ex["remaining"] % 60
-            stats = match["players_stats"][ex["team"]].get(ex["player"], {"exclusiones": 0})
+
+            stats = match["players_stats"][ex["team"]].get(
+                ex["player"], {"exclusiones": 0}
+            )
             count = stats["exclusiones"]
+
             st.markdown(
                 f"**{ex['player']}** ({count}) | "
                 f"{match['teamA'] if ex['team']=='A' else match['teamB']} | "
@@ -557,6 +568,10 @@ with mid:
             )
     else:
         st.write("—")
+
+
+with mid:
+    render_timer_exclusions()
 
 # -------- AÑADIR EXCLUSIÓN / TARJETA --------
 # Pegamento para subir la columna de la derecha
