@@ -365,18 +365,8 @@ left, mid, right = st.columns(3)
 with left:
     st.subheader("Marcador")
 
-    # Mostrar nombres y goles grandes
-    st.markdown(
-        f"""
-        <div style="display:flex; align-items:center; font-weight:bold; gap:0px;">
-            <span style="font-size:28px;">{match['teamA']}</span>
-            <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  
-            <span style="font-size:28px;">{match['teamB']}</span>
-            <span style="font-size:48px; color:red;">{match['scoreB']}</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    # Reservar el espacio del marcador para actualizarlo tras procesar los goles.
+    marcador_placeholder = st.empty()
 
     # Jugador y Zona en la misma fila
     col_player, col_zone = st.columns([1, 1])
@@ -510,6 +500,19 @@ with left:
                         st.warning("⚠️ Debes seleccionar una zona de la portería")
                     else:
                         add_goal("B", zone, player, finta, resultado, zona_porteria)
+
+    # Actualizar el marcador en su posición original, ya con el resultado del botón.
+    marcador_placeholder.markdown(
+        f"""
+        <div style="display:flex; align-items:center; font-weight:bold; gap:0px;">
+            <span style="font-size:28px;">{match['teamA']}</span>
+            <span style="font-size:48px; color:blue;">{match['scoreA']}</span>  
+            <span style="font-size:28px;">{match['teamB']}</span>
+            <span style="font-size:48px; color:red;">{match['scoreB']}</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     # =====================================================
     # REGISTRO DEL LANZAMIENTO (AGUSTINOS MARCADOR PRO)
