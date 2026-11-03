@@ -579,6 +579,140 @@ def render_timer_exclusions():
 with mid:
     render_timer_exclusions()
 
+
+# =========================================================
+# MAPAS DE CALOR DE LAS DOS PORTERÍAS
+# =========================================================
+
+def render_goal_heatmap(team, rgb, title):
+
+    # Contar los goles de cada uno de los cuatro sectores
+    counts = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0
+    }
+
+    for ev in match["events"]:
+
+        if ev.get("type") != "goal":
+            continue
+
+        if ev.get("team") != team:
+            continue
+
+        # Solo contabilizar goles registrados con el nuevo sistema
+        if ev.get("goal_zone_layout") != 4:
+            continue
+
+        try:
+            zona = int(ev.get("goal_zone"))
+        except (TypeError, ValueError):
+            continue
+
+        if zona in counts:
+            counts[zona] += 1
+
+    max_goals = max(counts.values()) or 1
+
+    # Construir los cuatro cuadrantes de la portería
+    cells = []
+
+    for zona in (1, 2, 3, 4):
+
+        goles = counts[zona]
+
+        if goles > 0:
+            intensidad = goles / max_goals
+            alpha = 0.18 + (0.72 * intensidad)
+
+            fondo = f"rgba({rgb}, {alpha:.2f})"
+
+            color_texto = (
+                "#FFFFFF" if intensidad >= 0.55 else "#111111"
+            )
+        else:
+            fondo = "#F1F1F1"
+            color_texto = "#555555"
+
+        cells.append(
+            f"""
+            <div style="
+                min-height:68px;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+                gap:2px;
+                background:{fondo};
+                color:{color_texto};
+                border:1px solid rgba(0,0,0,0.15);
+                border-radius:2px;
+            ">
+                <span style="font-size:11px;font-weight:bold;">
+                    ZONA {zona}
+                </span>
+                <strong style="font-size:25px;">
+                    {goles}
+                </strong>
+                <span style="font-size:9px;">
+                    GOLES
+                </span>
+            </div>
+            """
+        )
+
+    # Dibujar portería frontal dividida en cuatro sectores
+    st.markdown(
+        f"""
+        <div style="margin:0.35rem 0 1rem;">
+
+            <div style="
+                text-align:center;
+                font-weight:bold;
+                font-size:0.9rem;
+                margin-bottom:0.35rem;
+            ">
+                {title}
+            </div>
+
+            <div style="
+                max-width:330px;
+                margin:0 auto;
+                padding:5px;
+                border:4px solid #222222;
+                border-bottom-width:8px;
+                border-radius:4px;
+                background:#FFFFFF;
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:3px;
+            ">
+                {''.join(cells)}
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+# PORTERÍA AZUL — EQUIPO A
+with mid:
+    render_goal_heatmap(
+        "A",
+        "30, 100, 220",
+        "PORTERÍA AZUL — EQUIPO A"
+    )
+
+    # PORTERÍA ROJA — EQUIPO B
+    render_goal_heatmap(
+        "B",
+        "220, 45, 55",
+        "PORTERÍA ROJA — EQUIPO B"
+    )
+
 # -------- AÑADIR EXCLUSIÓN / TARJETA --------
 # Pegamento para subir la columna de la derecha
 st_empty_right = st.empty()
