@@ -423,14 +423,14 @@ with left:
 
         st.markdown("### 🥅 Zona de finalización")
 
-        # Estilo únicamente para los botones 1-9
+        # Estilo de la botonera de cuatro zonas
         st.markdown("""
         <style>
         .st-key-botonera_zonas div.stButton > button {
             height: 30px;
             min-height: 30px;
             padding: 0px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             margin: 0px !important;
         }
@@ -450,15 +450,17 @@ with left:
         </style>
         """, unsafe_allow_html=True)
 
-        if "selected_goal_zone" not in st.session_state.match:
+        # Comprobar que la zona seleccionada pertenece al nuevo sistema 1-4
+        if st.session_state.match.get("selected_goal_zone") not in (1, 2, 3, 4):
             st.session_state.match["selected_goal_zone"] = None
 
-        # Botonera 1-9
+        # Botonera de cuatro zonas: dos arriba y dos abajo
         with st.container(key="botonera_zonas"):
-            for fila in [[1, 2, 3], [4, 5, 6], [7, 8, 9]]:
-                c1, c2, c3 = st.columns(3, gap="small")
 
-                for col, zona in zip([c1, c2, c3], fila):
+            for fila in [[1, 2], [3, 4]]:
+                c1, c2 = st.columns(2, gap="small")
+
+                for col, zona in zip([c1, c2], fila):
                     with col:
                         if st.button(
                             str(zona),
@@ -472,8 +474,9 @@ with left:
         if zona_porteria:
             st.caption(f"🎯 Zona seleccionada: {zona_porteria}")
 
-        # Botones de los dos equipos, inmediatamente debajo
+        # Botones de los dos equipos
         with st.container(key="goles_equipos"):
+
             col_gol_a, col_gol_b = st.columns([1, 1], gap="small")
 
             with col_gol_a:
@@ -501,6 +504,7 @@ with left:
                         st.warning("⚠️ Debes seleccionar una zona de la portería")
                     else:
                         add_goal("B", zone, player, finta, resultado, zona_porteria)
+    
 
     # Actualizar el marcador en su posición original, ya con el resultado del botón.
     marcador_placeholder.markdown(
