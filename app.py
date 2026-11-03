@@ -663,16 +663,21 @@ def render_goal_heatmap(team, rgb, title):
             """
         )
 
+    
     # Dibujar portería frontal dividida en cuatro sectores
-    st.markdown(
+    st.components.v1.html(
         f"""
-        <div style="margin:0.35rem 0 1rem;">
+        <div style="
+            margin:0.35rem 0 1rem;
+            font-family:Arial,sans-serif;
+        ">
 
             <div style="
                 text-align:center;
                 font-weight:bold;
-                font-size:0.9rem;
-                margin-bottom:0.35rem;
+                font-size:14px;
+                margin-bottom:6px;
+                color:rgb({rgb});
             ">
                 {title}
             </div>
@@ -688,16 +693,17 @@ def render_goal_heatmap(team, rgb, title):
                 display:grid;
                 grid-template-columns:1fr 1fr;
                 gap:3px;
+                box-sizing:border-box;
             ">
                 {''.join(cells)}
             </div>
 
         </div>
         """,
-        unsafe_allow_html=True
+        height=190,
+        scrolling=False
     )
-
-
+    
 # PORTERÍA AZUL — EQUIPO A
 with mid:
     render_goal_heatmap(
