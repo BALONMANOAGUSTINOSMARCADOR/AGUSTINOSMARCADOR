@@ -650,15 +650,9 @@ def render_goal_heatmap(team, rgb, title):
                 border:1px solid rgba(0,0,0,0.15);
                 border-radius:2px;
             ">
-                <span style="font-size:11px;font-weight:bold;">
-                    ZONA {zona}
-                </span>
-                <strong style="font-size:25px;">
+                <strong style="font-size:28px;">
                     {goles}
                 </strong>
-                <span style="font-size:9px;">
-                    GOLES
-                </span>
             </div>
             """
         )
@@ -687,7 +681,7 @@ def render_goal_heatmap(team, rgb, title):
                 margin:0 auto;
                 padding:5px;
                 border:4px solid #222222;
-                border-bottom-width:8px;
+                border-bottom:none;
                 border-radius:4px;
                 background:#FFFFFF;
                 display:grid;
