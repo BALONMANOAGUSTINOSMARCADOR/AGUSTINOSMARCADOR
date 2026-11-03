@@ -103,7 +103,7 @@ if "match" not in st.session_state:
         # NUEVO - Lanzamiento seleccionado sobre el campo
         "selected_shot": None,
 
-        # NUEVO - Zona seleccionada de la portería (1-9)
+        # NUEVO - Zona seleccionada de la portería (1-4)
         "selected_goal_zone": None,
 
         "exclusions": [],
