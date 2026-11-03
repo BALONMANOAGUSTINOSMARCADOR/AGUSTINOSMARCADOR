@@ -180,7 +180,7 @@ def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria
             return
 
 
-    m["events"].append({
+        m["events"].append({
         "type": "goal" if resultado == "Gol" else "shot",
         "time": iso_now(),
         "team": team,
@@ -189,6 +189,7 @@ def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria
         "finta": finta,
         "result": resultado,
         "goal_zone": zona_porteria,
+        "goal_zone_layout": 4,
     })
     
     # Solo los goles modifican el marcador
