@@ -1199,9 +1199,11 @@ with st.container():
             goals[t][z]["IZ"] += 1
         elif ev.get("finta") == "DCHA":
             goals[t][z]["DCHA"] += 1
-            
-    # 2️⃣ función para construir coordenadas, tamaño y texto
-        def build_team_points(team):
+
+    # 2️⃣ FUNCIÓN PARA CONSTRUIR COORDENADAS, TAMAÑO Y TEXTO
+
+    def build_team_points(team):
+
         xs, ys, sizes, texts = [], [], [], []
 
         # Recorrer siempre las nueve zonas del campo
@@ -1211,38 +1213,45 @@ with st.container():
             n = data["total"]
 
             x, y = ZONE_COORDS[zone_name]
-                if team == "B":
-                # Reflejar horizontalmente el eje X
+
+            # Reflejar horizontalmente el equipo B
+            if team == "B":
+
                 x = 1 - x
 
                 # Ajustar las zonas laterales
-                if zone_name == "EI":  # izquierda → derecha
+                if zone_name == "EI":
                     x = 1 - ZONE_COORDS["ED"][0]
                     y = ZONE_COORDS["ED"][1]
-                elif zone_name == "ED":  # derecha → izquierda
+
+                elif zone_name == "ED":
                     x = 1 - ZONE_COORDS["EI"][0]
                     y = ZONE_COORDS["EI"][1]
-                elif zone_name == "LI":  # izquierda interna → derecha interna
+
+                elif zone_name == "LI":
                     x = 1 - ZONE_COORDS["LD"][0]
                     y = ZONE_COORDS["LD"][1]
-                elif zone_name == "LD":  # derecha interna → izquierda interna
+
+                elif zone_name == "LD":
                     x = 1 - ZONE_COORDS["LI"][0]
                     y = ZONE_COORDS["LI"][1]
-                elif zone_name == "EXI":  # invertir EXI ↔ EXD
+
+                elif zone_name == "EXI":
                     x = 1 - ZONE_COORDS["EXD"][0]
                     y = ZONE_COORDS["EXD"][1]
-                elif zone_name == "EXD":  # invertir EXD ↔ EXI
+
+                elif zone_name == "EXD":
                     x = 1 - ZONE_COORDS["EXI"][0]
                     y = ZONE_COORDS["EXI"][1]
-                    
-    # Centro, P, EXC se mantienen igual
+
+            # Centro, P y EXC se mantienen igual
 
             xs.append(x)
             ys.append(y)
-            sizes.append(18 + n*6)
+            sizes.append(18 + n * 6)
             texts.append(str(n))
 
-        return xs, ys, sizes, texts
+        return xs, ys, sizes, texts    
 
     xsA, ysA, sizesA, textsA = build_team_points("A")
     xsB, ysB, sizesB, textsB = build_team_points("B")
