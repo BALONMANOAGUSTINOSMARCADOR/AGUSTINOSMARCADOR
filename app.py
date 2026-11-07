@@ -627,9 +627,12 @@ with left:
                             zona_porteria
                         )
 
-                        # Limpiar selección después del registro
+                        # Limpiar selecciones después del registro
                         match["selected_goal_team"] = None
                         match["selected_goal_zone"] = None
+                        match["selected_shot_team"] = None
+                        match["selected_shot_zone"] = None
+                        match["court_chart_version"] += 1
 
                         st.rerun()        
 
