@@ -503,8 +503,6 @@ with left:
 
     with st.container(key="zona_finalizacion"):
 
-        st.markdown("### 🥅 Registro de finalización")
-
         # Recuperar la selección realizada en las porterías
         zona_porteria = match.get("selected_goal_zone")
         equipo_porteria = match.get("selected_goal_team")
