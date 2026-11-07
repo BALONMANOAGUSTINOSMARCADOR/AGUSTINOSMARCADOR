@@ -183,6 +183,50 @@ def reset_match():
         "part": 1        
     }
 
+def registrar_cambio_portero(dorsal, team):
+
+    m = st.session_state.match
+
+    dorsal = str(dorsal).strip()
+
+    if not dorsal:
+        st.error("Introduce el dorsal del portero.")
+        return
+
+    if team not in ("A", "B"):
+        st.error("Selecciona un equipo válido.")
+        return
+
+    porteros = m.setdefault(
+        "active_goalkeepers",
+        {"A": None, "B": None}
+    )
+
+    anterior = porteros.get(team)
+
+    if anterior == dorsal:
+        st.warning(
+            f"El portero nº {dorsal} ya está en la portería."
+        )
+        return
+
+    cambio = {
+        "time": iso_now(),
+        "elapsed_seconds": elapsed_seconds(),
+        "part": m.get("part", 1),
+        "team": team,
+        "team_name": m["teamA"] if team == "A" else m["teamB"],
+        "previous_goalkeeper": anterior,
+        "goalkeeper": dorsal
+    }
+
+    m.setdefault("goalkeeper_changes", []).append(cambio)
+
+    porteros[team] = dorsal
+
+    st.success(
+        f"Portero nº {dorsal} registrado para el EQUIPO {team}"
+    )
 def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria=None):
         
     m = st.session_state.match
