@@ -1850,6 +1850,10 @@ for equipo in ["A", "B"]:
         # BARRAS APILADAS POR SECTOR DE PORTERÍA
         # =========================================
 
+               # =========================================
+        # BARRAS APILADAS POR SECTOR DE PORTERÍA
+        # =========================================
+
         for sector in (1, 2, 3, 4):
 
             valores_sector = [
@@ -1869,7 +1873,9 @@ for equipo in ["A", "B"]:
                     f"Sector {sector}<br>"
                     "Goles: %{y}<extra></extra>"
                 )
-            ))        # Línea media equipo
+            ))
+
+        # Línea media equipo
         fig_jugador.add_trace(go.Scatter(
             x=zonas_x,
             y=media_y,
@@ -1877,7 +1883,8 @@ for equipo in ["A", "B"]:
             name="Media equipo"
         ))
 
-                fig_jugador.update_layout(
+        # Configuración del gráfico
+        fig_jugador.update_layout(
             height=350,
             title=f"Jugador {jugador}",
             xaxis_title="Zona de lanzamiento",
@@ -1887,8 +1894,7 @@ for equipo in ["A", "B"]:
                 title="Sector de portería",
                 traceorder="normal"
             )
-        )
-        st.plotly_chart(
+        )        st.plotly_chart(
             fig_jugador,
             use_container_width=True,
             key=f"grafico_{equipo}_{jugador}"
