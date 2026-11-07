@@ -661,9 +661,13 @@ with mid:
 # MAPAS DE CALOR DE LAS DOS PORTERÍAS
 # =========================================================
 
-def render_goal_heatmap(team, rgb, title):
+def render_goal_heatmap(team, rgb, title, eventos=None):
 
-    # Contar los goles de cada uno de los cuatro sectores
+    # Si no se indica una lista concreta, utilizar todos los eventos
+    if eventos is None:
+        eventos = match["events"]
+
+    # Contar únicamente los goles de cada sector
     counts = {
         1: 0,
         2: 0,
@@ -671,25 +675,47 @@ def render_goal_heatmap(team, rgb, title):
         4: 0
     }
 
-    for ev in match["events"]:
+    # Calcular el ratio: goles / (goles + paradas + postes)
+    goles_total = 0
+    intentos_validos = 0
 
-        if ev.get("type") != "goal":
+    for ev in eventos:
+
+        # En las porterías generales se filtra por equipo atacante
+        if team is not None and ev.get("team") != team:
             continue
 
-        if ev.get("team") != team:
-            continue
+        resultado = ev.get("result")
 
-        # Solo contabilizar goles registrados con el nuevo sistema
-        if ev.get("goal_zone_layout") != 4:
-            continue
+        # Compatibilidad con eventos antiguos
+        if resultado is None and ev.get("type") == "goal":
+            resultado = "Gol"
 
-        try:
-            zona = int(ev.get("goal_zone"))
-        except (TypeError, ValueError):
-            continue
+        if resultado in ("Gol", "Parada", "Poste"):
+            intentos_validos += 1
 
-        if zona in counts:
-            counts[zona] += 1
+        if resultado == "Gol":
+            goles_total += 1
+
+            # Los sectores solo muestran goles
+            if ev.get("goal_zone_layout") == 4:
+                try:
+                    zona = int(ev.get("goal_zone"))
+                except (TypeError, ValueError):
+                    zona = None
+
+                if zona in counts:
+                    counts[zona] += 1
+
+    porcentaje = (
+        (goles_total / intentos_validos) * 100
+        if intentos_validos > 0 else 0
+    )
+
+    ratio_texto = (
+        f"{goles_total}/{intentos_validos} = "
+        f"{porcentaje:.1f}%"
+    ).replace(".", ",")
 
     max_goals = max(counts.values()) or 1
 
@@ -734,7 +760,6 @@ def render_goal_heatmap(team, rgb, title):
             """
         )
 
-    
     # Dibujar portería frontal dividida en cuatro sectores
     st.components.v1.html(
         f"""
@@ -747,10 +772,20 @@ def render_goal_heatmap(team, rgb, title):
                 text-align:center;
                 font-weight:bold;
                 font-size:14px;
-                margin-bottom:6px;
+                margin-bottom:3px;
                 color:rgb({rgb});
             ">
                 {title}
+            </div>
+
+            <div style="
+                text-align:center;
+                font-weight:bold;
+                font-size:14px;
+                margin-bottom:6px;
+                color:#222222;
+            ">
+                {ratio_texto}
             </div>
 
             <div style="
@@ -771,10 +806,9 @@ def render_goal_heatmap(team, rgb, title):
 
         </div>
         """,
-        height=190,
+        height=210,
         scrolling=False
-    )
-    
+    )    
 # PORTERÍA AZUL — EQUIPO A
 with mid:
     render_goal_heatmap(
