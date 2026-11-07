@@ -1175,59 +1175,6 @@ with right:
             if card_color != "NINGUNA":
                 add_card(p, team, card_color)
 
-        # -------------------------------------------------
-    # CAMBIO DE PORTERO
-    # -------------------------------------------------
-
-    with st.form("form_cambio_portero", clear_on_submit=True):
-
-        col_dorsal, col_equipo, col_boton = st.columns(
-            [1, 1, 1.2]
-        )
-
-        with col_dorsal:
-            dorsal_portero = st.text_input(
-                "Dorsal",
-                placeholder="Nº"
-            )
-
-        with col_equipo:
-            equipo_portero = st.selectbox(
-                "Equipo",
-                ["A", "B"],
-                format_func=lambda x: (
-                    "EQUIPO A" if x == "A" else "EQUIPO B"
-                )
-            )
-
-        with col_boton:
-            st.write("")
-            registrar = st.form_submit_button(
-                "CAMBIO DE PORTERO",
-                use_container_width=True
-            )
-
-        if registrar:
-            registrar_cambio_portero(
-                dorsal_portero,
-                equipo_portero
-            )
-
-    # MOSTRAR PORTEROS ACTUALES
-
-    porteros_activos = match.get(
-        "active_goalkeepers",
-        {"A": None, "B": None}
-    )
-
-    portero_a = porteros_activos.get("A") or "Sin registrar"
-    portero_b = porteros_activos.get("B") or "Sin registrar"
-
-    st.caption(
-        f"🥅 A: {portero_a}  |  B: {portero_b}"
-    )    
-
-        
     court_placeholder = st.empty()    
 
 # =========================================================
