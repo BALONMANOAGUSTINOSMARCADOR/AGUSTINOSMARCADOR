@@ -497,96 +497,104 @@ with left:
         horizontal=True
     )
 
-    
     # -----------------------------
-    # ZONA DE FINALIZACIÓN Y GOLES
+    # REGISTRO DE GOLES DESDE LAS DOS PORTERÍAS
     # -----------------------------
+
     with st.container(key="zona_finalizacion"):
 
-        st.markdown("### 🥅 Zona de finalización")
+        st.markdown("### 🥅 Registro de finalización")
 
-        # Estilo de la botonera de cuatro zonas
-        st.markdown("""
-        <style>
-        .st-key-botonera_zonas div.stButton > button {
-            height: 30px;
-            min-height: 30px;
-            padding: 0px;
-            font-size: 12px;
-            font-weight: bold;
-            margin: 0px !important;
-        }
-
-        .st-key-zona_finalizacion div[data-testid="stHorizontalBlock"] {
-            gap: 0.15rem !important;
-        }
-
-        .st-key-goles_equipos div[data-testid="stHorizontalBlock"] {
-            gap: 0.1rem !important;
-        }
-
-        .st-key-goles_equipos div.stButton > button {
-            margin-top: 0px !important;
-            margin-bottom: 0px !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-
-        # Comprobar que la zona seleccionada pertenece al nuevo sistema 1-4
-        if st.session_state.match.get("selected_goal_zone") not in (1, 2, 3, 4):
-            st.session_state.match["selected_goal_zone"] = None
-
-        # Botonera de cuatro zonas: dos arriba y dos abajo
-        with st.container(key="botonera_zonas"):
-
-            for fila in [[1, 2], [3, 4]]:
-                c1, c2 = st.columns(2, gap="small")
-
-                for col, zona in zip([c1, c2], fila):
-                    with col:
-                        if st.button(
-                            str(zona),
-                            key=f"goal_{zona}",
-                            use_container_width=True
-                        ):
-                            st.session_state.match["selected_goal_zone"] = zona
-
-        zona_porteria = st.session_state.match["selected_goal_zone"]
-
-        if zona_porteria:
-            st.caption(f"🎯 Zona seleccionada: {zona_porteria}")
+        # Recuperar la selección realizada en las porterías
+        zona_porteria = match.get("selected_goal_zone")
+        equipo_porteria = match.get("selected_goal_team")
 
         # Botones de los dos equipos
         with st.container(key="goles_equipos"):
 
             col_gol_a, col_gol_b = st.columns([1, 1], gap="small")
 
+            # ---------------------------------
+            # GOL EQUIPO A
+            # ---------------------------------
             with col_gol_a:
+
                 if st.button(
                     f"⚽ GOL {match['teamA']}",
                     key="gol_equipo_a",
                     use_container_width=True
                 ):
+
                     if finta is None:
                         st.warning("⚠️ Debes seleccionar tipo de finta")
-                    elif zona_porteria is None:
-                        st.warning("⚠️ Debes seleccionar una zona de la portería")
-                    else:
-                        add_goal("A", zone, player, finta, resultado, zona_porteria)
 
+                    elif equipo_porteria != "A":
+                        st.error(
+                            "❌ ERROR: Has seleccionado la portería del EQUIPO B. "
+                            "Debes seleccionar la portería del EQUIPO A."
+                        )
+
+                    elif zona_porteria not in (1, 2, 3, 4):
+                        st.warning(
+                            "⚠️ Debes seleccionar una zona de la portería A"
+                        )
+
+                    else:
+                        add_goal(
+                            "A",
+                            zone,
+                            player,
+                            finta,
+                            resultado,
+                            zona_porteria
+                        )
+
+                        # Limpiar selección después del registro
+                        match["selected_goal_team"] = None
+                        match["selected_goal_zone"] = None
+
+                        st.rerun()
+
+            # ---------------------------------
+            # GOL EQUIPO B
+            # ---------------------------------
             with col_gol_b:
+
                 if st.button(
                     f"⚽ GOL {match['teamB']}",
                     key="gol_equipo_b",
                     use_container_width=True
                 ):
+
                     if finta is None:
                         st.warning("⚠️ Debes seleccionar tipo de finta")
-                    elif zona_porteria is None:
-                        st.warning("⚠️ Debes seleccionar una zona de la portería")
+
+                    elif equipo_porteria != "B":
+                        st.error(
+                            "❌ ERROR: Has seleccionado la portería del EQUIPO A. "
+                            "Debes seleccionar la portería del EQUIPO B."
+                        )
+
+                    elif zona_porteria not in (1, 2, 3, 4):
+                        st.warning(
+                            "⚠️ Debes seleccionar una zona de la portería B"
+                        )
+
                     else:
-                        add_goal("B", zone, player, finta, resultado, zona_porteria)
-    
+                        add_goal(
+                            "B",
+                            zone,
+                            player,
+                            finta,
+                            resultado,
+                            zona_porteria
+                        )
+
+                        # Limpiar selección después del registro
+                        match["selected_goal_team"] = None
+                        match["selected_goal_zone"] = None
+
+                        st.rerun()        
 
     # Actualizar el marcador en su posición original, ya con el resultado del botón.
     marcador_placeholder.markdown(
