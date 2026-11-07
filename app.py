@@ -1197,18 +1197,17 @@ with st.container():
             goals[t][z]["DCHA"] += 1
             
     # 2️⃣ función para construir coordenadas, tamaño y texto
-    def build_team_points(team):
+        def build_team_points(team):
         xs, ys, sizes, texts = [], [], [], []
 
-        for zone_name, data in goals[team].items():
+        # Recorrer siempre las nueve zonas del campo
+        for zone_name in ZONE_COORDS:
+
+            data = goals[team][zone_name]
             n = data["total"]
-            
-            if zone_name not in ZONE_COORDS:
-                continue
 
             x, y = ZONE_COORDS[zone_name]
-
-            if team == "B":
+                if team == "B":
                 # Reflejar horizontalmente el eje X
                 x = 1 - x
 
