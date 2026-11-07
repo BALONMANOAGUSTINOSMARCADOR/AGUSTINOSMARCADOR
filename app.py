@@ -108,7 +108,13 @@ if "match" not in st.session_state:
 
         "exclusions": [],
 
-        "players_stats": {"A": {}, "B": {}},
+        # PORTEROS ACTIVOS DE CADA EQUIPO
+        "active_goalkeepers": {"A": None, "B": None},
+
+        # HISTORIAL DE CAMBIOS DE PORTERO
+        "goalkeeper_changes": [],
+
+        "players_stats": {"A": {}, "B": {}},        
         "started_at": None,
         "elapsed_before_pause": 0,
         "part": 1
