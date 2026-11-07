@@ -569,7 +569,7 @@ with left:
                     else:
                         add_goal(
                             "A",
-                            zone,
+                            ZONA_NOMBRE_A_ID[zona_lanzamiento],
                             player,
                             finta,
                             resultado,
