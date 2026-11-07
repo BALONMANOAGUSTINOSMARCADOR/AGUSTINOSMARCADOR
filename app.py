@@ -458,17 +458,32 @@ with left:
     # Reservar el espacio del marcador para actualizarlo tras procesar los goles.
     marcador_placeholder = st.empty()
 
-    # Jugador y Zona en la misma fila
+    # JUGADOR Y ZONA DE LANZAMIENTO
     col_player, col_zone = st.columns([1, 1])
+
     with col_player:
         player = st.text_input("Jugador")
+
     with col_zone:
-        zone = st.selectbox(
-            "Zonas",
-            list(ZONAS.keys()),
-            format_func=lambda x: ZONAS[x],
-            index=4
-        )
+        st.markdown("**Zona de lanzamiento**")
+
+        zona_lanzamiento = match.get("selected_shot_zone")
+        equipo_lanzamiento = match.get("selected_shot_team")
+
+        if zona_lanzamiento and equipo_lanzamiento:
+
+            nombre_equipo_lanzamiento = (
+                match["teamA"] if equipo_lanzamiento == "A"
+                else match["teamB"]
+            )
+
+            st.info(
+                f"{nombre_equipo_lanzamiento} — {zona_lanzamiento}"
+            )
+
+        else:
+            st.caption("Selecciona un círculo del campo")    
+    
     # 👇 NUEVO: FINTA IZQUIERDA / DERECHA
     col_finta1, col_finta2 = st.columns(2)
 
