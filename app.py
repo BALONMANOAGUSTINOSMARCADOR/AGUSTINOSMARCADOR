@@ -465,7 +465,7 @@ with left:
     # Reservar el espacio del marcador para actualizarlo tras procesar los goles.
     marcador_placeholder = st.empty()
 
-        # JUGADOR Y SELECCIÓN INTERNA DE ZONA DE LANZAMIENTO
+    # JUGADOR Y SELECCIÓN INTERNA DE ZONA DE LANZAMIENTO
 
     match.setdefault("player_input_version", 0)
 
@@ -476,10 +476,8 @@ with left:
 
     # Mantener la selección interna para validar los goles
     zona_lanzamiento = match.get("selected_shot_zone")
-    equipo_lanzamiento = match.get("selected_shot_team")
-        else:
-            st.caption("Selecciona un círculo del campo")    
-    
+    equipo_lanzamiento = match.get("selected_shot_team")    
+     
     # 👇 NUEVO: FINTA IZQUIERDA / DERECHA
     col_finta1, col_finta2 = st.columns(2)
 
