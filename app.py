@@ -1923,7 +1923,7 @@ for equipo in ["A", "B"]:
             mode="markers+text",
             marker=dict(
                 size=60,
-                color="blue" if team == "A" else "red"
+                color="blue" if equipo == "A" else "red"
             ),
             text=[f"{total}<br>{pct_dcha}% / {pct_iz}%"],
             textfont=dict(color="white", size=11),
@@ -1965,7 +1965,7 @@ for equipo in ["A", "B"]:
                 mode="markers+text",
                 marker=dict(
                     size=50,
-                    color="blue" if team == "A" else "red"
+                    color="blue" if equipo == "A" else "red"
                 ),
                 text=[f"{total_z}<br>{pct_dcha_z}% / {pct_iz_z}%"],
                 textfont=dict(color="white", size=10),
