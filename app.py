@@ -1391,10 +1391,21 @@ if st.button("💾 Guardar en histórico"):
             "goles_local": match["scoreA"],
             "goles_visitante": match["scoreB"],
             "fecha": datetime.datetime.utcnow().isoformat(),
-            "acciones": match["events"],
+                        "acciones": match["events"],
             "exclusiones": match["exclusions"],
             "players_stats": match["players_stats"],
-            "rival": rival,
+
+            # PORTEROS
+            "active_goalkeepers": match.get(
+                "active_goalkeepers",
+                {"A": None, "B": None}
+            ),
+            "goalkeeper_changes": match.get(
+                "goalkeeper_changes",
+                []
+            ),
+
+            "rival": rival,            
             "competicion": competicion
         }
 
