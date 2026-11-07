@@ -178,9 +178,13 @@ def reset_match():
         "scoreB": 0,
         "events": [],
 
-        # NUEVO
+        # SELECCIONES DEL CAMPO Y PORTERÍA
         "selected_shot": None,
+        "selected_goal_team": None,
         "selected_goal_zone": None,
+        "selected_shot_team": None,
+        "selected_shot_zone": None,
+        "court_chart_version": 0,        
 
         "exclusions": [],
 
