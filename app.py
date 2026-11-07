@@ -599,7 +599,14 @@ with left:
                     if finta is None:
                         st.warning("⚠️ Debes seleccionar tipo de finta")
 
-                    elif equipo_porteria != "B":
+                    elif equipo_lanzamiento != "B":
+                        st.error(
+                            "❌ ERROR: La zona de lanzamiento seleccionada "
+                            "no pertenece al EQUIPO B. Selecciona un círculo rojo."
+                        )
+
+                    elif equipo_porteria != "B":                    
+                    
                         st.error(
                             "❌ ERROR: Has seleccionado la portería del EQUIPO A. "
                             "Debes seleccionar la portería del EQUIPO B."
