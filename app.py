@@ -171,9 +171,16 @@ def reset_match():
         "selected_goal_zone": None,
 
         "exclusions": [],
+
+        # PORTEROS
+        "active_goalkeepers": {"A": None, "B": None},
+        "goalkeeper_changes": [],
+
+        "players_stats": {"A": {}, "B": {}},
+
         "started_at": None,
         "elapsed_before_pause": 0,
-        "part": 1
+        "part": 1        
     }
 
 def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria=None):
