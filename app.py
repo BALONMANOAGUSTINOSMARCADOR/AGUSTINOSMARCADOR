@@ -122,6 +122,10 @@ if "match" not in st.session_state:
 
 match = st.session_state.match
 
+# COMPATIBILIDAD CON PARTIDOS ANTERIORES
+match.setdefault("active_goalkeepers", {"A": None, "B": None})
+match.setdefault("goalkeeper_changes", [])
+    
 if "view" not in st.session_state:
     st.session_state.view = ""
 
