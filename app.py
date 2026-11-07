@@ -1012,16 +1012,18 @@ with mid:
     render_goal_heatmap(
         "A",
         "30, 100, 220",
-        "PORTERÍA AZUL — EQUIPO A"
+        "PORTERÍA AZUL — EQUIPO A",
+        interactiva=True
     )
 
     # PORTERÍA ROJA — EQUIPO B
     render_goal_heatmap(
         "B",
         "220, 45, 55",
-        "PORTERÍA ROJA — EQUIPO B"
+        "PORTERÍA ROJA — EQUIPO B",
+        interactiva=True
     )
-
+    
 # -------- AÑADIR EXCLUSIÓN / TARJETA --------
 # Pegamento para subir la columna de la derecha
 st_empty_right = st.empty()
