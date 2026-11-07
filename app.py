@@ -13,7 +13,7 @@ from collections import defaultdict
 from modules import recorder, loader
 from github import Github
 import os
-st.write("Versión Streamlit:", st.__version__)
+
 # =========================================================
 # CONFIG
 # =========================================================
@@ -22,6 +22,8 @@ st.set_page_config(
     layout="wide",
     page_icon="🏐"
 )
+
+st.write("Versión Streamlit:", st.__version__)
 st.markdown("""
 <style>
 div[data-testid="stVerticalBlock"] > div {
