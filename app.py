@@ -123,6 +123,10 @@ if "match" not in st.session_state:
 
 match = st.session_state.match
 
+# PORTERÍA SELECCIONADA PARA REGISTRAR EL LANZAMIENTO
+match.setdefault("selected_goal_team", None)
+match.setdefault("selected_goal_zone", None)
+
 # COMPATIBILIDAD CON PARTIDOS ANTERIORES
 match.setdefault("active_goalkeepers", {"A": None, "B": None})
 match.setdefault("goalkeeper_changes", [])
