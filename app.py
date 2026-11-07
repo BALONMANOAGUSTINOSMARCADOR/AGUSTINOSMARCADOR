@@ -640,7 +640,8 @@ with left:
                         match["selected_shot_team"] = None
                         match["selected_shot_zone"] = None
                         match["court_chart_version"] += 1
-
+                        match["goal_chart_version"] += 1
+                        
                         st.rerun()        
 
     # Actualizar el marcador en su posición original, ya con el resultado del botón.
