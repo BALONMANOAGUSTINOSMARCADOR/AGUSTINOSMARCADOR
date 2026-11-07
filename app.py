@@ -1846,14 +1846,30 @@ for equipo in ["A", "B"]:
 
         fig_jugador = go.Figure()
 
-        # Barras jugador
-        fig_jugador.add_trace(go.Bar(
-            x=zonas_x,
-            y=valores_y,
-            name=f"Goles jugador {jugador}"
-        ))
+        # =========================================
+        # BARRAS APILADAS POR SECTOR DE PORTERÍA
+        # =========================================
 
-        # Línea media equipo
+        for sector in (1, 2, 3, 4):
+
+            valores_sector = [
+                estructura_sectores[equipo][jugador][zona][sector]
+                for zona in zonas_x
+            ]
+
+            fig_jugador.add_trace(go.Bar(
+                x=zonas_x,
+                y=valores_sector,
+                name=f"Sector {sector}",
+                marker=dict(
+                    color=COLORES_SECTORES[sector]
+                ),
+                hovertemplate=(
+                    "Zona lanzamiento: %{x}<br>"
+                    f"Sector {sector}<br>"
+                    "Goles: %{y}<extra></extra>"
+                )
+            ))        # Línea media equipo
         fig_jugador.add_trace(go.Scatter(
             x=zonas_x,
             y=media_y,
