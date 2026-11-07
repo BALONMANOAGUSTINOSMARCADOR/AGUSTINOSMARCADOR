@@ -7,6 +7,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import datetime, json, glob
 from PIL import Image
+from streamlit_image_coordinates import streamlit_image_coordinates
 from streamlit_autorefresh import st_autorefresh
 from collections import defaultdict
 from modules import recorder, loader
