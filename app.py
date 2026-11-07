@@ -127,6 +127,13 @@ match = st.session_state.match
 match.setdefault("selected_goal_team", None)
 match.setdefault("selected_goal_zone", None)
 
+# SELECCIÓN DE ZONA DE LANZAMIENTO EN EL CAMPO
+match.setdefault("selected_shot_team", None)
+match.setdefault("selected_shot_zone", None)
+
+# CONTROL DE LA SELECCIÓN INTERACTIVA DEL CAMPO
+match.setdefault("court_chart_version", 0)
+
 # COMPATIBILIDAD CON PARTIDOS ANTERIORES
 match.setdefault("active_goalkeepers", {"A": None, "B": None})
 match.setdefault("goalkeeper_changes", [])
