@@ -930,34 +930,41 @@ def render_goal_heatmap(
             x = coordenadas["x"]
             y = coordenadas["y"]
 
-            if x < 165:
-                columna = 0
-            else:
-                columna = 1
+            # Identificar la última pulsación procesada
+            clave_ultima = (
+                f"ultima_coordenada_porteria_{team}_"
+                f"{match['goal_chart_version']}"
+            )
 
-            if y < 75:
-                fila = 0
-            else:
-                fila = 1
+            coordenada_actual = (x, y)
 
-            zonas = [
-                [1, 2],
-                [3, 4]
-            ]
+            # Procesar únicamente pulsaciones nuevas
+            if st.session_state.get(clave_ultima) != coordenada_actual:
 
-            zona_pulsada = zonas[fila][columna]
+                st.session_state[clave_ultima] = coordenada_actual
 
-            # Actualizar selección solo si ha cambiado
-            if (
-                match.get("selected_goal_team") != team
-                or match.get("selected_goal_zone") != zona_pulsada
-            ):
+                if x < 165:
+                    columna = 0
+                else:
+                    columna = 1
+
+                if y < 75:
+                    fila = 0
+                else:
+                    fila = 1
+
+                zonas = [
+                    [1, 2],
+                    [3, 4]
+                ]
+
+                zona_pulsada = zonas[fila][columna]
 
                 match["selected_goal_team"] = team
                 match["selected_goal_zone"] = zona_pulsada
 
-                st.rerun()
-
+                st.rerun()        
+       
         return
 
     # ==========================================
