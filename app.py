@@ -674,7 +674,13 @@ with mid:
 # MAPAS DE CALOR DE LAS DOS PORTERÍAS
 # =========================================================
 
-def render_goal_heatmap(team, rgb, title, eventos=None):
+def render_goal_heatmap(
+    team,
+    rgb,
+    title,
+    eventos=None,
+    interactiva=False
+):
 
     # Si no se indica una lista concreta, utilizar todos los eventos
     if eventos is None:
@@ -688,19 +694,17 @@ def render_goal_heatmap(team, rgb, title, eventos=None):
         4: 0
     }
 
-    # Calcular el ratio: goles / (goles + paradas + postes)
+    # Calcular ratio: goles / (goles + paradas + postes)
     goles_total = 0
     intentos_validos = 0
 
     for ev in eventos:
 
-        # En las porterías generales se filtra por equipo atacante
         if team is not None and ev.get("team") != team:
             continue
 
         resultado = ev.get("result")
 
-        # Compatibilidad con eventos antiguos
         if resultado is None and ev.get("type") == "goal":
             resultado = "Gol"
 
@@ -710,7 +714,6 @@ def render_goal_heatmap(team, rgb, title, eventos=None):
         if resultado == "Gol":
             goles_total += 1
 
-            # Los sectores solo muestran goles
             if ev.get("goal_zone_layout") == 4:
                 try:
                     zona = int(ev.get("goal_zone"))
@@ -732,7 +735,189 @@ def render_goal_heatmap(team, rgb, title, eventos=None):
 
     max_goals = max(counts.values()) or 1
 
-    # Construir los cuatro cuadrantes de la portería
+    # ==========================================
+    # PORTERÍAS INTERACTIVAS DEL EQUIPO A Y B
+    # ==========================================
+
+    if interactiva:
+
+        from PIL import ImageDraw, ImageFont
+
+        ancho = 330
+        alto = 150
+
+        imagen = Image.new(
+            "RGB",
+            (ancho, alto),
+            "#FFFFFF"
+        )
+
+        dibujo = ImageDraw.Draw(imagen)
+
+        try:
+            fuente_numero = ImageFont.truetype(
+                "DejaVuSans.ttf", 32
+            )
+            fuente_sector = ImageFont.truetype(
+                "DejaVuSans.ttf", 13
+            )
+        except OSError:
+            fuente_numero = ImageFont.load_default()
+            fuente_sector = ImageFont.load_default()
+
+        rgb_valores = tuple(
+            int(v.strip()) for v in rgb.split(",")
+        )
+
+        equipo_seleccionado = match.get("selected_goal_team")
+        zona_seleccionada = match.get("selected_goal_zone")
+
+        # Dibujar los cuatro sectores
+        for zona in (1, 2, 3, 4):
+
+            goles = counts[zona]
+
+            if goles > 0:
+                intensidad = goles / max_goals
+                alpha = 0.18 + (0.72 * intensidad)
+
+                fondo = tuple(
+                    int(255 * (1 - alpha) + c * alpha)
+                    for c in rgb_valores
+                )
+            else:
+                fondo = (241, 241, 241)
+
+            if zona == 1:
+                x1, y1, x2, y2 = 0, 0, 163, 73
+            elif zona == 2:
+                x1, y1, x2, y2 = 166, 0, 329, 73
+            elif zona == 3:
+                x1, y1, x2, y2 = 0, 76, 163, 149
+            else:
+                x1, y1, x2, y2 = 166, 76, 329, 149
+
+            dibujo.rectangle(
+                (x1, y1, x2, y2),
+                fill=fondo,
+                outline="#999999",
+                width=1
+            )
+
+            # Número del sector
+            dibujo.text(
+                (x1 + 7, y1 + 5),
+                str(zona),
+                fill="#555555",
+                font=fuente_sector
+            )
+
+            # Goles registrados en el sector
+            texto = str(goles)
+
+            caja = dibujo.textbbox(
+                (0, 0),
+                texto,
+                font=fuente_numero
+            )
+
+            texto_ancho = caja[2] - caja[0]
+            texto_alto = caja[3] - caja[1]
+
+            dibujo.text(
+                (
+                    x1 + (x2 - x1 - texto_ancho) / 2,
+                    y1 + (y2 - y1 - texto_alto) / 2
+                ),
+                texto,
+                fill="#111111",
+                font=fuente_numero
+            )
+
+            # Resaltar el sector seleccionado
+            if (
+                equipo_seleccionado == team
+                and zona_seleccionada == zona
+            ):
+                dibujo.rectangle(
+                    (x1 + 3, y1 + 3, x2 - 3, y2 - 3),
+                    outline="#00A000",
+                    width=4
+                )
+
+        # Marco superior y laterales de la portería
+        dibujo.line(
+            [(0, 0), (330, 0)],
+            fill="#222222",
+            width=6
+        )
+
+        dibujo.line(
+            [(0, 0), (0, 150)],
+            fill="#222222",
+            width=6
+        )
+
+        dibujo.line(
+            [(329, 0), (329, 150)],
+            fill="#222222",
+            width=6
+        )
+
+        # Título y ratio
+        st.markdown(
+            f"**{title}**",
+            help="Toca directamente uno de los cuatro sectores"
+        )
+
+        st.caption(ratio_texto)
+
+        # Imagen interactiva
+        coordenadas = streamlit_image_coordinates(
+            imagen,
+            key=f"porteria_interactiva_{team}"
+        )
+
+        if coordenadas is not None:
+
+            x = coordenadas["x"]
+            y = coordenadas["y"]
+
+            if x < 165:
+                columna = 0
+            else:
+                columna = 1
+
+            if y < 75:
+                fila = 0
+            else:
+                fila = 1
+
+            zonas = [
+                [1, 2],
+                [3, 4]
+            ]
+
+            zona_pulsada = zonas[fila][columna]
+
+            # Actualizar selección solo si ha cambiado
+            if (
+                match.get("selected_goal_team") != team
+                or match.get("selected_goal_zone") != zona_pulsada
+            ):
+
+                match["selected_goal_team"] = team
+                match["selected_goal_zone"] = zona_pulsada
+
+                st.rerun()
+
+        return
+
+    # ==========================================
+    # RESTO DE PORTERÍAS ESTADÍSTICAS
+    # SE MANTIENE EL DISEÑO ANTERIOR
+    # ==========================================
+
     cells = []
 
     for zona in (1, 2, 3, 4):
@@ -773,7 +958,6 @@ def render_goal_heatmap(team, rgb, title, eventos=None):
             """
         )
 
-    # Dibujar portería frontal dividida en cuatro sectores
     st.components.v1.html(
         f"""
         <div style="
@@ -821,7 +1005,8 @@ def render_goal_heatmap(team, rgb, title, eventos=None):
         """,
         height=210,
         scrolling=False
-    )    
+    )
+    
 # PORTERÍA AZUL — EQUIPO A
 with mid:
     render_goal_heatmap(
