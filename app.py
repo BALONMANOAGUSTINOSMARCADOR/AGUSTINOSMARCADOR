@@ -1498,19 +1498,13 @@ if files:
                 "scoreB": data.get("scoreB", 0),
                 "events": data.get("events", []),
                 "exclusions": data.get("exclusiones", []),
-                "players_stats": data.get("players_stats", {"A": {}, "B": {}}),
+                "players_stats": {"A": {}, "B": {}},
 
                 # PORTEROS
-                "active_goalkeepers": data.get(
-                    "active_goalkeepers",
-                    {"A": None, "B": None}
-                ),
-                "goalkeeper_changes": data.get(
-                    "goalkeeper_changes",
-                    []
-                ),
+                "active_goalkeepers": {"A": None, "B": None},
+                "goalkeeper_changes": [],
 
-                "started_at": None,                
+                "started_at": None,                           
                 "elapsed_before_pause": data.get("elapsed_seconds", 0),
                 "part": 1
             }
