@@ -241,17 +241,33 @@ def add_goal(team, zone, player=None, finta=None, resultado="Gol", zona_porteria
             return
 
 
+                # IDENTIFICAR EL PORTERO DEL EQUIPO DEFENSOR
+        equipo_defensor = "B" if team == "A" else "A"
+
+        portero_defensor = None
+
+        if resultado != "Pérdida":
+            portero_defensor = m.get(
+                "active_goalkeepers",
+                {"A": None, "B": None}
+            ).get(equipo_defensor)
+
         m["events"].append({
-        "type": "goal" if resultado == "Gol" else "shot",
-        "time": iso_now(),
-        "team": team,
-        "zone": ZONAS[int(zone)],
-        "player": player,
-        "finta": finta,
-        "result": resultado,
-        "goal_zone": zona_porteria,
-        "goal_zone_layout": 4,
-    })
+            "type": "goal" if resultado == "Gol" else "shot",
+            "time": iso_now(),
+            "team": team,
+            "zone": ZONAS[int(zone)],
+            "player": player,
+            "finta": finta,
+            "result": resultado,
+            "goal_zone": zona_porteria,
+            "goal_zone_layout": 4,
+
+            # DATOS DEL PORTERO
+            "goalkeeper_team": equipo_defensor if resultado != "Pérdida" else None,
+            "goalkeeper": portero_defensor
+        })        
+        
     
     # Solo los goles modifican el marcador
     if resultado == "Gol":
