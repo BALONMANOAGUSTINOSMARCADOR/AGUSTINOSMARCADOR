@@ -134,6 +134,9 @@ match.setdefault("selected_shot_zone", None)
 # CONTROL DE LA SELECCIÓN INTERACTIVA DEL CAMPO
 match.setdefault("court_chart_version", 0)
 
+# CONTROL DE ACTUALIZACIÓN DE LAS PORTERÍAS
+match.setdefault("goal_chart_version", 0)
+    
 # COMPATIBILIDAD CON PARTIDOS ANTERIORES
 match.setdefault("active_goalkeepers", {"A": None, "B": None})
 match.setdefault("goalkeeper_changes", [])
