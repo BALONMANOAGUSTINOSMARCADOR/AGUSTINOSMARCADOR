@@ -1737,6 +1737,124 @@ if match["events"]:
         st.plotly_chart(fig5, use_container_width=True)
 
 # =====================================================
+# 🎯 RELACIÓN ZONA DE LANZAMIENTO Y SECTOR DE PORTERÍA
+# =====================================================
+
+st.markdown("---")
+st.subheader("🎯 RELACIÓN LANZAMIENTO - PORTERÍA")
+
+st.caption(
+    "Resultados de cada jugador según su zona de lanzamiento "
+    "y el sector de portería al que dirige el balón."
+)
+
+estadisticas_lanzamientos = {}
+
+for ev in match["events"]:
+
+    jugador = ev.get("player")
+    equipo = ev.get("team")
+    zona_lanzamiento = ev.get("zone")
+    resultado = ev.get("result")
+
+    if not jugador or equipo not in ("A", "B"):
+        continue
+
+    if zona_lanzamiento not in ZONAS.values():
+        continue
+
+    # Solo incluir lanzamientos con sector de portería registrado
+    if ev.get("goal_zone_layout") != 4:
+        continue
+
+    try:
+        sector = int(ev.get("goal_zone"))
+    except (TypeError, ValueError):
+        continue
+
+    if sector not in (1, 2, 3, 4):
+        continue
+
+    # Compatibilidad con eventos antiguos
+    if resultado is None and ev.get("type") == "goal":
+        resultado = "Gol"
+
+    if resultado not in (
+        "Gol", "Parada", "Poste", "Fuera", "Pérdida"
+    ):
+        continue
+
+    clave = (
+        equipo,
+        str(jugador),
+        zona_lanzamiento,
+        sector
+    )
+
+    if clave not in estadisticas_lanzamientos:
+        estadisticas_lanzamientos[clave] = {
+            "Goles": 0,
+            "Paradas": 0,
+            "Postes": 0,
+            "Fuera": 0,
+            "Pérdidas": 0
+        }
+
+    if resultado == "Gol":
+        estadisticas_lanzamientos[clave]["Goles"] += 1
+
+    elif resultado == "Parada":
+        estadisticas_lanzamientos[clave]["Paradas"] += 1
+
+    elif resultado == "Poste":
+        estadisticas_lanzamientos[clave]["Postes"] += 1
+
+    elif resultado == "Fuera":
+        estadisticas_lanzamientos[clave]["Fuera"] += 1
+
+    elif resultado == "Pérdida":
+        estadisticas_lanzamientos[clave]["Pérdidas"] += 1
+
+
+filas_lanzamientos = []
+
+for clave, datos in estadisticas_lanzamientos.items():
+
+    equipo, jugador, zona_lanzamiento, sector = clave
+
+    filas_lanzamientos.append({
+        "Equipo": match["teamA"] if equipo == "A" else match["teamB"],
+        "Jugador": f"Nº {jugador}",
+        "Zona lanzamiento": zona_lanzamiento,
+        "Sector portería": sector,
+        "Goles": datos["Goles"],
+        "Paradas": datos["Paradas"],
+        "Postes": datos["Postes"],
+        "Fuera": datos["Fuera"],
+        "Pérdidas": datos["Pérdidas"]
+    })
+
+
+if filas_lanzamientos:
+
+    df_lanzamientos = pd.DataFrame(filas_lanzamientos)
+
+    df_lanzamientos = df_lanzamientos.sort_values(
+        by=["Equipo", "Jugador", "Zona lanzamiento", "Sector portería"]
+    )
+
+    st.dataframe(
+        df_lanzamientos,
+        use_container_width=True,
+        hide_index=True
+    )
+
+else:
+
+    st.info(
+        "Todavía no hay lanzamientos con zona de portería registrada."
+    )
+# =====================================================
 # 6️⃣ GOLES JUGADOR POR ZONA
 # =====================================================
 st.subheader("🎯 GOLES JUGADOR POR ZONA")
