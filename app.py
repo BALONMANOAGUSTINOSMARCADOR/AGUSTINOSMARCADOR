@@ -922,8 +922,8 @@ def render_goal_heatmap(
         # Imagen interactiva
         coordenadas = streamlit_image_coordinates(
             imagen,
-            key=f"porteria_interactiva_{team}"
-        )
+            key=f"porteria_interactiva_{team}_{match['goal_chart_version']}"
+        )        
 
         if coordenadas is not None:
 
