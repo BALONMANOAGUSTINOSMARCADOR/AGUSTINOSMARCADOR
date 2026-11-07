@@ -902,14 +902,22 @@ def render_goal_heatmap(
             width=6
         )
 
-        # Título y ratio
-        st.markdown(
-            f"**{title}**",
-            help="Toca directamente uno de los cuatro sectores"
-        )
+                # TÍTULO Y RATIO EN UNA MISMA LÍNEA
 
-        st.caption(ratio_texto)
+        col_titulo, col_ratio = st.columns([2.2, 1])
 
+        with col_titulo:
+            st.markdown(
+                f"**{title}**"
+            )
+
+        with col_ratio:
+            st.markdown(
+                f"<div style='text-align:right; font-weight:bold; "
+                f"white-space:nowrap;'>{ratio_texto}</div>",
+                unsafe_allow_html=True
+            )
+            
         # Imagen interactiva
         coordenadas = streamlit_image_coordinates(
             imagen,
