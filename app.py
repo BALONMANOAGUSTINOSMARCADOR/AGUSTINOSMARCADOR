@@ -1743,24 +1743,73 @@ if match["events"]:
 st.subheader("🎯 GOLES JUGADOR POR ZONA")
 st.caption("Producción individual comparada con media equipo")
 
-# Estructura: equipo → jugador → zona → goles
+# Estructura: equipo → jugador → zona de lanzamiento → goles
 estructura = {
     "A": {},
     "B": {}
 }
 
+# Estructura adicional: equipo → jugador → zona lanzamiento → sector portería
+estructura_sectores = {
+    "A": {},
+    "B": {}
+}
+
+# Colores fijos para los cuatro sectores de portería
+COLORES_SECTORES = {
+    1: "#2563EB",
+    2: "#DC2626",
+    3: "#16A34A",
+    4: "#F59E0B"
+}
+
 for ev in match["events"]:
+
     jugador = ev.get("player")
-    if not jugador:
+    equipo = ev.get("team")
+    zona = ev.get("zone")
+
+    resultado = ev.get("result")
+
+    # Compatibilidad con goles antiguos
+    if resultado is None and ev.get("type") == "goal":
+        resultado = "Gol"
+
+    # Contabilizar exclusivamente goles
+    if resultado != "Gol":
         continue
 
-    equipo = ev["team"]
-    zona = ev["zone"]
+    if not jugador or equipo not in ("A", "B"):
+        continue
+
+    if zona not in ZONAS.values():
+        continue
+
+    jugador = str(jugador)
 
     if jugador not in estructura[equipo]:
-        estructura[equipo][jugador] = {z: 0 for z in ZONAS.values()}
+        estructura[equipo][jugador] = {
+            z: 0 for z in ZONAS.values()
+        }
 
+        estructura_sectores[equipo][jugador] = {
+            z: {1: 0, 2: 0, 3: 0, 4: 0}
+            for z in ZONAS.values()
+        }
+
+    # Total de goles desde cada zona de lanzamiento
     estructura[equipo][jugador][zona] += 1
+
+    # Identificar el sector de portería del gol
+    if ev.get("goal_zone_layout") == 4:
+
+        try:
+            sector = int(ev.get("goal_zone"))
+        except (TypeError, ValueError):
+            sector = None
+
+        if sector in (1, 2, 3, 4):
+            estructura_sectores[equipo][jugador][zona][sector] += 1
 
 for equipo in ["A", "B"]:
 
