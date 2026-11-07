@@ -1894,7 +1894,8 @@ for equipo in ["A", "B"]:
                 title="Sector de portería",
                 traceorder="normal"
             )
-        )        st.plotly_chart(
+        )        
+        st.plotly_chart(
             fig_jugador,
             use_container_width=True,
             key=f"grafico_{equipo}_{jugador}"
