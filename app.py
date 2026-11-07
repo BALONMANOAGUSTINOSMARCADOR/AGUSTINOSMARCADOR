@@ -1476,11 +1476,57 @@ config = {
     "displayModeBar": False
 }
 
-court_placeholder.plotly_chart(
+# =========================================================
+# SELECCIÓN INTERACTIVA DE ZONAS DE LANZAMIENTO
+# =========================================================
+
+evento_campo = court_placeholder.plotly_chart(
     fig,
     use_container_width=True,
-    key="campo_heatmap_fijo"
+    key=f"campo_heatmap_fijo_{match['court_chart_version']}",
+    on_select="rerun",
+    selection_mode="points"
 )
+
+# Recuperar los puntos seleccionados
+puntos_seleccionados = evento_campo.selection.points
+
+if puntos_seleccionados:
+
+    punto = puntos_seleccionados[0]
+
+    curva = punto.get("curve_number")
+    indice = punto.get("point_index")
+
+    if indice is None:
+        indice = punto.get("point_number")
+
+    # Las nueve zonas siguen el mismo orden en ambas trazas
+    nombres_zonas = list(ZONE_COORDS.keys())
+
+    if (
+        curva in (0, 1)
+        and indice is not None
+        and 0 <= indice < len(nombres_zonas)
+    ):
+
+        # Traza 0 = Equipo A (azul)
+        # Traza 1 = Equipo B (rojo)
+        nuevo_equipo = "A" if curva == 0 else "B"
+
+        nueva_zona = nombres_zonas[indice]
+
+        # Guardar la selección
+        if (
+            match.get("selected_shot_team") != nuevo_equipo
+            or match.get("selected_shot_zone") != nueva_zona
+        ):
+
+            match["selected_shot_team"] = nuevo_equipo
+            match["selected_shot_zone"] = nueva_zona
+
+            st.rerun()
+
 
 # Modificaciones permitidas solo si el reloj NO está corriendo
 modificaciones_habilitadas = match["started_at"] is None
