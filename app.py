@@ -1702,6 +1702,109 @@ if match["events"]:
         fig5.update_layout(height=400)
         st.plotly_chart(fig5, use_container_width=True)
 
+    # =====================================================
+    # 6️⃣ ESTADÍSTICAS DE PORTEROS
+    # =====================================================
+
+    st.markdown("---")
+    st.subheader("🥅 ESTADÍSTICAS DE PORTEROS")
+
+    st.caption(
+        "Estadísticas individuales según los lanzamientos recibidos por cada portero"
+    )
+
+    estadisticas_porteros = {
+        "A": {},
+        "B": {}
+    }
+
+    # RECORRER TODOS LOS LANZAMIENTOS REGISTRADOS
+
+    for ev in match["events"]:
+
+        equipo_defensor = ev.get("goalkeeper_team")
+        portero = ev.get("goalkeeper")
+        resultado = ev.get("result")
+
+        # Ignorar lanzamientos antiguos sin portero asociado
+        if equipo_defensor not in ("A", "B") or not portero:
+            continue
+
+        # Ignorar pérdidas
+        if resultado == "Pérdida":
+            continue
+
+        if portero not in estadisticas_porteros[equipo_defensor]:
+
+            estadisticas_porteros[equipo_defensor][portero] = {
+                "Lanzamientos": 0,
+                "Goles": 0,
+                "Paradas": 0,
+                "Postes": 0,
+                "Fuera": 0
+            }
+
+        datos = estadisticas_porteros[equipo_defensor][portero]
+
+        datos["Lanzamientos"] += 1
+
+        if resultado == "Gol":
+            datos["Goles"] += 1
+
+        elif resultado == "Parada":
+            datos["Paradas"] += 1
+
+        elif resultado == "Poste":
+            datos["Postes"] += 1
+
+        elif resultado == "Fuera":
+            datos["Fuera"] += 1
+
+    # MOSTRAR RESULTADOS DE CADA EQUIPO
+
+    filas_porteros = []
+
+    for equipo in ("A", "B"):
+
+        for dorsal, datos in estadisticas_porteros[equipo].items():
+
+            lanzamientos_puerta = (
+                datos["Goles"] + datos["Paradas"]
+            )
+
+            if lanzamientos_puerta > 0:
+                efectividad = (
+                    datos["Paradas"] / lanzamientos_puerta
+                ) * 100
+            else:
+                efectividad = 0
+
+            filas_porteros.append({
+                "Equipo": match["teamA"] if equipo == "A" else match["teamB"],
+                "Portero": f"Nº {dorsal}",
+                "Lanzamientos": datos["Lanzamientos"],
+                "Goles": datos["Goles"],
+                "Paradas": datos["Paradas"],
+                "Postes": datos["Postes"],
+                "Fuera": datos["Fuera"],
+                "Efectividad": f"{efectividad:.1f}%"
+            })
+
+    if filas_porteros:
+
+        df_porteros = pd.DataFrame(filas_porteros)
+
+        st.dataframe(
+            df_porteros,
+            use_container_width=True,
+            hide_index=True
+        )
+
+    else:
+
+        st.info(
+            "Todavía no hay lanzamientos asociados a ningún portero."
+        )
 # =====================================================
 # 6️⃣ GOLES JUGADOR POR ZONA
 # =====================================================
