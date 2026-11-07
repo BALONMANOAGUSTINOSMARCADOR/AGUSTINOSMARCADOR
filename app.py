@@ -1877,13 +1877,17 @@ for equipo in ["A", "B"]:
             name="Media equipo"
         ))
 
-        fig_jugador.update_layout(
+                fig_jugador.update_layout(
             height=350,
             title=f"Jugador {jugador}",
             xaxis_title="Zona de lanzamiento",
-            yaxis_title="Número de goles"
+            yaxis_title="Número de goles",
+            barmode="stack",
+            legend=dict(
+                title="Sector de portería",
+                traceorder="normal"
+            )
         )
-
         st.plotly_chart(
             fig_jugador,
             use_container_width=True,
